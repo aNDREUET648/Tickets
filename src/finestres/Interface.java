@@ -165,7 +165,7 @@ public class Interface extends javax.swing.JFrame {
                             new Administrador().setVisible(true);
                         } else if (rol.equalsIgnoreCase("Tecnico")) {
                             dispose(); // destruirá la ventana de Interface(login) y sus componentes
-                            JOptionPane.showMessageDialog(null, "Bienvenido a la Aplicación Tickets - Técnico " + usuario + " " + rol + " " + habilitado);
+                            //JOptionPane.showMessageDialog(null, "Bienvenido a la Aplicación Tickets - Técnico " + usuario + " " + rol + " " + habilitado);
                             new Tecnico().setVisible(true);
                         } else if (rol.equalsIgnoreCase("Cliente")) {
                             dispose(); // destruirá la ventana de Interface(login) y sus componentes

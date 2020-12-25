@@ -1,23 +1,98 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package finestres;
 
-/**
- *
- * @author andreuet
+import clases.Conexion;
+import java.sql.*;
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.WindowConstants;
+//
+//   agrego las clases que voy a utilizar de la librería itext5
+//   al no pertenecer al JDK, NetBeans no los incluirá automáticamente
+//
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+
+
+/*
+ * @author aNDREUET
  */
 public class Tecnico extends javax.swing.JFrame {
 
+    String user, nombre_usuario, apellido_usuario;
+    //
+    // sesion_usuario actuará como Flag 
+    // la ventana de Tecnico no dejará de ejecutarse si 
+    // he arrancado esta ventana desde la sesión de Administrador
+    //
+    int sesion_usuario; // 
+
     /**
-     * Creates new form Tecnico
+     * Constructor del form Tecnico
      */
     public Tecnico() {
         initComponents();
-        setTitle("Rol: Técnico");
+        user = Interface.usuario;
+        sesion_usuario = Administrador.sesion_usuario;
+        setSize(550, 300);
+        setResizable(false);
+        setTitle("Rol: Técnico - Sesión de " + user);
         setLocationRelativeTo(null);
+        //
+        // dentro del constructor creo una estructura condicional para que no se
+        // cierre este Interface si he iniciado sesión de Administrador y no
+        // finalice a menos que se cierre la Interface de Administrador.java
+        // 
+        // En cambio, si estoy he iniciado sesión como Técnico el Interface
+        // Tecnico.java se cerrará y por tanto finalizará el programa
+        //
+        if (sesion_usuario == 1) {
+            // he iniciado sesión como Administrador
+            setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        } else {
+            // he iniciado sesión como Técnico
+            setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        }
+
+        ImageIcon wallpaper = new ImageIcon("src/imatges/wallpaperPrincipal.jpg");
+        Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
+                jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
+        jLabel_Wallpaper.setIcon(icono);
+        this.repaint();
+
+        try {
+            Connection con = Conexion.conector();
+            //  recupero nombre y apellidos del user que ha entrado
+            String sql = "select nombre, apellidos from Usuarios where user = '" + user + "'";
+            PreparedStatement pst = con.prepareStatement(sql);
+
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                nombre_usuario = rs.getString("nombre");
+                apellido_usuario = rs.getString("apellidos");
+                // visualizo en el Interface de Técnico nombre y apellidos user
+                jLabel_NombreUsuario.setText("Bienvenido " + nombre_usuario + " " + apellido_usuario);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error en la consulta del nombre del Técnico " + e);
+        }
+    }
+
+    //
+    //  Colocamos en icono que aparecerá en la barra de tareas
+    //
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imatges/logohpp.png"));
+        return retValue;
     }
 
     /**
@@ -29,14 +104,81 @@ public class Tecnico extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel_NombreUsuario = new javax.swing.JLabel();
+        jButton_RegistrarCliente = new javax.swing.JButton();
+        jButton_GestionarClientes = new javax.swing.JButton();
+        jButton_Imprimir = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel_NombreUsuario.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
+        jLabel_NombreUsuario.setForeground(java.awt.Color.white);
+        jLabel_NombreUsuario.setText("jLabel1");
+        getContentPane().add(jLabel_NombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        jButton_RegistrarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/add.png"))); // NOI18N
+        jButton_RegistrarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_RegistrarClienteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton_RegistrarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 120, 100));
+
+        jButton_GestionarClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/informationuser.png"))); // NOI18N
+        jButton_GestionarClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_GestionarClientesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton_GestionarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 120, 100));
+
+        jButton_Imprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/impresora.png"))); // NOI18N
+        jButton_Imprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_ImprimirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton_Imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, 120, 100));
+
+        jLabel3.setForeground(java.awt.Color.white);
+        jLabel3.setText("Registrar Cliente");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, -1, -1));
+
+        jLabel4.setForeground(java.awt.Color.white);
+        jLabel4.setText("Gestionar Clientes");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, -1, -1));
+
+        jLabel5.setForeground(java.awt.Color.white);
+        jLabel5.setText("Imprimir Clientes");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, -1, -1));
+
+        jLabel7.setText("Andreu Garcia Coll - UIB 2020");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, -1, -1));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 300));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton_RegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RegistrarClienteActionPerformed
+     //  creamos una instancia de clases
+     RegistrarClientes registrarClientes = new RegistrarClientes();
+     registrarClientes.setVisible(true);
+    }//GEN-LAST:event_jButton_RegistrarClienteActionPerformed
+
+    private void jButton_GestionarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GestionarClientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_GestionarClientesActionPerformed
+
+    private void jButton_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ImprimirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_ImprimirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -74,6 +216,14 @@ public class Tecnico extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton_GestionarClientes;
+    private javax.swing.JButton jButton_Imprimir;
+    private javax.swing.JButton jButton_RegistrarCliente;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel_NombreUsuario;
     private javax.swing.JLabel jLabel_Wallpaper;
     // End of variables declaration//GEN-END:variables
 }

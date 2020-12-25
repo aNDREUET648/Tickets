@@ -12,9 +12,14 @@ import javax.swing.WindowConstants;
  * @author aNDREUET
  */
 public class Administrador extends javax.swing.JFrame {
-    
-    String user, nombre_usuario,apellido_usuario;
-    public static int sesion_usuario; //variable para enviar datos entre interfaces
+
+    String user, nombre_usuario, apellido_usuario;
+    //
+    // sesion_usuario actua como Flag 
+    // y nos servirá para enviar datos entre interfaces Tecnico y Cliente
+    // por eso la defino como public static int
+    //
+    public static int sesion_usuario;
 
     /*
      * Constructor del form Administrador
@@ -22,40 +27,42 @@ public class Administrador extends javax.swing.JFrame {
     public Administrador() {
         initComponents();
         user = Interface.usuario;
+        //
+        // sesion_usuario=1 le dice a la aplicación que se ha iniciado
+        // la sesión como Administrador
+        // la emplearemos en Tecnico.java y Cliente.java
         sesion_usuario = 1;
-        
-        setSize(650,450);
+
+        setSize(650, 450);
         setResizable(false);
         setTitle("Rol: Administrador - Sesión de " + user);
         setLocationRelativeTo(null);
-        
+
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //mata procesos en segundo plano
-        
+
         ImageIcon wallpaper = new ImageIcon("src/imatges/wallpaperPrincipal.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
-                jLabel_Wallpaper.getHeight(),Image.SCALE_DEFAULT));
+                jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
         jLabel_Wallpaper.setIcon(icono);
         this.repaint();
-        
-        
+
         try {
-            Connection con =Conexion.conector();
+            Connection con = Conexion.conector();
             //  recupero nombre y apellidos del user que ha entrado
-            String sql ="select nombre, apellidos from Usuarios where user = '" + user + "'";
+            String sql = "select nombre, apellidos from Usuarios where user = '" + user + "'";
             PreparedStatement pst = con.prepareStatement(sql);
-            
+
             ResultSet rs = pst.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 nombre_usuario = rs.getString("nombre");
                 apellido_usuario = rs.getString("apellidos");
-                jLabel_NombreUsuario.setText(nombre_usuario + " " + apellido_usuario);
+                jLabel_NombreUsuario.setText("Bienvenido " + nombre_usuario + " " + apellido_usuario);
             }
         } catch (SQLException e) {
-            System.err.println("Error en conexión desde la interfaz Administrador");
+            System.err.println("Error en la consulta del nombre del Administrador " + e);
         }
     }
-    
-    
+
     //
     //  Colocamos en icono que aparecerá en la barra de tareas
     //
@@ -195,7 +202,9 @@ public class Administrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_CreatividadActionPerformed
 
     private void jButton_TecnicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_TecnicoActionPerformed
-        // TODO add your handling code here:
+        // creo una instalación de clases
+        Tecnico tecnico = new Tecnico();
+        tecnico.setVisible(true);
     }//GEN-LAST:event_jButton_TecnicoActionPerformed
 
     private void jButton_TecnicossActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_TecnicossActionPerformed
