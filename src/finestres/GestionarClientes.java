@@ -4,99 +4,50 @@ import java.sql.*;
 import clases.Conexion;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
-/*
+/**
+ *
  * @author aNDREUET
  */
-public class GestionarUsuarios extends javax.swing.JFrame {
-    
+public class GestionarClientes extends javax.swing.JFrame {
+
     String user;
-    // enviar datos entre interfaces
-    public static String user_update = ""; // usuario que se trata de consultar en jTable
-    // acceso a todos los métodos necesarios para modificar datos en su interior
+    // creo la variable que me permita enviar datos entre interfaces
+    // y guardará el cliente que queremos consultar al dar click
+    // en cualquiera de los registros visualizados en la tabla
+    public static int IDcliente_update = 0;
+    // declaro globalmente el objeto de la clase DefaultTableModel
+    // para poder utilizarlo en cualquier parte de nuestra clase
+    // model es la que nos va a permitir poder general el click en la tabla
+    // y establecer la interacción con los datos que se muestren en la tabla
     DefaultTableModel model = new DefaultTableModel();
 
     /**
-     * Constructor del form GestionarUsuarios
+     * Constructor del form GestionarClientes
      */
-    public GestionarUsuarios() {
+    public GestionarClientes() {
         initComponents();
         user = Interface.usuario;
-        
+
         setSize(630, 350);
         setResizable(false);
-        setTitle("Usuarios registrados - Sesión de " + user);
+        setTitle("Técnico - Sesión de " + user);
         setLocationRelativeTo(null);
 
         // evita que se cierre el programa cuando cerramos esta interfaz
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        
+
         ImageIcon wallpaper = new ImageIcon("src/imatges/wallpaperPrincipal.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
                 jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
         jLabel_Wallpaper.setIcon(icono);
         this.repaint();
-        
-        try {
-            Connection con = Conexion.conector();
-            String sql = "select  idUsuario, nombre, user, rol, U.habilitado from Usuarios U, Roles_has_Usuarios, Roles "
-                    + "where  Usuarios_idUsuario = idUsuario and Roles_idRol = idRol";
-            PreparedStatement pst = con.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
-            
-            jTable_usuarios = new JTable(model);
-            jScrollPane1.setViewportView(jTable_usuarios);
-            
-            model.addColumn("ID");
-            model.addColumn("Nombre");
-            model.addColumn("username");
-            model.addColumn("Rol");
-            model.addColumn("Habilitado");
-            
-            while (rs.next()) {
-                Object[] fila = new Object[5]; // 5 columnas
-                for (int i = 0; i < 5; i++) {
-                    // la primera fila del rs.next() es 1 y no 0 (i+1)
-                    fila[i] = rs.getObject(i + 1);
-                }
-                model.addRow(fila); // añadimos la fila encontrada  
-            }
-            con.close();
-            
-        } catch (SQLException e) {
-            System.err.println("Error al llenar la tabla. " + e);
-            JOptionPane.showMessageDialog(null, "Error al mostrar la tabla, contacte con el Administrador");
-        }
-        //
-        // evento para obtener el campo al que le damos click con el ratón
-        //
-        jTable_usuarios.addMouseListener(new MouseAdapter() {
-           @Override
-           // e guardará momentáneamente el evento que se está generando
-           public void mouseClicked(MouseEvent e){
-               // seleccionamos una fila cualquiera
-               // pero siempre se seleccionará la columna 2 (nombre)
-               int fila_point = jTable_usuarios.rowAtPoint(e.getPoint());
-               int columna_point = 2;
-               
-               if(fila_point > -1){
-                   user_update = (String)model.getValueAt(fila_point,columna_point);
-                   InformacionUsuario informacion_usuario = new InformacionUsuario();
-                   informacion_usuario.setVisible(true);
-               }
-           }
-        });
-        
-    }
 
+    }
     //
     //  Colocamos en icono que aparecerá en la barra de tareas
     //
@@ -117,20 +68,21 @@ public class GestionarUsuarios extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable_usuarios = new javax.swing.JTable();
+        jTable_clientes = new javax.swing.JTable();
         jLabel_footer = new javax.swing.JLabel();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setIconImage(getIconImage());
+        setMinimumSize(new java.awt.Dimension(630, 350));
+        setPreferredSize(new java.awt.Dimension(630, 350));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setForeground(java.awt.Color.white);
-        jLabel1.setText("Usuarios registrados");
+        jLabel1.setText("Clientes registrados");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, -1, -1));
 
-        jTable_usuarios.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_clientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -141,7 +93,7 @@ public class GestionarUsuarios extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable_usuarios);
+        jScrollPane1.setViewportView(jTable_clientes);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 630, 180));
 
@@ -169,20 +121,20 @@ public class GestionarUsuarios extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GestionarUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionarClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GestionarUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionarClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GestionarUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionarClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GestionarUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionarClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GestionarUsuarios().setVisible(true);
+                new GestionarClientes().setVisible(true);
             }
         });
     }
@@ -192,6 +144,6 @@ public class GestionarUsuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_Wallpaper;
     private javax.swing.JLabel jLabel_footer;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable_usuarios;
+    private javax.swing.JTable jTable_clientes;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,11 +1,13 @@
 package finestres;
 
 import clases.Conexion;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.sql.*;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
 /**
@@ -67,7 +69,7 @@ public class RegistrarClientes extends javax.swing.JFrame {
         txt_nombre = new javax.swing.JTextField();
         txt_email = new javax.swing.JTextField();
         txt_apellidos = new javax.swing.JTextField();
-        txt_telefono = new javax.swing.JTextField();
+        txt_username = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel_footer = new javax.swing.JLabel();
         jLabel_Wallpaper = new javax.swing.JLabel();
@@ -99,7 +101,7 @@ public class RegistrarClientes extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setForeground(java.awt.Color.white);
-        jLabel5.setText("Teléfono:");
+        jLabel5.setText("username:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -140,16 +142,16 @@ public class RegistrarClientes extends javax.swing.JFrame {
         });
         getContentPane().add(txt_apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 210, -1));
 
-        txt_telefono.setBackground(new java.awt.Color(153, 153, 255));
-        txt_telefono.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        txt_telefono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txt_telefono.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txt_telefono.addActionListener(new java.awt.event.ActionListener() {
+        txt_username.setBackground(new java.awt.Color(153, 153, 255));
+        txt_username.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        txt_username.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_username.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txt_username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_telefonoActionPerformed(evt);
+                txt_usernameActionPerformed(evt);
             }
         });
-        getContentPane().add(txt_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 210, -1));
+        getContentPane().add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 210, -1));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/add.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -178,13 +180,127 @@ public class RegistrarClientes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_apellidosActionPerformed
 
-    private void txt_telefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_telefonoActionPerformed
+    private void txt_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_usernameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_telefonoActionPerformed
+    }//GEN-LAST:event_txt_usernameActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
+        int validacion = 0; // flag por si quedaron campos de texto vacíos
+        String nombre, email, apellidos, username;
+        //
+        // recupero los valores para insertarlos luego en las tablas
+        //
+        nombre = txt_nombre.getText().trim();
+        email = txt_email.getText().trim();
+        apellidos = txt_apellidos.getText().trim();
+        username = txt_username.getText().trim();
 
+        // compruebo que no haya campos vacíos
+        if (nombre.equals("")) {
+            txt_nombre.setBackground(Color.RED);
+            validacion++;
+        }
+        if (email.equals("")) {
+            txt_email.setBackground(Color.RED);
+            validacion++;
+        }
+        if (apellidos.equals("")) {
+            txt_apellidos.setBackground(Color.RED);
+            validacion++;
+        }
+        if (username.equals("")) {
+            txt_username.setBackground(Color.RED);
+            validacion++;
+        }
+        // compruebo que no hay otro cliente con el mismo username
+        try {
+            Connection con = Conexion.conector();
+            String sql = "select user from Usuarios where user = '" + username + "'";
+            PreparedStatement pst = con.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                // lo encuentra, por tanto existe
+                txt_username.setBackground(Color.red);
+                JOptionPane.showMessageDialog(null, "Este username"
+                        + "ya está en uso");
+                con.close(); // cerramos la conexión
+            } else {
+                // no lo encuentra, se puede utilizar este username
+                // empezamos cerrando la conexión con (anterior) y
+                // abrimos una nueva con2 en la que insertaremos el nuevo cliente
+                con.close();
+                if (validacion == 0) {
+                    // se han rellenado bien los campos y se puede insertar el cliente
+                    try {
+                        //
+                        //  insertamos los datos en la tabla de Usuarios
+                        //
+                        Connection con2 = Conexion.conector();
+                        String sql2 = "insert into Usuarios (nombre, apellidos, user, password, email) values (?,?,?,?,?)";
+                        PreparedStatement pst2 = con2.prepareStatement(sql2);
+
+                        // el IdUsuario es autoincremental no escribo nada
+                        //
+                        // Si el técnico da de alta un nuevo cliente, por defecto
+                        // el password de este cliente será el mismo username
+                        // por defecto el cliente recién creado esta habilitado
+                        //
+                        pst2.setString(1, nombre);       // nombre
+                        pst2.setString(2, apellidos);    // apellidos
+                        pst2.setString(3, username);     // user
+                        pst2.setString(4, username);     // password = user
+                        pst2.setString(5, email);        // email
+
+                        int resultado = pst2.executeUpdate();
+
+                        if (resultado > 0) {
+                            // JOptionPane.showMessageDialog(null, "Cliente creado");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Error al crear nuevo cliente, contacte con el Administrador");
+                        }
+                        // el MAX(idUsuario) es el ID del usuario que acabo de crear. El último
+                        // el rol es de cliente por lo que será
+                        Timestamp fecha_actual = new Timestamp(new java.util.Date().getTime());
+                        String sql3 = "insert into Roles_has_Usuarios(Usuarios_idUsuario,Roles_idRol,fecha_posesion) "
+                                + "VALUES ((select MAX(idUsuario) from Usuarios),?,?)";
+                        PreparedStatement pst3 = con2.prepareStatement(sql3);
+
+                        pst3.setInt(1, 3);   // es un cliente --> Rol:Cliente=3
+                        pst3.setTimestamp(2, fecha_actual);  // añadimos el timestamp
+
+                        resultado = pst3.executeUpdate();
+
+                        if (resultado > 0) {
+                            //  marcamos en verde todos los campos insertados
+                            txt_nombre.setBackground(Color.GREEN);
+                            txt_apellidos.setBackground(Color.GREEN);
+                            txt_email.setBackground(Color.GREEN);
+                            txt_username.setBackground(Color.GREEN);
+                            JOptionPane.showMessageDialog(null, "Cliente creado correctamente");
+                            JOptionPane.showMessageDialog(null, "Recuerda: el password es el mismo que el username");
+                            // JOptionPane.showMessageDialog(null, "Añadido Rol Cliente");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Error al insertar el rol Cliente(3), contacte con el Administrador");
+                        }
+
+                        con2.close();
+                        Limpiar();
+                        this.dispose(); // destruyo ventana y libero recursos
+
+                    } catch (SQLException e) {
+                        System.err.println("Error al crear el usuario " + e);
+                        JOptionPane.showMessageDialog(null, "Error al insertar nuevo usuario, contacte con el Administrador");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "No puede haber campos vacíos");
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al insertar cliente " + e);
+            JOptionPane.showMessageDialog(null, "Error al crear cliente, contacte con el Administrador");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -235,6 +351,14 @@ public class RegistrarClientes extends javax.swing.JFrame {
     private javax.swing.JTextField txt_apellidos;
     private javax.swing.JTextField txt_email;
     private javax.swing.JTextField txt_nombre;
-    private javax.swing.JTextField txt_telefono;
+    private javax.swing.JTextField txt_username;
     // End of variables declaration//GEN-END:variables
+
+    public void Limpiar() {
+        txt_nombre.setText("");
+        txt_apellidos.setText("");
+        txt_email.setText("");
+        txt_username.setText("");
+    }
+
 }

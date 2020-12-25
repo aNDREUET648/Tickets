@@ -250,7 +250,7 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
                 //
                 //          insertamos registros
                 //
-                con.close(); // cerramos la conexión
+                con.close(); // cerramos la conexión con y abriremos otra con2
                 // se han rellenado bien los campos y se pueden insertar el usuario
                 if (validacion == 0) {
                     try {
@@ -302,7 +302,6 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
 
                         con2.close();
                         Limpiar();
-                        resultado = 0;
                         this.dispose(); // destruímos ventana
 
                     } catch (SQLException e) {

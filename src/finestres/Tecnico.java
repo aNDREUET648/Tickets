@@ -173,7 +173,11 @@ public class Tecnico extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_RegistrarClienteActionPerformed
 
     private void jButton_GestionarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GestionarClientesActionPerformed
-        // TODO add your handling code here:
+       //  creamos una instancia de clases
+       
+       // clase nombre_objeto = nuevo objeto de la misma clase;
+       GestionarClientes gestionarClientes = new GestionarClientes();
+       gestionarClientes.setVisible(true); // objeto.metodo
     }//GEN-LAST:event_jButton_GestionarClientesActionPerformed
 
     private void jButton_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ImprimirActionPerformed
