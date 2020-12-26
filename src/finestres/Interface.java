@@ -11,10 +11,13 @@ import clases.Conexion; // importo mi conexión a la bd
  */
 public class Interface extends javax.swing.JFrame {
 
-    // envío de datos entre interfaces
-    public static String usuario = "";
-    static String user;
+    //static String user;
     String pass = "";  //variable temporal del password de usuario
+    // usuario enviará su valor a muchas interfaces
+    public static String usuario = "";
+    // IDuser enviará su valor a otras interfaces
+    public static int IDuser = 0;
+
 
     /*
      * Constructor del form Interface
@@ -26,7 +29,7 @@ public class Interface extends javax.swing.JFrame {
         this.setSize(300, 460);        // Tamaño de nuestra pantalla principal de login
         this.setResizable(false);         // Impedir que se modifiquen las dimensiones del interfaz 
         jTextUser.requestFocus();
-        
+
     }
 
     //
@@ -147,7 +150,7 @@ public class Interface extends javax.swing.JFrame {
                 // invoco al método conexionMySQL de mi clase Conexion
 
                 Connection con = Conexion.conector();
-                String sql = "select U.habilitado, nombre, password, rol from Usuarios U, Roles_has_Usuarios, Roles where user ='" + usuario
+                String sql = "select U.habilitado, nombre, password, rol, idUsuario from Usuarios U, Roles_has_Usuarios, Roles where user ='" + usuario
                         + "'  and password = BINARY '" + pass + "' and Usuarios_idUsuario = idUsuario and Roles_idRol = idRol and U.habilitado = 1";
                 PreparedStatement pst = con.prepareStatement(sql);
 
@@ -157,7 +160,11 @@ public class Interface extends javax.swing.JFrame {
                     String rol = rs.getString("rol");
                     String habilitado = rs.getString("U.habilitado");
                     String contra = rs.getString("password");
-
+                    //
+                    // me guardo el idUsuario para emplearlo en otros formularios
+                    //  
+                    IDuser = rs.getInt("idUsuario");
+                    
                     if ("1".equals(habilitado)) {
                         if (rol.equalsIgnoreCase("Administrador")) {
                             dispose(); // destruirá la ventana de Interface(login) y sus componentes

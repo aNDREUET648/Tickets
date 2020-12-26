@@ -4,8 +4,12 @@ import java.sql.*;
 import clases.Conexion;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,7 +19,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class GestionarClientes extends javax.swing.JFrame {
 
+    // variable que recoge el nombre del usuario que ha iniciado sesión
+    // definido en Interface.java y asignada en la línea 144 (+/-)
     String user;
+    //variable para recoger el valor de idUsuario que ha iniciado sesión
+    //definido en Interface.java y asignada en la línea 165 (+/-)
+    int id_usuario;
     // creo la variable que me permita enviar datos entre interfaces
     // y guardará el cliente que queremos consultar al dar click
     // en cualquiera de los registros visualizados en la tabla
@@ -32,6 +41,7 @@ public class GestionarClientes extends javax.swing.JFrame {
     public GestionarClientes() {
         initComponents();
         user = Interface.usuario;
+        id_usuario = Interface.IDuser;
 
         setSize(630, 350);
         setResizable(false);
@@ -47,7 +57,78 @@ public class GestionarClientes extends javax.swing.JFrame {
         jLabel_Wallpaper.setIcon(icono);
         this.repaint();
 
+        try {
+            Connection con = Conexion.conector();
+            String sql = "select idUsuario, nombre, apellidos, user, email, registrado_por from Usuarios , Roles_has_Usuarios "
+                    + "where  Usuarios_idUsuario = idUsuario and Roles_idRol = 3";
+            PreparedStatement pst = con.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            //
+            // Creo conexión hacia la tabla
+            //
+            jTable_clientes = new JTable(model);
+            // hacemos visible nuestra tabla dentro del jScrollPane 1
+            jScrollPane1.setViewportView(jTable_clientes);
+            // definimos las columnas que estarán en el jScrollPane
+            model.addColumn("ID");
+            model.addColumn("Nombre");
+            model.addColumn("Apellidos");
+            model.addColumn("username");
+            model.addColumn("em@il");
+            model.addColumn("Creado por");
+            // y relleno la tabla
+            while (rs.next()) {
+                /*
+                estoy probando el casting de abajo. Aquí el idUsuario es int pero 
+                cuando lo lee celda[0]=rs.getObject(i+1) lo ve como tipo long
+                lo arreglo guardando celda[0] como como rs.getInt("idUsuario")
+                Why?
+                JOptionPane.showMessageDialog(null, "ID DEL CLIENTE " + rs.getInt("idUsuario"));
+                */
+                // creo vector de tipo objetos
+                Object[] celda = new Object[6]; // 6 columnas
+                celda[0] = rs.getInt("idUsuario");
+                for (int i = 1; i < 6; i++) {
+                    // bucle para ir llenando cada columna de la fila
+                    // la primera fila del rs.next() es 1 y no 0 (i+1)
+                    celda[i] = rs.getObject(i + 1);
+                }
+                // agregar nueva fila
+                model.addRow(celda); // añadimos la nueva fila ya rellenada  
+            }
+            con.close();
+        } catch (SQLException e) {
+            System.err.println("Error al llenar la tabla de Clientes " + e);
+            JOptionPane.showMessageDialog(null, "Error al mostrar la tabla Clientes, contacte con el Administrador");
+        }
+
+        //
+        // evento para escuchar los clicks del ratón que damos en la tabla
+        //
+        jTable_clientes.addMouseListener(new MouseAdapter() {
+            @Override  //sobreescribimos el método mouseClicked
+            // me guardará momentáneamente el evento que se está generando
+            public void mouseClicked(MouseEvent e) {
+                // la variable e guardará el evento de manera temporal
+                // la fila seleccionada la recogerá el evento getPoint en e
+                // la columna será 0 porque nos interesa guardar la columna ID
+                // la cual me permitirá obtener la información del cliente
+                int fila_point = jTable_clientes.rowAtPoint(e.getPoint());
+                int columna_point = 0;
+
+                if (fila_point > -1) {
+                    // ahora que tengo una fila seleccionada
+                    // 
+                    // como columna_point es 0 va directo a su valor
+                    // para guardar el valor tengo que hacer un casting del model
+                    // guardamos el valor del ID del cliente seleccionado al clickar
+                    IDcliente_update =  (int) model.getValueAt(fila_point, columna_point);
+                    JOptionPane.showMessageDialog(null, "el ID del cliente es: " + IDcliente_update);
+                }
+            }
+        });
     }
+
     //
     //  Colocamos en icono que aparecerá en la barra de tareas
     //
@@ -74,7 +155,6 @@ public class GestionarClientes extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(630, 350));
-        setPreferredSize(new java.awt.Dimension(630, 350));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N

@@ -159,30 +159,35 @@ public class InformacionUsuario extends javax.swing.JFrame {
 
         txt_nombre.setBackground(new java.awt.Color(153, 153, 255));
         txt_nombre.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        txt_nombre.setForeground(java.awt.Color.white);
         txt_nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_nombre.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 210, -1));
 
         txt_email.setBackground(new java.awt.Color(153, 153, 255));
         txt_email.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        txt_email.setForeground(java.awt.Color.white);
         txt_email.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_email.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 210, -1));
 
         txt_apellidos.setBackground(new java.awt.Color(153, 153, 255));
         txt_apellidos.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        txt_apellidos.setForeground(java.awt.Color.white);
         txt_apellidos.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_apellidos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txt_apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 210, -1));
 
         txt_username.setBackground(new java.awt.Color(153, 153, 255));
         txt_username.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        txt_username.setForeground(java.awt.Color.white);
         txt_username.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_username.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, 210, -1));
 
         txt_RegistradoPor.setBackground(new java.awt.Color(153, 153, 255));
         txt_RegistradoPor.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        txt_RegistradoPor.setForeground(java.awt.Color.white);
         txt_RegistradoPor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_RegistradoPor.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txt_RegistradoPor.setEnabled(false);
@@ -220,7 +225,7 @@ public class InformacionUsuario extends javax.swing.JFrame {
 
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
         getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, -1, -1));
-        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 638, 460));
+        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 460));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -347,7 +352,7 @@ public class InformacionUsuario extends javax.swing.JFrame {
 
     private void jButton_RestaurarPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RestaurarPasswordActionPerformed
         
-        // realizao una instancia de clase para abrir el interfaz
+        // realizo una instancia de clase para abrir el interfaz
         // creo objeto de la clase RestaurarPassword y lo nombro
         RestaurarPassword restaurarPassword = new RestaurarPassword();
         restaurarPassword.setVisible(true);

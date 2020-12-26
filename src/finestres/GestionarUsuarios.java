@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  * @author aNDREUET
  */
 public class GestionarUsuarios extends javax.swing.JFrame {
-    
+
     String user;
     // enviar datos entre interfaces
     public static String user_update = ""; // usuario que se trata de consultar en jTable
@@ -30,7 +30,7 @@ public class GestionarUsuarios extends javax.swing.JFrame {
     public GestionarUsuarios() {
         initComponents();
         user = Interface.usuario;
-        
+
         setSize(630, 350);
         setResizable(false);
         setTitle("Usuarios registrados - Sesión de " + user);
@@ -38,63 +38,69 @@ public class GestionarUsuarios extends javax.swing.JFrame {
 
         // evita que se cierre el programa cuando cerramos esta interfaz
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        
+
         ImageIcon wallpaper = new ImageIcon("src/imatges/wallpaperPrincipal.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
                 jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
         jLabel_Wallpaper.setIcon(icono);
         this.repaint();
-        
+
         try {
             Connection con = Conexion.conector();
             String sql = "select  idUsuario, nombre, user, rol, U.habilitado from Usuarios U, Roles_has_Usuarios, Roles "
                     + "where  Usuarios_idUsuario = idUsuario and Roles_idRol = idRol";
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
-            
+
             jTable_usuarios = new JTable(model);
             jScrollPane1.setViewportView(jTable_usuarios);
-            
+
             model.addColumn("ID");
             model.addColumn("Nombre");
             model.addColumn("username");
             model.addColumn("Rol");
             model.addColumn("Habilitado");
-            
+
             while (rs.next()) {
                 Object[] fila = new Object[5]; // 5 columnas
                 for (int i = 0; i < 5; i++) {
+                    // bucle para ir llenando cada columna de una fila
                     // la primera fila del rs.next() es 1 y no 0 (i+1)
                     fila[i] = rs.getObject(i + 1);
                 }
                 model.addRow(fila); // añadimos la fila encontrada  
             }
             con.close();
-            
+
         } catch (SQLException e) {
             System.err.println("Error al llenar la tabla. " + e);
             JOptionPane.showMessageDialog(null, "Error al mostrar la tabla, contacte con el Administrador");
         }
         //
-        // evento para obtener el campo al que le damos click con el ratón
+        // evento para escuchar los clicks del ratón que damos en la tabla
         //
         jTable_usuarios.addMouseListener(new MouseAdapter() {
-           @Override
-           // e guardará momentáneamente el evento que se está generando
-           public void mouseClicked(MouseEvent e){
-               // seleccionamos una fila cualquiera
-               // pero siempre se seleccionará la columna 2 (nombre)
-               int fila_point = jTable_usuarios.rowAtPoint(e.getPoint());
-               int columna_point = 2;
-               
-               if(fila_point > -1){
-                   user_update = (String)model.getValueAt(fila_point,columna_point);
-                   InformacionUsuario informacion_usuario = new InformacionUsuario();
-                   informacion_usuario.setVisible(true);
-               }
-           }
+            @Override
+            // me guardará momentáneamente el evento que se está generando
+            public void mouseClicked(MouseEvent e) {
+                // la variable e guardará el evento de manera temporal
+                // seleccionamos una fila cualquiera
+                // la columna 2 (nombre) únicamente la que me interesa
+                int fila_point = jTable_usuarios.rowAtPoint(e.getPoint());
+                int columna_point = 2;
+
+                if (fila_point > -1) {
+                    // ahora que tengo una fila seleccionada puedo poner el
+                    // valor del nombre de usuario que ha seleccionado
+                    // como columna_point es 2 va directo a su valor
+                    // para guardar el valor tengo que hacer un casting del model
+                    user_update = (String) model.getValueAt(fila_point, columna_point);
+                    InformacionUsuario informacion_usuario = new InformacionUsuario();
+                    informacion_usuario.setVisible(true);
+                }
+            }
         });
-        
+
     }
 
     //
