@@ -39,6 +39,7 @@ public class GestionarUsuarios extends javax.swing.JFrame {
         // evita que se cierre el programa cuando cerramos esta interfaz
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
+        // Fondo de pantalla de mi aplicación
         ImageIcon wallpaper = new ImageIcon("src/imatges/wallpaperPrincipal.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
                 jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
@@ -105,7 +106,7 @@ public class GestionarUsuarios extends javax.swing.JFrame {
 
     //
     //  Colocamos en icono que aparecerá en la barra de tareas
-    //
+    //  Que no aparezca al famosa tacita de café
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imatges/logohpp.png"));

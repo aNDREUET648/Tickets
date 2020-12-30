@@ -28,7 +28,7 @@ public class Interface extends javax.swing.JFrame {
         this.setTitle("Acceso al Sistema");
         this.setSize(300, 460);        // Tamaño de nuestra pantalla principal de login
         this.setResizable(false);         // Impedir que se modifiquen las dimensiones del interfaz 
-        jTextUser.requestFocus();
+        jTextUser.requestFocus();   // sitúa el cursor sobre el campo de usuario
 
     }
 

@@ -30,8 +30,10 @@ public class RestaurarPassword extends javax.swing.JFrame {
         setTitle("Cambio de Password para " + user_update);
         setLocationRelativeTo(null);
 
+        // evita que se cierre el programa cuando cerramos esta interfaz
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-
+        
+        // Fondo de pantalla de mi aplicación
         ImageIcon wallpaper = new ImageIcon("src/imatges/wallpaperPrincipal.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
                 jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
@@ -139,7 +141,7 @@ public class RestaurarPassword extends javax.swing.JFrame {
                     txt_passwordConfirmacion.setBackground(Color.green);
                     JOptionPane.showMessageDialog(null, "Contraseña cambiada");
                     this.dispose();
-                    
+
                 } catch (SQLException e) {
                     System.err.println("Error en el cambio de password" + e);
                 }

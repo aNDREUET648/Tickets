@@ -37,9 +37,11 @@ public class Administrador extends javax.swing.JFrame {
         setResizable(false);
         setTitle("Rol: Administrador - Sesión de " + user);
         setLocationRelativeTo(null);
-
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //mata procesos en segundo plano
-
+        
+        //mata procesos en segundo plano
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); 
+        
+        // Fondo de pantalla de mi aplicación
         ImageIcon wallpaper = new ImageIcon("src/imatges/wallpaperPrincipal.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
                 jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
@@ -65,7 +67,7 @@ public class Administrador extends javax.swing.JFrame {
 
     //
     //  Colocamos en icono que aparecerá en la barra de tareas
-    //
+    //  Que nos nos salga la famosa tacita de café
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imatges/logohpp.png"));

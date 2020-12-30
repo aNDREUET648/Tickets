@@ -21,7 +21,6 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 
-
 /*
  * @author aNDREUET
  */
@@ -62,6 +61,7 @@ public class Tecnico extends javax.swing.JFrame {
             setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         }
 
+        // Fondo de pantalla de mi aplicación
         ImageIcon wallpaper = new ImageIcon("src/imatges/wallpaperPrincipal.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
                 jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
@@ -167,17 +167,17 @@ public class Tecnico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_RegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RegistrarClienteActionPerformed
-     //  creamos una instancia de clases
-     RegistrarClientes registrarClientes = new RegistrarClientes();
-     registrarClientes.setVisible(true);
+        //  creamos una instancia de clases
+        RegistrarClientes registrarClientes = new RegistrarClientes();
+        registrarClientes.setVisible(true);
     }//GEN-LAST:event_jButton_RegistrarClienteActionPerformed
 
     private void jButton_GestionarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GestionarClientesActionPerformed
-       //  creamos una instancia de clases
-       
-       // clase nombre_objeto = nuevo objeto de la misma clase;
-       GestionarClientes gestionarClientes = new GestionarClientes();
-       gestionarClientes.setVisible(true); // objeto.metodo
+        //  creamos una instancia de clases
+
+        // clase nombre_objeto = nuevo objeto de la misma clase;
+        GestionarClientes gestionarClientes = new GestionarClientes();
+        gestionarClientes.setVisible(true); // objeto.metodo
     }//GEN-LAST:event_jButton_GestionarClientesActionPerformed
 
     private void jButton_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ImprimirActionPerformed

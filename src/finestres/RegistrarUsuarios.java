@@ -28,10 +28,11 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
         setSize(630, 350);
         setResizable(false);
         setLocationRelativeTo(null);
-
+        
         //impedimos que el programa finalice cuando la interface se cierre
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-
+        
+        // Fondo de pantalla de mi aplicación
         ImageIcon wallpaper = new ImageIcon("src/imatges/wallpaperPrincipal.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
                 jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
@@ -284,7 +285,7 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
 
                         pst3.setInt(1, rol_cmb);       // Roles_idRol
                         pst3.setTimestamp(2, fecha_actual);  // añadimos el timestamp
-                        
+
                         resultado = pst3.executeUpdate();
 
                         if (resultado > 0) {

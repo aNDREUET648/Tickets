@@ -10,7 +10,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
-
 /*
  * @author aNDREUET
  */
@@ -35,7 +34,8 @@ public class InformacionUsuario extends javax.swing.JFrame {
 
         // evita que se cierre el programa cuando cerramos esta interfaz
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-
+        
+        // Fondo de pantalla de mi aplicación
         ImageIcon wallpaper = new ImageIcon("src/imatges/wallpaperPrincipal.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
                 jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));

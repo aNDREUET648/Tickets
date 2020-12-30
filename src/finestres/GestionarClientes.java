@@ -47,10 +47,11 @@ public class GestionarClientes extends javax.swing.JFrame {
         setResizable(false);
         setTitle("Técnico - Sesión de " + user);
         setLocationRelativeTo(null);
-
+        
         // evita que se cierre el programa cuando cerramos esta interfaz
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-
+        
+        // Fondo de pantalla de mi aplicación
         ImageIcon wallpaper = new ImageIcon("src/imatges/wallpaperPrincipal.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
                 jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
@@ -75,7 +76,7 @@ public class GestionarClientes extends javax.swing.JFrame {
             model.addColumn("Apellidos");
             model.addColumn("username");
             model.addColumn("em@il");
-            model.addColumn("Creado por");
+            model.addColumn("Modificado por");
             // y relleno la tabla
             while (rs.next()) {
                 /*
@@ -84,7 +85,7 @@ public class GestionarClientes extends javax.swing.JFrame {
                 lo arreglo guardando celda[0] como como rs.getInt("idUsuario")
                 Why?
                 JOptionPane.showMessageDialog(null, "ID DEL CLIENTE " + rs.getInt("idUsuario"));
-                */
+                 */
                 // creo vector de tipo objetos
                 Object[] celda = new Object[6]; // 6 columnas
                 celda[0] = rs.getInt("idUsuario");
@@ -122,8 +123,11 @@ public class GestionarClientes extends javax.swing.JFrame {
                     // como columna_point es 0 va directo a su valor
                     // para guardar el valor tengo que hacer un casting del model
                     // guardamos el valor del ID del cliente seleccionado al clickar
-                    IDcliente_update =  (int) model.getValueAt(fila_point, columna_point);
-                    JOptionPane.showMessageDialog(null, "el ID del cliente es: " + IDcliente_update);
+                    IDcliente_update = (int) model.getValueAt(fila_point, columna_point);
+                    // creo una instancia entre clases
+                    Informacion_Cliente informacion_cliente = new Informacion_Cliente();
+                    informacion_cliente.setVisible(true);
+
                 }
             }
         });
@@ -154,6 +158,7 @@ public class GestionarClientes extends javax.swing.JFrame {
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
         setMinimumSize(new java.awt.Dimension(630, 350));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

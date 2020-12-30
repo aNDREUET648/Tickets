@@ -29,19 +29,17 @@ public class RegistrarClientes extends javax.swing.JFrame {
         setSize(530, 370);
         setResizable(false);
         setLocationRelativeTo(null);
-
-        //
+        
         // método que impide que finalice si se cierra esta ventana
-        //
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-
+        
+        // Fondo de pantalla de mi aplicación
         ImageIcon wallpaper = new ImageIcon("src/imatges/wallpaperPrincipal.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
                 jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
         jLabel_Wallpaper.setIcon(icono);
         this.repaint();
     }
-
     //
     //  Colocamos en icono que aparecerá en la barra de tareas
     //
@@ -75,6 +73,7 @@ public class RegistrarClientes extends javax.swing.JFrame {
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
         setMinimumSize(new java.awt.Dimension(530, 370));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
