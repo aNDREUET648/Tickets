@@ -205,7 +205,6 @@ public class RegistrarEquipo extends javax.swing.JFrame {
         modelo = txt_modelo.getText().trim();
         num_serie = txt_num_serie.getText().trim();
         observaciones = jTextPane_observaciones.getText();
-        habilitado = 1;
         
         fecha_ingreso = Integer.toString(calendar.get(Calendar.DATE));
 

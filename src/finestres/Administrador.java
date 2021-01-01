@@ -190,11 +190,13 @@ public class Administrador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_CrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CrearUsuarioActionPerformed
+        // Creo una instacia de clases
         RegistrarUsuarios registrarUsuarios = new RegistrarUsuarios();
         registrarUsuarios.setVisible(true);
     }//GEN-LAST:event_jButton_CrearUsuarioActionPerformed
 
     private void jButton_GestionarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GestionarUsuariosActionPerformed
+        // Creo una instacia de clases
         GestionarUsuarios gestionarUsuarios = new GestionarUsuarios();
         gestionarUsuarios.setVisible(true);
     }//GEN-LAST:event_jButton_GestionarUsuariosActionPerformed
@@ -210,7 +212,9 @@ public class Administrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_TecnicoActionPerformed
 
     private void jButton_TecnicossActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_TecnicossActionPerformed
-        // TODO add your handling code here:
+        // Creo una instacia de clases
+        Cliente cliente = new Cliente();
+        cliente.setVisible(true);
     }//GEN-LAST:event_jButton_TecnicossActionPerformed
 
     private void jButton_AcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AcercaDeActionPerformed

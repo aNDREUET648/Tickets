@@ -176,7 +176,7 @@ public class Interface extends javax.swing.JFrame {
                             new Tecnico().setVisible(true);
                         } else if (rol.equalsIgnoreCase("Cliente")) {
                             dispose(); // destruirá la ventana de Interface(login) y sus componentes
-                            JOptionPane.showMessageDialog(null, "Bienvenido a la Aplicación Tickets - Cliente " + usuario + " " + rol + " " + habilitado);
+                            //JOptionPane.showMessageDialog(null, "Bienvenido a la Aplicación Tickets - Cliente " + usuario + " " + rol + " " + habilitado);
                             new Cliente().setVisible(true);
                         } else {
                             JOptionPane.showMessageDialog(null, "Tickets NO PIULA " + usuario + " " + rol + " " + habilitado);

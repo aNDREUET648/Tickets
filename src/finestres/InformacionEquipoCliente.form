@@ -217,6 +217,9 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
         <Component class="javax.swing.JTextPane" name="jTextPane_observaciones">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
@@ -233,9 +236,6 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
         <Component class="javax.swing.JTextPane" name="jTextPane_comentariosTecnico">
-          <Properties>
-            <Property name="editable" type="boolean" value="false"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>
@@ -418,9 +418,14 @@
     <Component class="javax.swing.JComboBox" name="cmb_estatus">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="2">
+          <StringArray count="7">
             <StringItem index="0" value="Activo"/>
             <StringItem index="1" value="Inactivo"/>
+            <StringItem index="2" value="Nuevo ingreso"/>
+            <StringItem index="3" value="No reparado"/>
+            <StringItem index="4" value="En revisi&#xf3;n"/>
+            <StringItem index="5" value="Reparado"/>
+            <StringItem index="6" value="Entregado"/>
           </StringArray>
         </Property>
       </Properties>
@@ -444,7 +449,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Actualizar equipo"/>
+        <Property name="text" type="java.lang.String" value="Comentar y actualizar"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="null"/>
         </Property>

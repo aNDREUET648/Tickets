@@ -16,37 +16,19 @@ import javax.swing.WindowConstants;
 /*
  * @author aNDREUET
  */
-public class InformacionEquipo extends javax.swing.JFrame {
+public class InformacionEquipoCliente extends javax.swing.JFrame {
 
-    int IDcliente_update = 0, IDequipo = 0;
-    String user = "", nom_cliente = "";
-    int IDuser = 0;
+    int IDequipo = 0, IDuser = 0;
+    String user = "";
 
     /**
-     * Constructor del form InformacionEquipo
+     * Constructor del form InformacionEquipoCliente
      */
-    public InformacionEquipo() {
+    public InformacionEquipoCliente() {
         initComponents();
         user = Interface.usuario;
         IDuser = Interface.IDuser;
-        IDequipo = Informacion_Cliente.IDequipo;
-        IDcliente_update = GestionarClientes.IDcliente_update;
-
-        // recuperamos el nombre del cliente de la tabla Usuarios
-        try {
-            Connection con = Conexion.conector();
-            String sql = "select  nombre, apellidos from Usuarios where "
-                    + " idUsuario = '" + IDcliente_update + "'";
-            PreparedStatement pst = con.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
-
-            if (rs.next()) {
-                nom_cliente = rs.getString("nombre") + " " + rs.getString("apellidos");
-            }
-        } catch (SQLException e) {
-            System.err.println("Error al consultar el nombre del cliente en InformacionEquipo " + e);
-            JOptionPane.showMessageDialog(null, "Error al al consultar el nombre del cliente en InformacionEquipo, contacte con el Administrador");
-        }
+        IDequipo = GestionarEquipos.IDequipo_update;
 
         // recuperamos datos del equipo de la tabla Equipos
         try {
@@ -71,7 +53,7 @@ public class InformacionEquipo extends javax.swing.JFrame {
                 // y la formateamos y convertimos en String
                 DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", new Locale("es", "ES"));
                 Date fecha = rs.getDate("fecha_compra");
-                
+
                 String strFecha = dateFormat.format(fecha);
                 txt_fecha.setText(strFecha);
                 // observaciones del form
@@ -86,7 +68,7 @@ public class InformacionEquipo extends javax.swing.JFrame {
         }
 
         // ahora si que puedo ponerlo porque ya tengo el valor de nombre_cliente
-        setTitle("Equipo del cliente " + nom_cliente);
+        setTitle("Equipo registrado con el ID " + IDequipo + " - Sesión de " + user);
         setSize(670, 530);
         setResizable(false);  // no se modificar el tamaño del interfaz
         setLocationRelativeTo(null); // centrar la interfaz al ejecutar
@@ -101,7 +83,6 @@ public class InformacionEquipo extends javax.swing.JFrame {
         jLabel_Wallpaper.setIcon(icono);
         this.repaint();
 
-        txt_NombreCliente.setText(nom_cliente);
     }
 
     //
@@ -208,11 +189,11 @@ public class InformacionEquipo extends javax.swing.JFrame {
         jLabel_revisionTecnicaDe.setText("Comentarios adicionales:");
         getContentPane().add(jLabel_revisionTecnicaDe, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, -1, -1));
 
+        jTextPane_observaciones.setEditable(false);
         jScrollPane1.setViewportView(jTextPane_observaciones);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, 330, 120));
 
-        jTextPane_comentariosTecnico.setEditable(false);
         jScrollPane2.setViewportView(jTextPane_comentariosTecnico);
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 280, 330, 120));
@@ -266,13 +247,13 @@ public class InformacionEquipo extends javax.swing.JFrame {
         });
         getContentPane().add(cmb_marcas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
 
-        cmb_estatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
+        cmb_estatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo", "Nuevo ingreso", "No reparado", "En revisión", "Reparado", "Entregado" }));
         getContentPane().add(cmb_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, -1, -1));
 
         jButton_Actualizar.setBackground(new java.awt.Color(153, 153, 255));
         jButton_Actualizar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton_Actualizar.setForeground(java.awt.Color.white);
-        jButton_Actualizar.setText("Actualizar equipo");
+        jButton_Actualizar.setText("Comentar y actualizar");
         jButton_Actualizar.setBorder(null);
         jButton_Actualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -290,75 +271,31 @@ public class InformacionEquipo extends javax.swing.JFrame {
 
     private void jButton_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ActualizarActionPerformed
 
-        int validacion = 0, estatus_cmb = 0;
-        // variables de alojamiento temporal de la información a modificar
-        String tipo_equipo, marca, modelo, num_serie, observaciones;
-        // guardo la información de los combo Box
-        tipo_equipo = cmb_tipoequipo.getSelectedItem().toString();
-        marca = cmb_marcas.getSelectedItem().toString();
-        estatus_cmb = cmb_estatus.getSelectedIndex() + 1;
-        // y ahora la de los campos de texto
-        modelo = txt_modelo.getText().trim();
-        num_serie = txt_num_serie.getText().trim();
-        observaciones = jTextPane_observaciones.getText();
-        //verifico que los campos no están vacíos
-        if (modelo.equals("")) {
-            validacion++;
-            txt_modelo.setBackground(Color.red);
+        String comentariosTecnicos, tecnico;
+        int estatus;
+
+        estatus = cmb_estatus.getSelectedIndex() + 1;
+        comentariosTecnicos = jTextPane_comentariosTecnico.getText();
+        tecnico = user;
+
+        try {
+            Connection con = Conexion.conector();
+            String sql = "update Equipos set habilitado=?, observaciones=? where idEquipos = '" + IDequipo + "'";
+            PreparedStatement pst = con.prepareStatement(sql);
+            
+            pst.setInt(1,estatus);
+            pst.setString(2,comentariosTecnicos);
+            
+            pst.executeUpdate();
+            con.close();
+            
+            JOptionPane.showMessageDialog(null, "Actualización exitosa");
+            this.dispose();
+
+        } catch (SQLException e) {
+            System.err.println("Error al actualizar el equipo " + e);
+            JOptionPane.showMessageDialog(null, "Error al actualizar el equipo, contacte con el Administrador");
         }
-        if (num_serie.equals("")) {
-            validacion++;
-            txt_num_serie.setBackground(Color.red);
-        }
-        if (observaciones.equals("")) {
-            jTextPane_observaciones.setText("Sin observaciones");
-            observaciones = jTextPane_observaciones.getText();
-        }
-
-        if (validacion == 0) {
-
-            try {
-                // acceso a la base de datos para modificar la información
-                Connection con = Conexion.conector();
-                String sql = "update Equipos set tipo=?, marca=?, modelo=?, num_serie=?, "
-                        + "observaciones=?, habilitado=? where idEquipos = '" + IDequipo + "'";
-                PreparedStatement pst = con.prepareStatement(sql);
-
-                // envío los valores de las variables temporales a la bd
-                pst.setString(1, tipo_equipo);
-                pst.setString(2, marca);
-                pst.setString(3, modelo);
-                pst.setString(4, num_serie);
-                pst.setString(5, observaciones);
-                // sigue activo o lo desactivamos
-                // si está activo es 1, sino es 0
-                if (estatus_cmb != 1) {
-                    estatus_cmb = 0;
-                }
-                pst.setInt(6, estatus_cmb);
-
-                pst.executeUpdate();
-
-                con.close();
-
-                txt_NombreCliente.setBackground(Color.green);
-                txt_fecha.setBackground(Color.green);
-                txt_modelo.setBackground(Color.green);
-                txt_num_serie.setBackground(Color.green);
-                txt_ultima_Modificacion.setText(user);
-                
-                JOptionPane.showMessageDialog(null, "Equipo actualizado correctamente");
-                Limpiar();
-                this.dispose();
-
-            } catch (SQLException e) {
-                System.err.println("Error al actualiza datos del Equipo " + e);
-                JOptionPane.showMessageDialog(null, "Error al actualizar datos del equipo, contacte con el Administrador");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos");
-        }
-
 
     }//GEN-LAST:event_jButton_ActualizarActionPerformed
 
@@ -383,20 +320,21 @@ public class InformacionEquipo extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InformacionEquipo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InformacionEquipoCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InformacionEquipo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InformacionEquipoCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InformacionEquipo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InformacionEquipoCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InformacionEquipo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InformacionEquipoCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InformacionEquipo().setVisible(true);
+                new InformacionEquipoCliente().setVisible(true);
             }
         });
     }
@@ -430,7 +368,7 @@ public class InformacionEquipo extends javax.swing.JFrame {
     private javax.swing.JTextField txt_ultima_Modificacion;
     // End of variables declaration//GEN-END:variables
 
-    public void Limpiar(){
+    public void Limpiar() {
         txt_NombreCliente.setText("");
         txt_fecha.setText("");
         txt_modelo.setText("");

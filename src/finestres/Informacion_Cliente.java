@@ -15,7 +15,6 @@ import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
-import static finestres.GestionarClientes.IDcliente_update;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -29,6 +28,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
+
 
 /*
  * @author aNDREUET
@@ -496,8 +496,8 @@ public class Informacion_Cliente extends javax.swing.JFrame {
                     //con2.close();
                     
                 } catch (SQLException e) {
-                    System.err.println("Error al obtener los datos de los equipos del cliente " + e);
-                    JOptionPane.showMessageDialog(null, "rror al obtener los datos de los equipos del cliente, contacte con el Administrador");
+                    System.err.println("Error al generar listado de equipos del cliente " + e);
+                    JOptionPane.showMessageDialog(null, "Error al generar listado de equipos del cliente, contacte con el Administrador");
                 }
 
             } catch (SQLException e) {
