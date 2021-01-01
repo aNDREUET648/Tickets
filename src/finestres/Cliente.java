@@ -173,6 +173,10 @@ public class Cliente extends javax.swing.JFrame {
 
     private void jButton_GraficaMarcasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GraficaMarcasActionPerformed
 
+        // creo una instancia de clases
+        GraficarMarcas graficarMarcas = new GraficarMarcas();
+        graficarMarcas.setVisible(true);
+
     }//GEN-LAST:event_jButton_GraficaMarcasActionPerformed
 
     /**

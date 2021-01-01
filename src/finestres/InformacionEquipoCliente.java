@@ -239,7 +239,7 @@ public class InformacionEquipoCliente extends javax.swing.JFrame {
         cmb_tipoequipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laptop", "Desktop", "Impresora", "Multifunción", "Plotter" }));
         getContentPane().add(cmb_tipoequipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
 
-        cmb_marcas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acer", "Apple", "Asus", "Brother", "Canon", "Dell", "HP", "Epson", "Lenovo", "OKI", "Samsung", "Toshiba", "Xerox" }));
+        cmb_marcas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acer", "Apple", "Asus", "Brother", "Dell", "HP", "Lenovo", "MSI", "Samsung", "Toshiba", "Xerox" }));
         cmb_marcas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmb_marcasActionPerformed(evt);

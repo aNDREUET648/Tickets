@@ -386,20 +386,18 @@
     <Component class="javax.swing.JComboBox" name="cmb_marcas">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="13">
+          <StringArray count="11">
             <StringItem index="0" value="Acer"/>
             <StringItem index="1" value="Apple"/>
             <StringItem index="2" value="Asus"/>
             <StringItem index="3" value="Brother"/>
-            <StringItem index="4" value="Canon"/>
-            <StringItem index="5" value="Dell"/>
-            <StringItem index="6" value="HP"/>
-            <StringItem index="7" value="Epson"/>
-            <StringItem index="8" value="Lenovo"/>
-            <StringItem index="9" value="OKI"/>
-            <StringItem index="10" value="Samsung"/>
-            <StringItem index="11" value="Toshiba"/>
-            <StringItem index="12" value="Xerox"/>
+            <StringItem index="4" value="Dell"/>
+            <StringItem index="5" value="HP"/>
+            <StringItem index="6" value="Lenovo"/>
+            <StringItem index="7" value="MSI"/>
+            <StringItem index="8" value="Samsung"/>
+            <StringItem index="9" value="Toshiba"/>
+            <StringItem index="10" value="Xerox"/>
           </StringArray>
         </Property>
       </Properties>
@@ -418,9 +416,14 @@
     <Component class="javax.swing.JComboBox" name="cmb_estatus">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="2">
+          <StringArray count="7">
             <StringItem index="0" value="Activo"/>
             <StringItem index="1" value="Inactivo"/>
+            <StringItem index="2" value="Nuevo ingreso"/>
+            <StringItem index="3" value="No reparado"/>
+            <StringItem index="4" value="En revisi&#xf3;n"/>
+            <StringItem index="5" value="Reparado"/>
+            <StringItem index="6" value="Entregado"/>
           </StringArray>
         </Property>
       </Properties>

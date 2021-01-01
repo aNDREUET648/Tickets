@@ -45,7 +45,7 @@ public class InformacionEquipo extends javax.swing.JFrame {
             }
         } catch (SQLException e) {
             System.err.println("Error al consultar el nombre del cliente en InformacionEquipo " + e);
-            JOptionPane.showMessageDialog(null, "Error al al consultar el nombre del cliente en InformacionEquipo, contacte con el Administrador");
+            JOptionPane.showMessageDialog(null, "Error al consultar el nombre del cliente en InformacionEquipo, contacte con el Administrador");
         }
 
         // recuperamos datos del equipo de la tabla Equipos
@@ -258,7 +258,7 @@ public class InformacionEquipo extends javax.swing.JFrame {
         cmb_tipoequipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laptop", "Desktop", "Impresora", "Multifunción", "Plotter" }));
         getContentPane().add(cmb_tipoequipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
 
-        cmb_marcas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acer", "Apple", "Asus", "Brother", "Canon", "Dell", "HP", "Epson", "Lenovo", "OKI", "Samsung", "Toshiba", "Xerox" }));
+        cmb_marcas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acer", "Apple", "Asus", "Brother", "Dell", "HP", "Lenovo", "MSI", "Samsung", "Toshiba", "Xerox" }));
         cmb_marcas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmb_marcasActionPerformed(evt);
@@ -266,7 +266,7 @@ public class InformacionEquipo extends javax.swing.JFrame {
         });
         getContentPane().add(cmb_marcas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
 
-        cmb_estatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
+        cmb_estatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo", "Nuevo ingreso", "No reparado", "En revisión", "Reparado", "Entregado" }));
         getContentPane().add(cmb_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, -1, -1));
 
         jButton_Actualizar.setBackground(new java.awt.Color(153, 153, 255));
