@@ -169,11 +169,11 @@ public class Administrador extends javax.swing.JFrame {
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, -1, -1));
 
         jLabel4.setForeground(java.awt.Color.white);
-        jLabel4.setText("Panel Vista CAU");
+        jLabel4.setText("Técnico");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, -1, -1));
 
         jLabel5.setForeground(java.awt.Color.white);
-        jLabel5.setText("Técnico");
+        jLabel5.setText("Cliente");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 340, -1, -1));
 
         jLabel6.setForeground(java.awt.Color.white);

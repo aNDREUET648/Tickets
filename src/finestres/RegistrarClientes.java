@@ -186,6 +186,7 @@ public class RegistrarClientes extends javax.swing.JFrame {
 
         int validacion = 0; // flag por si quedaron campos de texto vacíos
         String nombre, email, apellidos, username;
+        
         //
         // recupero los valores para insertarlos luego en las tablas
         //

@@ -26,7 +26,7 @@ public class GestionarEquipos extends javax.swing.JFrame {
     //definido en Interface.java y asignada en la línea 165 (+/-)
     int id_usuario;
     // creo la variable que me permita enviar datos entre interfaces
-    // y guardará el cliente que queremos consultar al dar click
+    // y guardará el equipo que queremos consultar al dar click
     // en cualquiera de los registros visualizados en la tabla
     public static int IDequipo_update = 0;
     // declaro globalmente el objeto de la clase DefaultTableModel
@@ -156,7 +156,7 @@ public class GestionarEquipos extends javax.swing.JFrame {
         ));
         jScrollPane_equipos.setViewportView(jTable_equipos);
 
-        getContentPane().add(jScrollPane_equipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 630, 180));
+        getContentPane().add(jScrollPane_equipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 630, 180));
 
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
         getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 320, -1, -1));

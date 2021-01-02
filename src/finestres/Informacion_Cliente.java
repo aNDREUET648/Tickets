@@ -56,7 +56,7 @@ public class Informacion_Cliente extends javax.swing.JFrame {
         IDuser = Interface.IDuser;
         IDcliente_update = GestionarClientes.IDcliente_update;
 
-        setSize(630, 470);
+        setSize(750, 470);
         setResizable(false);
         setLocationRelativeTo(null);
 
@@ -108,7 +108,7 @@ public class Informacion_Cliente extends javax.swing.JFrame {
             model.addColumn("ID equipo");
             model.addColumn("Tipo de equipo");
             model.addColumn("Marca");
-            model.addColumn("Status");
+            model.addColumn("Modelo");
 
             while (rs.next()) {
                 //creo vector de tipo objectos
@@ -195,6 +195,7 @@ public class Informacion_Cliente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
+        setPreferredSize(new java.awt.Dimension(750, 470));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTable_equipos.setModel(new javax.swing.table.DefaultTableModel(
@@ -210,7 +211,7 @@ public class Informacion_Cliente extends javax.swing.JFrame {
         ));
         jScrollPane_equipos.setViewportView(jTable_equipos);
 
-        getContentPane().add(jScrollPane_equipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 380, 180));
+        getContentPane().add(jScrollPane_equipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 480, 180));
 
         jLabel_Titulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel_Titulo.setForeground(java.awt.Color.white);
@@ -312,7 +313,7 @@ public class Informacion_Cliente extends javax.swing.JFrame {
 
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
         getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, -1, -1));
-        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 470));
+        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 470));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

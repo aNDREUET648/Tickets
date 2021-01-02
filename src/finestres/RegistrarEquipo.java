@@ -197,7 +197,7 @@ public class RegistrarEquipo extends javax.swing.JFrame {
                 estatus, observaciones;
         // Calendar es una clase abstracta y no podermos hacer un new
         // tenemos que llamarla con getinstance
-        Calendar calendar = Calendar.getInstance();
+        //Calendar calendar = Calendar.getInstance();
         Timestamp fecha = new Timestamp(new java.util.Date().getTime());
 
         tipo_equipo = cmb_tipoequipo.getSelectedItem().toString();
@@ -206,7 +206,7 @@ public class RegistrarEquipo extends javax.swing.JFrame {
         num_serie = txt_num_serie.getText().trim();
         observaciones = jTextPane_observaciones.getText();
         
-        fecha_ingreso = Integer.toString(calendar.get(Calendar.DATE));
+        //fecha_ingreso = Integer.toString(calendar.get(Calendar.DATE));
 
         if (modelo.equals("")) {
             txt_modelo.setBackground(Color.red);
@@ -230,7 +230,6 @@ public class RegistrarEquipo extends javax.swing.JFrame {
 
                 // El idEquipo pero como es AutoIncremental es igual lo que ponga
                 // porque el pondrá el id que quiera, por eso pongo 0
-                pst.setInt(1, 0);
                 pst.setInt(1, 0);
                 pst.setString(2, tipo_equipo); // tipo
                 pst.setString(3, marca); // marca

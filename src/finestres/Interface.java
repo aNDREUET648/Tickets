@@ -5,6 +5,8 @@ import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import java.sql.*;
 import clases.Conexion; // importo mi conexión a la bd
+import com.sun.glass.events.KeyEvent;
+
 
 /*
  * @author aNDREUET
@@ -93,11 +95,6 @@ public class Interface extends javax.swing.JFrame {
         jTextUser.setBackground(new java.awt.Color(22, 122, 218));
         jTextUser.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jTextUser.setForeground(new java.awt.Color(222, 222, 222));
-        jTextUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextUserActionPerformed(evt);
-            }
-        });
         getContentPane().add(jTextUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 270, 145, 30));
 
         jPassword.setBackground(new java.awt.Color(22, 122, 218));
@@ -106,9 +103,9 @@ public class Interface extends javax.swing.JFrame {
         jPassword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jPassword.setCaretColor(new java.awt.Color(255, 255, 255));
         jPassword.setName(""); // NOI18N
-        jPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordActionPerformed(evt);
+        jPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPasswordKeyPressed(evt);
             }
         });
         getContentPane().add(jPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 310, 145, 30));
@@ -135,9 +132,6 @@ public class Interface extends javax.swing.JFrame {
     private void jButtonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExitActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jButtonExitActionPerformed
-    private void jTextUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextUserActionPerformed
-
-    }//GEN-LAST:event_jTextUserActionPerformed
 
 //  Botón de Inicio de Sesión
     @SuppressWarnings("StringEquality")
@@ -168,15 +162,12 @@ public class Interface extends javax.swing.JFrame {
                     if ("1".equals(habilitado)) {
                         if (rol.equalsIgnoreCase("Administrador")) {
                             dispose(); // destruirá la ventana de Interface(login) y sus componentes
-                            //JOptionPane.showMessageDialog(null, "Bienvenido a la Aplicación Tickets - Administrador " + usuario + " " + rol + " " + habilitado);
                             new Administrador().setVisible(true);
                         } else if (rol.equalsIgnoreCase("Tecnico")) {
                             dispose(); // destruirá la ventana de Interface(login) y sus componentes
-                            //JOptionPane.showMessageDialog(null, "Bienvenido a la Aplicación Tickets - Técnico " + usuario + " " + rol + " " + habilitado);
                             new Tecnico().setVisible(true);
                         } else if (rol.equalsIgnoreCase("Cliente")) {
                             dispose(); // destruirá la ventana de Interface(login) y sus componentes
-                            //JOptionPane.showMessageDialog(null, "Bienvenido a la Aplicación Tickets - Cliente " + usuario + " " + rol + " " + habilitado);
                             new Cliente().setVisible(true);
                         } else {
                             JOptionPane.showMessageDialog(null, "Tickets NO PIULA " + usuario + " " + rol + " " + habilitado);
@@ -198,9 +189,13 @@ public class Interface extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonInicioSesionActionPerformed
 
-    private void jPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordActionPerformed
+    private void jPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordKeyPressed
+        // si pulso Enter tiene que hacer lo mismo que si le doy al 
+        // botón de iniciar sesión
+        if (evt.getKeyCode()==KeyEvent.VK_ENTER){
+            JOptionPane.showMessageDialog(null, "Pulsa en Iniciar Sesión");
+        }
+    }//GEN-LAST:event_jPasswordKeyPressed
 
     /**
      * @param args the command line arguments
