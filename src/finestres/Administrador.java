@@ -37,10 +37,10 @@ public class Administrador extends javax.swing.JFrame {
         setResizable(false);
         setTitle("Rol: Administrador - Sesión de " + user);
         setLocationRelativeTo(null);
-        
+
         //mata procesos en segundo plano
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); 
-        
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
         // Fondo de pantalla de mi aplicación
         ImageIcon wallpaper = new ImageIcon("src/imatges/wallpaperPrincipal.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
@@ -86,7 +86,7 @@ public class Administrador extends javax.swing.JFrame {
         jLabel_NombreUsuario = new javax.swing.JLabel();
         jButton_CrearUsuario = new javax.swing.JButton();
         jButton_GestionarUsuarios = new javax.swing.JButton();
-        jButton_Creatividad = new javax.swing.JButton();
+        jButton_GestionarIncidenciasAdmin = new javax.swing.JButton();
         jButton_Tecnico = new javax.swing.JButton();
         jButton_Tecnicoss = new javax.swing.JButton();
         jButton_AcercaDe = new javax.swing.JButton();
@@ -124,13 +124,13 @@ public class Administrador extends javax.swing.JFrame {
         });
         getContentPane().add(jButton_GestionarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 120, 100));
 
-        jButton_Creatividad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/creatividad.png"))); // NOI18N
-        jButton_Creatividad.addActionListener(new java.awt.event.ActionListener() {
+        jButton_GestionarIncidenciasAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/creatividad.png"))); // NOI18N
+        jButton_GestionarIncidenciasAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_CreatividadActionPerformed(evt);
+                jButton_GestionarIncidenciasAdminActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Creatividad, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 120, 100));
+        getContentPane().add(jButton_GestionarIncidenciasAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 120, 100));
 
         jButton_Tecnico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/capturista.png"))); // NOI18N
         jButton_Tecnico.addActionListener(new java.awt.event.ActionListener() {
@@ -196,14 +196,20 @@ public class Administrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_CrearUsuarioActionPerformed
 
     private void jButton_GestionarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GestionarUsuariosActionPerformed
+
         // Creo una instacia de clases
         GestionarUsuarios gestionarUsuarios = new GestionarUsuarios();
         gestionarUsuarios.setVisible(true);
+
     }//GEN-LAST:event_jButton_GestionarUsuariosActionPerformed
 
-    private void jButton_CreatividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CreatividadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_CreatividadActionPerformed
+    private void jButton_GestionarIncidenciasAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GestionarIncidenciasAdminActionPerformed
+        
+        // Creo una instancia de clases
+        GestionarIncidenciasAdmin gestionarIncidenciasAdmin = new GestionarIncidenciasAdmin();
+        gestionarIncidenciasAdmin.setVisible(true);
+        
+    }//GEN-LAST:event_jButton_GestionarIncidenciasAdminActionPerformed
 
     private void jButton_TecnicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_TecnicoActionPerformed
         // creo una instalación de clases
@@ -259,7 +265,7 @@ public class Administrador extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_AcercaDe;
     private javax.swing.JButton jButton_CrearUsuario;
-    private javax.swing.JButton jButton_Creatividad;
+    private javax.swing.JButton jButton_GestionarIncidenciasAdmin;
     private javax.swing.JButton jButton_GestionarUsuarios;
     private javax.swing.JButton jButton_Tecnico;
     private javax.swing.JButton jButton_Tecnicoss;

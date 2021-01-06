@@ -144,7 +144,6 @@ public class FalloHardware extends javax.swing.JFrame {
                     // para guardar el valor tengo que hacer un casting del model
                     // guardamos el valor del ID del cliente seleccionado al clickar
                     IDequipo = (int) model.getValueAt(fila_point, columna_point);
-                    jTextPane_Descripcion.setText("IDEquipo: " + IDequipo);
                 }
             }
         });
@@ -275,13 +274,17 @@ public class FalloHardware extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_CrearIncidenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CrearIncidenciaActionPerformed
-        
+
         String descripcion;
         Timestamp fecha = new Timestamp(new java.util.Date().getTime());
 
-        descripcion = jTextPane_Descripcion.getText();
+        descripcion = jTextPane_Descripcion.getText().trim();
 
         if (!descripcion.equals("")) {
+
+            descripcion = "IDEquipo: " + IDequipo + ". \n" + jTextPane_Descripcion.getText();
+            jTextPane_Descripcion.setText(descripcion);
+            
             // creo un nuevo incidente Tabla Incidentes
             try {
                 Connection con = Conexion.conector();
@@ -295,7 +298,7 @@ public class FalloHardware extends javax.swing.JFrame {
 
                 pst.executeUpdate();
                 con.close();
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 System.err.println("Error al crear incidente Hardware " + e);
                 JOptionPane.showMessageDialog(null, "Error al crear incidente Hardware, contacte con el administrador");
             }
@@ -317,7 +320,7 @@ public class FalloHardware extends javax.swing.JFrame {
 
                 pst2.executeUpdate();
                 con2.close();
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 System.err.println("Error al crear intervención Hardware " + e);
                 JOptionPane.showMessageDialog(null, "Error al crear intervención Hardware, contacte con el administrador");
             }
@@ -337,7 +340,7 @@ public class FalloHardware extends javax.swing.JFrame {
 
                 pst3.executeUpdate();
                 con3.close();
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 System.err.println("Error al crear estado Hardware " + e);
                 JOptionPane.showMessageDialog(null, "Error al crear estado Hardware, contacte con el administrador");
             }
@@ -350,13 +353,13 @@ public class FalloHardware extends javax.swing.JFrame {
                         + "values (?,?,?,(select MAX(idIntervencion) from Intervenciones))";
                 PreparedStatement pst4 = con4.prepareStatement(sql4);
 
-                pst4.setString(1, "Basico"); // estado "Inicio" del Incidente
+                pst4.setString(1, "Basico"); // nivel "Básico" del Incidente
                 pst4.setString(2, "Nivel Básico de la Incidencia de Fallo del Hardware"); // descripción del problema
                 pst4.setTimestamp(3, fecha); // fecha evolución estado "Inici"
 
                 pst4.executeUpdate();
                 con4.close();
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 System.err.println("Error al crear nivel Hardware " + e);
                 JOptionPane.showMessageDialog(null, "Error al crear nivel Hardware, contacte con el administrador");
             }
@@ -376,7 +379,7 @@ public class FalloHardware extends javax.swing.JFrame {
 
                 pst5.executeUpdate();
                 con5.close();
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 System.err.println("Error al crear prioridad Hardware " + e);
                 JOptionPane.showMessageDialog(null, "Error al crear prioridad Hardware, contacte con el administrador");
             }

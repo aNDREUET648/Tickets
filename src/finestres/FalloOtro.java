@@ -193,10 +193,11 @@ public class FalloOtro extends javax.swing.JFrame {
         Timestamp fecha = new Timestamp(new java.util.Date().getTime());
 
         // compruebo que no ha dejado el campo vacío
-        descripcion = jTextPane_Descripcion.getText();
+        descripcion = jTextPane_Descripcion.getText().trim();
 
         if (!descripcion.equals("")) {
 
+            descripcion = "Otro. \n" + jTextPane_Descripcion.getText();
             // creo un nuevo incidente Tabla Incidentes
             try {
                 Connection con = Conexion.conector();
@@ -210,7 +211,7 @@ public class FalloOtro extends javax.swing.JFrame {
 
                 pst.executeUpdate();
                 con.close();
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 System.err.println("Error al crear incidente Otros " + e);
                 JOptionPane.showMessageDialog(null, "Error al crear incidente Otros, contacte con el administrador");
             }
@@ -232,7 +233,7 @@ public class FalloOtro extends javax.swing.JFrame {
 
                 pst2.executeUpdate();
                 con2.close();
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 System.err.println("Error al crear intervención Otros " + e);
                 JOptionPane.showMessageDialog(null, "Error al crear intervención Otros, contacte con el administrador");
             }
@@ -252,7 +253,7 @@ public class FalloOtro extends javax.swing.JFrame {
 
                 pst3.executeUpdate();
                 con3.close();
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 System.err.println("Error al crear estado Otros " + e);
                 JOptionPane.showMessageDialog(null, "Error al crear estado Otros, contacte con el administrador");
             }
@@ -265,13 +266,13 @@ public class FalloOtro extends javax.swing.JFrame {
                         + "values (?,?,?,(select MAX(idIntervencion) from Intervenciones))";
                 PreparedStatement pst4 = con4.prepareStatement(sql4);
 
-                pst4.setString(1, "Basico"); // estado "Inicio" del Incidente
+                pst4.setString(1, "Basico"); // nivel "Básicoc" del Incidente
                 pst4.setString(2, "Nivel Básico de la Incidencia de Otros Problemas"); // descripción del problema
                 pst4.setTimestamp(3, fecha); // fecha evolución estado "Inici"
 
                 pst4.executeUpdate();
                 con4.close();
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 System.err.println("Error al crear nivel Otros " + e);
                 JOptionPane.showMessageDialog(null, "Error al crear nivel Otros, contacte con el administrador");
             }
@@ -285,13 +286,13 @@ public class FalloOtro extends javax.swing.JFrame {
                         + "values (?,?,?,(select MAX(idIntervencion) from Intervenciones))";
                 PreparedStatement pst5 = con5.prepareStatement(sql5);
 
-                pst5.setString(1, "Baja"); // Prioridad "Inicio" del Incidente
+                pst5.setString(1, "Baja"); // Prioridad "Baja" del Incidente
                 pst5.setString(2, "Prioridad Baja de la Incidencia de Otros Problemas"); // descripción del problema
                 pst5.setTimestamp(3, fecha); // fecha evolución estado "Inici"
 
                 pst5.executeUpdate();
                 con5.close();
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 System.err.println("Error al crear prioridad Otros " + e);
                 JOptionPane.showMessageDialog(null, "Error al crear prioridad Otros, contacte con el administrador");
             }

@@ -13,11 +13,10 @@ import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
+/*
  * @author aNDREUET
  */
-public class GestionarEquipos extends javax.swing.JFrame {
+public class GestionarIncidenciasAdmin extends javax.swing.JFrame {
 
     // variable que recoge el nombre del usuario que ha iniciado sesión
     // definido en Interface.java y asignada en la línea 144 (+/-)
@@ -28,7 +27,7 @@ public class GestionarEquipos extends javax.swing.JFrame {
     // creo la variable que me permita enviar datos entre interfaces
     // y guardará el equipo que queremos consultar al dar click
     // en cualquiera de los registros visualizados en la tabla
-    public static int IDequipo_update = 0;
+    public static int IDincidente_update = 0;
     // declaro globalmente el objeto de la clase DefaultTableModel
     // para poder utilizarlo en cualquier parte de nuestra clase
     // model es la que nos va a permitir poder general el click en la tabla
@@ -36,16 +35,16 @@ public class GestionarEquipos extends javax.swing.JFrame {
     DefaultTableModel model = new DefaultTableModel();
 
     /**
-     * Constructor del form GestionarClientes
+     * Constructor form GestionarIncidenciasAdmin
      */
-    public GestionarEquipos() {
+    public GestionarIncidenciasAdmin() {
         initComponents();
         user = Interface.usuario;
         id_usuario = Interface.IDuser;
 
-        setSize(650, 380);
+        setSize(1000, 420);
         setResizable(false);
-        setTitle("Técnico - Sesión de " + user);
+        setTitle("Administrador - Sesión de " + user);
         setLocationRelativeTo(null);
 
         // evita que se cierre el programa cuando cerramos esta interfaz
@@ -58,52 +57,54 @@ public class GestionarEquipos extends javax.swing.JFrame {
         jLabel_Wallpaper.setIcon(icono);
         this.repaint();
 
+        // ahora busco todos los incidentes
         try {
             Connection con = Conexion.conector();
-            String sql = "select idEquipos, tipo, marca, modelo, num_serie, habilitado from Equipos";
+            String sql = "SELECT * FROM usuarios USU, incidentes INCID, intervenciones INTER, estados EST, tipos ";
+            sql += "where idUsuario=INCID.Usuarios_idUsuario ";
+            sql += "AND idIncidente = Incidentes_idIncidente AND ";
+            sql += "idIntervencion = Intervenciones_idIntervencion AND ";
+            sql += "idTipo = tipos_idTipo ORDER BY fecha_crea DESC";
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             //
-            // Creo la tabla de equipos
+            // Creo la tabla de incidentes
             //
-            jTable_equipos = new JTable(model);
+            jTable_incidentes = new JTable(model);
             // creo el contenedor y hago visible la tabla dentro de él
-            jScrollPane_equipos.setViewportView(jTable_equipos);
+            jScrollPane_incidentes.setViewportView(jTable_incidentes);
             // definimos las columnas que estarán en el jScrollPane
             model.addColumn("ID");
+            model.addColumn("Nombre y apellidos");
+            model.addColumn("Fecha");
             model.addColumn("Tipo");
-            model.addColumn("Marca");
-            model.addColumn("Modelo");
-            model.addColumn("Número de Serie");
-            model.addColumn("Status");
+            model.addColumn("Descripción");
+            model.addColumn("Estado");
+            model.addColumn("Descripción intervención");
+
             // y relleno la tabla
             while (rs.next()) {
-                /*
-                estoy probando el casting de abajo. Aquí el idEquipos es int pero 
-                cuando lo lee celda[0]=rs.getObject(i+1) lo ve como tipo long
-                lo arreglo guardando celda[0] independiente rs.getInt("idEquipos")
-                Why?
-                JOptionPane.showMessageDialog(null, "ID DEL CLIENTE " + rs.getInt("idEquipos"));
-                 */
-                // creo vector de tipo objetos
-                Object[] celda = new Object[6]; // 6 columnas
-                celda[0] = rs.getInt("idEquipos");
-                for (int i = 1; i < 6; i++) {
-                    // bucle para ir llenando cada columna de la fila
-                    // la primera fila del rs.next() es 1 y no 0 (i+1)
-                    celda[i] = rs.getObject(i + 1);
-                }
+                Object[] celda = new Object[7]; // 7 columnas
+                celda[0] = rs.getInt("idIncidente");
+                celda[1] = rs.getString("nombre") + " " + rs.getString("apellidos");
+                celda[2] = rs.getTimestamp("fecha_crea");
+                celda[3] = rs.getString("Tipo");
+                celda[4] = rs.getString("INCID.descripcion");
+                celda[5] = rs.getString("estado");
+                celda[6] = rs.getString("INTER.descripcion");
                 // agregar nueva fila
                 model.addRow(celda); // añadimos la nueva fila ya rellenada  
             }
             con.close();
         } catch (SQLException e) {
-            System.err.println("Error al llenar la tabla de Equipos " + e);
-            JOptionPane.showMessageDialog(null, "Error al mostrar la tabla Equipos, contacte con el Administrador");
+            System.err.println("Error al llenar Histórico de Incidentes Admin " + e);
+            JOptionPane.showMessageDialog(null, "Error al llenar Histórico de Incidentes Admin, contacte con el Administrador");
         }
-
+        //
+        // Utilizo el método ObtenerDatosTabla
+        // que nuevamente emplearé al darle al botón mostrar
+        //
         ObtenerDatosTabla();
-
     }
 
     //
@@ -124,26 +125,30 @@ public class GestionarEquipos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane_equipos = new javax.swing.JScrollPane();
-        jTable_equipos = new javax.swing.JTable();
+        jLabel_Titulo = new javax.swing.JLabel();
         jLabel_footer = new javax.swing.JLabel();
+        jScrollPane_incidentes = new javax.swing.JScrollPane();
+        jTable_incidentes = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
         cmb_estatus = new javax.swing.JComboBox<>();
         jButton_Mostrar = new javax.swing.JButton();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
-        setMinimumSize(new java.awt.Dimension(650, 380));
-        setPreferredSize(new java.awt.Dimension(630, 380));
+        setMinimumSize(new java.awt.Dimension(1000, 420));
+        setPreferredSize(new java.awt.Dimension(1000, 420));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setForeground(java.awt.Color.white);
-        jLabel1.setText("Equipos registrados");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, -1, -1));
+        jLabel_Titulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel_Titulo.setForeground(java.awt.Color.white);
+        jLabel_Titulo.setText("Gestión de Incidentes");
+        getContentPane().add(jLabel_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, -1, -1));
 
-        jTable_equipos.setModel(new javax.swing.table.DefaultTableModel(
+        jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
+        getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, -1, -1));
+
+        jTable_incidentes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -154,15 +159,15 @@ public class GestionarEquipos extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane_equipos.setViewportView(jTable_equipos);
+        jScrollPane_incidentes.setViewportView(jTable_incidentes);
 
-        getContentPane().add(jScrollPane_equipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 630, 180));
+        getContentPane().add(jScrollPane_incidentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 960, 180));
 
-        jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
-        getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 320, -1, -1));
+        jLabel1.setText("Estado:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 60, -1, -1));
 
-        cmb_estatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Activo", "Inactivo", "Nuevo ingreso", "No reparado", "En revisión", "Reparado", "Entregado" }));
-        getContentPane().add(cmb_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 40, 130, -1));
+        cmb_estatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Inicio", "Asignado", "En Proceso", "Finalizado" }));
+        getContentPane().add(cmb_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 60, 130, -1));
 
         jButton_Mostrar.setBackground(new java.awt.Color(153, 153, 255));
         jButton_Mostrar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -174,16 +179,17 @@ public class GestionarEquipos extends javax.swing.JFrame {
                 jButton_MostrarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 250, 210, 35));
-        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 380));
+        getContentPane().add(jButton_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 300, 210, 35));
+        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 420));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_MostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_MostrarActionPerformed
 
+        // filtramos según el estado
         String seleccion = cmb_estatus.getSelectedItem().toString();
-        String query = "";
+        String sql = "";
         // borramos el contenido de la tabla 
         // limpia las filas
         model.setRowCount(0);
@@ -191,71 +197,69 @@ public class GestionarEquipos extends javax.swing.JFrame {
         model.setColumnCount(0);
 
         try {
+
             Connection con = Conexion.conector();
-            // ahora vendría la instrucción hacia la bd pero ahora voy
-            // a utilizar dos instrucciones dinámicas a la bd
-            // una instrucción mostrará todos los registros
-            // la otra según el filtro (Activo, Inactivo)
+            // ahora vendría la instrucción hacia la bd pero ahora voy a utilizar dos instrucciones dinámicas a la bd.
+            // una instrucción mostrará todos los incidentes y la otra filtrará según el estado
+            // 
             if (seleccion.equalsIgnoreCase("Todos")) {
-                query = "select idEquipos, tipo, marca, modelo, num_serie, habilitado from Equipos";
+                sql = "SELECT * FROM usuarios USU, incidentes INCID, intervenciones INTER, estados EST, tipos ";
+                sql += "where idUsuario=INCID.Usuarios_idUsuario ";
+                sql += "AND idIncidente = Incidentes_idIncidente AND ";
+                sql += "idIntervencion = Intervenciones_idIntervencion AND ";
+                sql += "idTipo = tipos_idTipo ORDER BY fecha_crea DESC";
             } else {
-                if (seleccion.equalsIgnoreCase("Inactivo")) {
-                    query = "select idEquipos, tipo, marca, modelo, num_serie, habilitado from Equipos where habilitado = 0";
-                } else {
-                    query = "select idEquipos, tipo, marca, modelo, num_serie, habilitado from Equipos where habilitado = 1";
-                    //query = "select idEquipos,tipo,marca,modelo,num_serie,habilitado from Equipos where estatus='"+seleccion+"'";
-                }
+                sql = "SELECT * FROM usuarios USU, incidentes INCID, intervenciones INTER, estados EST, tipos ";
+                sql += "where idUsuario=INCID.Usuarios_idUsuario ";
+                sql += "AND idIncidente = Incidentes_idIncidente AND ";
+                sql += "idIntervencion = Intervenciones_idIntervencion AND ";
+                sql += "idTipo = tipos_idTipo AND ";
+                sql += "estado= '" + seleccion + "' ";
+                sql += "ORDER BY fecha_crea DESC";
             }
-            PreparedStatement pst = con.prepareStatement(query);
+            PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
+            
             //
-            // Creo nuevamente la tabla de equipos
+            // Creo nuevamente la tabla de incidentes
             // ya que la había borrado previamente con los métodos setxxxCount(0)
             //
-            jTable_equipos = new JTable(model);
+            jTable_incidentes = new JTable(model);
             // creo el contenedor y hago visible la tabla dentro de él
-            jScrollPane_equipos.setViewportView(jTable_equipos);
+            jScrollPane_incidentes.setViewportView(jTable_incidentes);
             // definimos las columnas que estarán en el jScrollPane
             model.addColumn("ID");
+            model.addColumn("Nombre y Apellidos");
+            model.addColumn("Fecha");
             model.addColumn("Tipo");
-            model.addColumn("Marca");
-            model.addColumn("Modelo");
-            model.addColumn("Número de Serie");
-            model.addColumn("Status");
-            // y relleno la tabla
+            model.addColumn("Descripción");
+            model.addColumn("Estado");
+            model.addColumn("Descripción intervención");
 
+            // y relleno la tabla
             while (rs.next()) {
-                /*
-                estoy probando el casting de abajo. Aquí el idEquipos es int pero 
-                cuando lo lee celda[0]=rs.getObject(i+1) lo ve como tipo long
-                lo arreglo guardando celda[0] independiente rs.getInt("idEquipos")
-                Why?
-                JOptionPane.showMessageDialog(null, "ID EQUIPO " + rs.getInt("idEquipos"));
-                 */
-                // creo vector de tipo objetos
-                Object[] celda = new Object[6]; // 6 columnas
-                celda[0] = rs.getInt("idEquipos");
-                for (int i = 1; i < 6; i++) {
-                    // bucle para ir llenando cada columna de la fila
-                    // la primera fila del rs.next() es 1 y no 0 (i+1)
-                    celda[i] = rs.getObject(i + 1);
-                }
+                Object[] celda = new Object[7]; // 7 columnas
+                celda[0] = rs.getInt("idIncidente");
+                celda[1] = rs.getString("nombre") + " " + rs.getString("apellidos");
+                celda[2] = rs.getTimestamp("fecha_crea");
+                celda[3] = rs.getString("Tipo");
+                celda[4] = rs.getString("INCID.descripcion");
+                celda[5] = rs.getString("estado");
+                celda[6] = rs.getString("INTER.descripcion");
                 // agregar nueva fila
-                model.addRow(celda); // añadimos la nueva fila ya rellenada   
+                model.addRow(celda); // añadimos la nueva fila ya rellenada  
             }
             con.close();
             
         } catch (SQLException e) {
-            System.err.println("Error al recuperar los registros de la tabla Equipos" + e);
-            JOptionPane.showMessageDialog(null, "Error al recuperar los registros de la tabla Equipos, contacte con el Administrador");
+            System.err.println("Error al recuperar los registros de los Incidentes Admin " + e);
+            JOptionPane.showMessageDialog(null, "Error al recuperar los registros de los Incidentes Admin, contacte con el Administrador");
         }
         //
-        // reutilizo el método ObtenerDatosTabla
-        // para la realización del filtraje
+        // Vuelvo otra vez a utilizar el método ObtenerDatosTabla
+        // para ver los datos filtrados
         //
         ObtenerDatosTabla();
-        
-
     }//GEN-LAST:event_jButton_MostrarActionPerformed
 
     /**
@@ -275,21 +279,20 @@ public class GestionarEquipos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GestionarEquipos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionarIncidenciasAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GestionarEquipos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionarIncidenciasAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GestionarEquipos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionarIncidenciasAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GestionarEquipos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionarIncidenciasAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GestionarEquipos().setVisible(true);
+                new GestionarIncidenciasAdmin().setVisible(true);
             }
         });
     }
@@ -298,17 +301,18 @@ public class GestionarEquipos extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmb_estatus;
     private javax.swing.JButton jButton_Mostrar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel_Titulo;
     private javax.swing.JLabel jLabel_Wallpaper;
     private javax.swing.JLabel jLabel_footer;
-    private javax.swing.JScrollPane jScrollPane_equipos;
-    private javax.swing.JTable jTable_equipos;
+    private javax.swing.JScrollPane jScrollPane_incidentes;
+    private javax.swing.JTable jTable_incidentes;
     // End of variables declaration//GEN-END:variables
 
     public void ObtenerDatosTabla() {
         //
         // evento para escuchar los clicks del ratón que damos en la tabla
         //
-        jTable_equipos.addMouseListener(new MouseAdapter() {
+        jTable_incidentes.addMouseListener(new MouseAdapter() {
             @Override  //sobreescribimos el método mouseClicked
             // me guardará momentáneamente el evento que se está generando
             public void mouseClicked(MouseEvent e) {
@@ -316,7 +320,7 @@ public class GestionarEquipos extends javax.swing.JFrame {
                 // la fila seleccionada la recogerá el evento getPoint en e
                 // la columna será 0 porque nos interesa guardar la columna ID
                 // la cual me permitirá obtener la información del cliente
-                int fila_point = jTable_equipos.rowAtPoint(e.getPoint());
+                int fila_point = jTable_incidentes.rowAtPoint(e.getPoint());
                 int columna_point = 0;
 
                 if (fila_point > -1) {
@@ -325,10 +329,11 @@ public class GestionarEquipos extends javax.swing.JFrame {
                     // como columna_point es 0 va directo a su valor
                     // para guardar el valor tengo que hacer un casting del model
                     // guardamos el valor del ID del cliente seleccionado al clickar
-                    IDequipo_update = (int) model.getValueAt(fila_point, columna_point);
+                    IDincidente_update = (int) model.getValueAt(fila_point, columna_point);
+                    //JOptionPane.showMessageDialog(null, "Ticket número "+ IDincidente_update);
                     // creo una instancia entre clases
-                    InformacionEquipoCliente info = new InformacionEquipoCliente();
-                    info.setVisible(true);
+                    InformacionIncidenciasAdmin informacionIncidenciasAdmin = new InformacionIncidenciasAdmin();
+                    informacionIncidenciasAdmin.setVisible(true);
                 }
             }
         });

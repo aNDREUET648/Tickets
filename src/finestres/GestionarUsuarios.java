@@ -30,6 +30,7 @@ public class GestionarUsuarios extends javax.swing.JFrame {
     public GestionarUsuarios() {
         initComponents();
         user = Interface.usuario;
+        
 
         setSize(630, 350);
         setResizable(false);
@@ -48,23 +49,26 @@ public class GestionarUsuarios extends javax.swing.JFrame {
 
         try {
             Connection con = Conexion.conector();
-            String sql = "select  idUsuario, nombre, user, rol, U.habilitado from Usuarios U, Roles_has_Usuarios, Roles "
+            String sql = "select  idUsuario, nombre,apellidos, user, rol, U.habilitado from Usuarios U, Roles_has_Usuarios, Roles "
                     + "where  Usuarios_idUsuario = idUsuario and Roles_idRol = idRol";
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
+            
 
             jTable_usuarios = new JTable(model);
             jScrollPane1.setViewportView(jTable_usuarios);
 
             model.addColumn("ID");
             model.addColumn("Nombre");
+            model.addColumn("Apellidos");
             model.addColumn("username");
             model.addColumn("Rol");
             model.addColumn("Habilitado");
 
             while (rs.next()) {
-                Object[] fila = new Object[5]; // 5 columnas
-                for (int i = 0; i < 5; i++) {
+                
+                Object[] fila = new Object[6]; // 5 columnas
+                for (int i = 0; i < 6; i++) {
                     // bucle para ir llenando cada columna de una fila
                     // la primera fila del rs.next() es 1 y no 0 (i+1)
                     fila[i] = rs.getObject(i + 1);
@@ -88,14 +92,15 @@ public class GestionarUsuarios extends javax.swing.JFrame {
                 // seleccionamos una fila cualquiera
                 // la columna 2 (nombre) únicamente la que me interesa
                 int fila_point = jTable_usuarios.rowAtPoint(e.getPoint());
-                int columna_point = 2;
+                int columna_point = 3;
 
                 if (fila_point > -1) {
                     // ahora que tengo una fila seleccionada puedo poner el
                     // valor del nombre de usuario que ha seleccionado
-                    // como columna_point es 2 va directo a su valor
+                    // como columna_point es 3 va directo a su valor
                     // para guardar el valor tengo que hacer un casting del model
                     user_update = (String) model.getValueAt(fila_point, columna_point);
+                    JOptionPane.showMessageDialog(null, "usuario "+user_update);
                     InformacionUsuario informacion_usuario = new InformacionUsuario();
                     informacion_usuario.setVisible(true);
                 }

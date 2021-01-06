@@ -204,11 +204,11 @@ public class FalloSoftware extends javax.swing.JFrame {
         Timestamp fecha = new Timestamp(new java.util.Date().getTime());
 
         // compruebo que no ha dejado el campo vacío
-        descripcion = jTextPane_Descripcion.getText();
+        descripcion = jTextPane_Descripcion.getText().trim();
 
         if (!descripcion.equals("")) {
             //pongo en la descripción el tipo de software y a continuación lo que ha escrito
-            descripcion = cmb_software.getSelectedItem().toString() + "\n" + jTextPane_Descripcion.getText();
+            descripcion = cmb_software.getSelectedItem().toString() + ". \n" + jTextPane_Descripcion.getText();
             jTextPane_Descripcion.setText(descripcion);
             // creo un nuevo incidente Tabla Incidentes
             try {
@@ -223,7 +223,7 @@ public class FalloSoftware extends javax.swing.JFrame {
 
                 pst.executeUpdate();
                 con.close();
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 System.err.println("Error al crear incidente Software " + e);
                 JOptionPane.showMessageDialog(null, "Error al crear incidente Software, contacte con el administrador");
             }
@@ -245,7 +245,7 @@ public class FalloSoftware extends javax.swing.JFrame {
 
                 pst2.executeUpdate();
                 con2.close();
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 System.err.println("Error al crear intervención Software " + e);
                 JOptionPane.showMessageDialog(null, "Error al crear intervención Software, contacte con el administrador");
             }
@@ -265,7 +265,7 @@ public class FalloSoftware extends javax.swing.JFrame {
 
                 pst3.executeUpdate();
                 con3.close();
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 System.err.println("Error al crear estado Software " + e);
                 JOptionPane.showMessageDialog(null, "Error al crear estado Software, contacte con el administrador");
             }
@@ -278,13 +278,13 @@ public class FalloSoftware extends javax.swing.JFrame {
                         + "values (?,?,?,(select MAX(idIntervencion) from Intervenciones))";
                 PreparedStatement pst4 = con4.prepareStatement(sql4);
 
-                pst4.setString(1, "Basico"); // estado "Inicio" del Incidente
+                pst4.setString(1, "Basico"); // nivel "Básico" del Incidente
                 pst4.setString(2, "Nivel Básico de la Incidencia de Fallo del Software"); // descripción del problema
                 pst4.setTimestamp(3, fecha); // fecha evolución estado "Inici"
 
                 pst4.executeUpdate();
                 con4.close();
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 System.err.println("Error al crear nivel Software " + e);
                 JOptionPane.showMessageDialog(null, "Error al crear nivel Software, contacte con el administrador");
             }
@@ -304,7 +304,7 @@ public class FalloSoftware extends javax.swing.JFrame {
 
                 pst5.executeUpdate();
                 con5.close();
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 System.err.println("Error al crear prioridad Software " + e);
                 JOptionPane.showMessageDialog(null, "Error al crear prioridad Software, contacte con el administrador");
             }

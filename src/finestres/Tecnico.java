@@ -115,10 +115,14 @@ public class Tecnico extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jButton_GestionarIncidencias = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
+        setMinimumSize(new java.awt.Dimension(550, 300));
+        setPreferredSize(new java.awt.Dimension(550, 300));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel_NombreUsuario.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
@@ -132,7 +136,7 @@ public class Tecnico extends javax.swing.JFrame {
                 jButton_RegistrarClienteActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_RegistrarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 120, 100));
+        getContentPane().add(jButton_RegistrarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 80, 80));
 
         jButton_GestionarClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/informationuser.png"))); // NOI18N
         jButton_GestionarClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -140,7 +144,7 @@ public class Tecnico extends javax.swing.JFrame {
                 jButton_GestionarClientesActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_GestionarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 120, 100));
+        getContentPane().add(jButton_GestionarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 80, 80));
 
         jButton_Imprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/impresora.png"))); // NOI18N
         jButton_Imprimir.addActionListener(new java.awt.event.ActionListener() {
@@ -148,22 +152,34 @@ public class Tecnico extends javax.swing.JFrame {
                 jButton_ImprimirActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, 120, 100));
+        getContentPane().add(jButton_Imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 80, 80));
 
         jLabel3.setForeground(java.awt.Color.white);
         jLabel3.setText("Registrar Cliente");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
 
         jLabel4.setForeground(java.awt.Color.white);
         jLabel4.setText("Gestionar Clientes");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, -1, -1));
 
         jLabel5.setForeground(java.awt.Color.white);
         jLabel5.setText("Imprimir Clientes");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, -1, -1));
 
         jLabel7.setText("Andreu Garcia Coll - UIB 2020");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, -1, -1));
+
+        jButton_GestionarIncidencias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/apoyo-tecnico.png"))); // NOI18N
+        jButton_GestionarIncidencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_GestionarIncidenciasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton_GestionarIncidencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 80, 80, 80));
+
+        jLabel10.setForeground(java.awt.Color.white);
+        jLabel10.setText("Gestión de Incidentes");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, -1, -1));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 300));
 
         pack();
@@ -265,6 +281,13 @@ public class Tecnico extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton_ImprimirActionPerformed
 
+    private void jButton_GestionarIncidenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GestionarIncidenciasActionPerformed
+
+        // creo una instancia de clases
+        GestionarIncidenciasTecnico gestionarIncidenciasTecnico = new GestionarIncidenciasTecnico();
+        gestionarIncidenciasTecnico.setVisible(true);
+    }//GEN-LAST:event_jButton_GestionarIncidenciasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -302,8 +325,10 @@ public class Tecnico extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_GestionarClientes;
+    private javax.swing.JButton jButton_GestionarIncidencias;
     private javax.swing.JButton jButton_Imprimir;
     private javax.swing.JButton jButton_RegistrarCliente;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

@@ -93,71 +93,28 @@ public class Cliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel_NombreUsuario = new javax.swing.JLabel();
-        jButton_GestionarEquipos = new javax.swing.JButton();
-        jButton_GraficaEstatus = new javax.swing.JButton();
-        jButton_GraficaMarcas = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jButton_FalloHardware = new javax.swing.JButton();
         jButton_FalloSoftware = new javax.swing.JButton();
         jButton_InformaProblema = new javax.swing.JButton();
+        jButton_HistoricoClientes = new javax.swing.JButton();
+        jButton_GestionarEquipos = new javax.swing.JButton();
+        jButton_GraficaEstatus = new javax.swing.JButton();
+        jButton_GraficaMarcas = new javax.swing.JButton();
+        jLabel_NombreUsuario = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
         setMinimumSize(new java.awt.Dimension(600, 350));
-        setPreferredSize(new java.awt.Dimension(600, 350));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel_NombreUsuario.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
-        jLabel_NombreUsuario.setForeground(java.awt.Color.white);
-        jLabel_NombreUsuario.setText("jLabel1");
-        getContentPane().add(jLabel_NombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
-        jButton_GestionarEquipos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/apoyo-tecnico.png"))); // NOI18N
-        jButton_GestionarEquipos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_GestionarEquiposActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton_GestionarEquipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 80, 80));
-
-        jButton_GraficaEstatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/grafica.png"))); // NOI18N
-        jButton_GraficaEstatus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_GraficaEstatusActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton_GraficaEstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 80, 80));
-
-        jButton_GraficaMarcas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/grafica.png"))); // NOI18N
-        jButton_GraficaMarcas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_GraficaMarcasActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton_GraficaMarcas, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 170, 80, 80));
-
-        jLabel3.setForeground(java.awt.Color.white);
-        jLabel3.setText("Gestión de Equipo");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
-
-        jLabel4.setForeground(java.awt.Color.white);
-        jLabel4.setText("Gráfica de status");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 250, -1, -1));
-
-        jLabel5.setForeground(java.awt.Color.white);
-        jLabel5.setText("Gráfica de marcas");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 250, -1, -1));
-
-        jLabel7.setText("Andreu Garcia Coll - UIB 2020");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, -1, -1));
 
         jButton_FalloHardware.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/Fallo Hardware.PNG"))); // NOI18N
         jButton_FalloHardware.addActionListener(new java.awt.event.ActionListener() {
@@ -183,9 +140,61 @@ public class Cliente extends javax.swing.JFrame {
         });
         getContentPane().add(jButton_InformaProblema, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 80, 80));
 
+        jButton_HistoricoClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/Reportar Incidencias.PNG"))); // NOI18N
+        jButton_HistoricoClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_HistoricoClientesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton_HistoricoClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 80, 80));
+
+        jButton_GestionarEquipos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/apoyo-tecnico.png"))); // NOI18N
+        jButton_GestionarEquipos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_GestionarEquiposActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton_GestionarEquipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 80, 80));
+
+        jButton_GraficaEstatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/grafica.png"))); // NOI18N
+        jButton_GraficaEstatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_GraficaEstatusActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton_GraficaEstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, 80, 80));
+
+        jButton_GraficaMarcas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/grafica.png"))); // NOI18N
+        jButton_GraficaMarcas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_GraficaMarcasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton_GraficaMarcas, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 170, 80, 80));
+
+        jLabel_NombreUsuario.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
+        jLabel_NombreUsuario.setForeground(java.awt.Color.white);
+        jLabel_NombreUsuario.setText("jLabel1");
+        getContentPane().add(jLabel_NombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        jLabel3.setForeground(java.awt.Color.white);
+        jLabel3.setText("Histórico Incidentes");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, -1, -1));
+
+        jLabel4.setForeground(java.awt.Color.white);
+        jLabel4.setText("Gráfica de status");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 250, -1, -1));
+
+        jLabel5.setForeground(java.awt.Color.white);
+        jLabel5.setText("Gráfica de marcas");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 250, -1, -1));
+
         jLabel6.setForeground(java.awt.Color.white);
         jLabel6.setText("Fallo Hardware");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, -1));
+
+        jLabel7.setText("Andreu Garcia Coll - UIB 2020");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, -1, -1));
 
         jLabel8.setForeground(java.awt.Color.white);
         jLabel8.setText("Fallo Software");
@@ -194,6 +203,10 @@ public class Cliente extends javax.swing.JFrame {
         jLabel9.setForeground(java.awt.Color.white);
         jLabel9.setText("Informar de un Problema");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, -1, -1));
+
+        jLabel10.setForeground(java.awt.Color.white);
+        jLabel10.setText("Gestión de Equipo");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 350));
 
         pack();
@@ -247,6 +260,14 @@ public class Cliente extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton_FalloSoftwareActionPerformed
 
+    private void jButton_HistoricoClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_HistoricoClientesActionPerformed
+        
+        // creo una instancia de clases
+        HistoricoClientes historicoClientes = new HistoricoClientes();
+        historicoClientes.setVisible(true);
+        
+    }//GEN-LAST:event_jButton_HistoricoClientesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -289,7 +310,9 @@ public class Cliente extends javax.swing.JFrame {
     private javax.swing.JButton jButton_GestionarEquipos;
     private javax.swing.JButton jButton_GraficaEstatus;
     private javax.swing.JButton jButton_GraficaMarcas;
+    private javax.swing.JButton jButton_HistoricoClientes;
     private javax.swing.JButton jButton_InformaProblema;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
