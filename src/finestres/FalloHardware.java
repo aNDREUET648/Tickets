@@ -311,7 +311,7 @@ public class FalloHardware extends javax.swing.JFrame {
                         + "values (?,?,?,(select MAX(idIncidente) from Incidentes))";
                 PreparedStatement pst2 = con2.prepareStatement(sql2);
 
-                pst2.setString(1, "Inicio\nReporte Fallo de Hardware"); // descripción del problema
+                pst2.setString(1, "Inicio. Reporte Fallo de Hardware"); // descripción del problema
                 pst2.setTimestamp(2, fecha); // fecha creación incidente
                 // técnico al que se le asigna el incidente
                 // en la creación del incidente al no determinarse el problema

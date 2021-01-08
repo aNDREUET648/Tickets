@@ -100,7 +100,7 @@ public class Interface extends javax.swing.JFrame {
         jPassword.setBackground(new java.awt.Color(22, 122, 218));
         jPassword.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jPassword.setForeground(new java.awt.Color(222, 222, 222));
-        jPassword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jPassword.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jPassword.setCaretColor(new java.awt.Color(255, 255, 255));
         jPassword.setName(""); // NOI18N
         jPassword.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -177,8 +177,9 @@ public class Interface extends javax.swing.JFrame {
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Datos de Acceso incorrectos");
-                    jTextUser.setText("");
+                    jTextUser.setText(""); //borro los datos actuales
                     jPassword.setText("");
+                    jTextUser.requestFocus();   // sitúa el cursor sobre el campo de usuario
                 }
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, "Error inicio sesión, contacte con el administrador");

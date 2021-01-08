@@ -64,7 +64,8 @@ public class GestionarIncidenciasAdmin extends javax.swing.JFrame {
             sql += "where idUsuario=INCID.Usuarios_idUsuario ";
             sql += "AND idIncidente = Incidentes_idIncidente AND ";
             sql += "idIntervencion = Intervenciones_idIntervencion AND ";
-            sql += "idTipo = tipos_idTipo ORDER BY fecha_crea DESC";
+            sql += "idTipo = tipos_idTipo ";
+            sql += "ORDER BY idIncidente DESC, idIntervencion DESC";
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             //
@@ -207,7 +208,8 @@ public class GestionarIncidenciasAdmin extends javax.swing.JFrame {
                 sql += "where idUsuario=INCID.Usuarios_idUsuario ";
                 sql += "AND idIncidente = Incidentes_idIncidente AND ";
                 sql += "idIntervencion = Intervenciones_idIntervencion AND ";
-                sql += "idTipo = tipos_idTipo ORDER BY fecha_crea DESC";
+                sql += "idTipo = tipos_idTipo ";
+                sql += "ORDER BY idIncidente DESC, idIntervencion DESC";
             } else {
                 sql = "SELECT * FROM usuarios USU, incidentes INCID, intervenciones INTER, estados EST, tipos ";
                 sql += "where idUsuario=INCID.Usuarios_idUsuario ";
@@ -215,7 +217,7 @@ public class GestionarIncidenciasAdmin extends javax.swing.JFrame {
                 sql += "idIntervencion = Intervenciones_idIntervencion AND ";
                 sql += "idTipo = tipos_idTipo AND ";
                 sql += "estado= '" + seleccion + "' ";
-                sql += "ORDER BY fecha_crea DESC";
+                sql += "ORDER BY idIncidente DESC, idIntervencion DESC";
             }
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();

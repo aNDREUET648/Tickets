@@ -61,16 +61,17 @@ public class GestionarIncidenciasTecnico extends javax.swing.JFrame {
         try {
             Connection con = Conexion.conector();
 
-            String sql = "SELECT * FROM usuarios USU, incidentes INCID, intervenciones INTER, estados EST, tipos ";
-            sql += "WHERE idUsuario=INCID.Usuarios_idUsuario AND ";
-            sql += "INTER.Usuarios_idUsuario = " + id_usuario + " AND ";
-            sql += "idIncidente = Incidentes_idIncidente AND ";
-            sql += "idIntervencion = EST.Intervenciones_idIntervencion AND ";
-            sql += "idTipo = tipos_idTipo AND ";
-            sql += "estado = 'Asignado' OR ";
-            sql += "estado = 'En Proceso' OR ";
-            sql += "estado = 'Finalizado' ";
-            sql += "ORDER BY fecha_crea DESC";
+            String sql = "SELECT idIncidente, nombre, apellidos, fecha_crea, INC.descripcion, tipo, estado, idIntervencion, ";
+            sql += "INTER.fecha_intervencion, INTER.Usuarios_idUsuario , INTER.descripcion FROM incidentes INC ";
+            sql += "INNER JOIN Usuarios USU ON USU.idUsuario = INC.Usuarios_idUsuario ";
+            sql += "INNER JOIN intervenciones INTER ON INTER.Incidentes_idIncidente = INC.idIncidente AND INTER.Usuarios_idUsuario = " + id_usuario + " ";
+            sql += "INNER JOIN estados EST ON EST.Intervenciones_idIntervencion = INTER.idIntervencion ";
+            sql += "INNER JOIN niveles NIV ON NIV.Intervenciones_idIntervencion = INTER.idIntervencion ";
+            sql += "INNER JOIN prioridades PRI ON PRI.Intervenciones_idIntervencion = INTER.idIntervencion ";
+            sql += "INNER JOIN tipos TIP ON TIP.idTipo = INC.tipos_idTipo ";
+            sql += "WHERE estado = 'Asignado' OR estado = 'En Proceso' OR estado = 'Finalizado'";
+            sql += "order BY idIncidente DESC ,idIntervencion DESC";
+
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             //
@@ -94,8 +95,8 @@ public class GestionarIncidenciasTecnico extends javax.swing.JFrame {
                 celda[0] = rs.getInt("idIncidente");
                 celda[1] = rs.getString("nombre") + " " + rs.getString("apellidos");
                 celda[2] = rs.getTimestamp("fecha_crea");
-                celda[3] = rs.getString("Tipo");
-                celda[4] = rs.getString("INCID.descripcion");
+                celda[3] = rs.getString("tipo");
+                celda[4] = rs.getString("INC.descripcion");
                 celda[5] = rs.getString("estado");
                 celda[6] = rs.getString("INTER.descripcion");
                 // agregar nueva fila
@@ -147,8 +148,8 @@ public class GestionarIncidenciasTecnico extends javax.swing.JFrame {
 
         jLabel_Titulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel_Titulo.setForeground(java.awt.Color.white);
-        jLabel_Titulo.setText("Gestión de Incidentes");
-        getContentPane().add(jLabel_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, -1, -1));
+        jLabel_Titulo.setText("Gestión de Incidentes de Técnico");
+        getContentPane().add(jLabel_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, -1, -1));
 
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
         getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, -1, -1));
@@ -208,26 +209,31 @@ public class GestionarIncidenciasTecnico extends javax.swing.JFrame {
             // una instrucción mostrará todos los incidentes y la otra filtrará según el estado
             // 
             if (seleccion.equalsIgnoreCase("Todos")) {
-                sql = "SELECT * FROM usuarios USU, incidentes INCID, intervenciones INTER, estados EST, tipos ";
-                sql += "WHERE idUsuario=INCID.Usuarios_idUsuario AND ";
-                sql += "INTER.Usuarios_idUsuario = " + id_usuario + " AND ";
-                sql += "idIncidente = Incidentes_idIncidente AND ";
-                sql += "idIntervencion = EST.Intervenciones_idIntervencion AND ";
-                sql += "idTipo = tipos_idTipo AND ";
-                sql += "estado = 'Asignado' OR ";
-                sql += "estado = 'En Proceso' OR ";
-                sql += "estado = 'Finalizado' ";
-                sql += "ORDER BY fecha_crea DESC";
-            } else {
-                sql = "SELECT * FROM usuarios USU, incidentes INCID, intervenciones INTER, estados EST, tipos ";
-                sql += "WHERE idUsuario=INCID.Usuarios_idUsuario AND ";
-                sql += "INTER.Usuarios_idUsuario = " + id_usuario + " AND ";
-                sql += "idIncidente = Incidentes_idIncidente AND ";
-                sql += "idIntervencion = EST.Intervenciones_idIntervencion AND ";
-                sql += "idTipo = tipos_idTipo AND ";
-                sql += "estado= '" + seleccion + "' ";
-                sql += "ORDER BY fecha_crea DESC";
                 
+                sql = "SELECT idIncidente, nombre, apellidos, fecha_crea, INC.descripcion, tipo, estado, idIntervencion, ";
+                sql += "INTER.fecha_intervencion, INTER.Usuarios_idUsuario , INTER.descripcion FROM incidentes INC ";
+                sql += "INNER JOIN Usuarios USU ON USU.idUsuario = INC.Usuarios_idUsuario ";
+                sql += "INNER JOIN intervenciones INTER ON INTER.Incidentes_idIncidente = INC.idIncidente AND INTER.Usuarios_idUsuario = " + id_usuario + " ";
+                sql += "INNER JOIN estados EST ON EST.Intervenciones_idIntervencion = INTER.idIntervencion ";
+                sql += "INNER JOIN niveles NIV ON NIV.Intervenciones_idIntervencion = INTER.idIntervencion ";
+                sql += "INNER JOIN prioridades PRI ON PRI.Intervenciones_idIntervencion = INTER.idIntervencion ";
+                sql += "INNER JOIN tipos TIP ON TIP.idTipo = INC.tipos_idTipo ";
+                sql += "WHERE estado = 'Asignado' OR estado = 'En Proceso' OR estado = 'Finalizado'";
+                sql += "order BY idIncidente DESC ,idIntervencion DESC";
+                
+            } else {    // pues sino, lo que se haya seleccionado en el comboBox
+                
+                sql = "SELECT idIncidente, nombre, apellidos, fecha_crea, INC.descripcion, tipo, estado, idIntervencion, ";
+                sql += "INTER.fecha_intervencion, INTER.Usuarios_idUsuario , INTER.descripcion FROM incidentes INC ";
+                sql += "INNER JOIN Usuarios USU ON USU.idUsuario = INC.Usuarios_idUsuario ";
+                sql += "INNER JOIN intervenciones INTER ON INTER.Incidentes_idIncidente = INC.idIncidente AND INTER.Usuarios_idUsuario = " + id_usuario + " ";
+                sql += "INNER JOIN estados EST ON EST.Intervenciones_idIntervencion = INTER.idIntervencion ";
+                sql += "INNER JOIN niveles NIV ON NIV.Intervenciones_idIntervencion = INTER.idIntervencion ";
+                sql += "INNER JOIN prioridades PRI ON PRI.Intervenciones_idIntervencion = INTER.idIntervencion ";
+                sql += "INNER JOIN tipos TIP ON TIP.idTipo = INC.tipos_idTipo ";
+                sql += "WHERE estado = '" + seleccion + "' ";
+                sql += "order BY idIncidente DESC ,idIntervencion DESC";
+
             }
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
@@ -255,7 +261,7 @@ public class GestionarIncidenciasTecnico extends javax.swing.JFrame {
                 celda[1] = rs.getString("nombre") + " " + rs.getString("apellidos");
                 celda[2] = rs.getTimestamp("fecha_crea");
                 celda[3] = rs.getString("Tipo");
-                celda[4] = rs.getString("INCID.descripcion");
+                celda[4] = rs.getString("INC.descripcion");
                 celda[5] = rs.getString("estado");
                 celda[6] = rs.getString("INTER.descripcion");
                 // agregar nueva fila
@@ -345,8 +351,8 @@ public class GestionarIncidenciasTecnico extends javax.swing.JFrame {
                     IDincidente_update = (int) model.getValueAt(fila_point, columna_point);
                     //JOptionPane.showMessageDialog(null, "Ticket número "+ IDincidente_update);
                     // creo una instancia entre clases
-                    InformacionIncidenciasAdmin informacionIncidenciasAdmin = new InformacionIncidenciasAdmin();
-                    informacionIncidenciasAdmin.setVisible(true);
+                    InformacionIncidenciasTecnico informacionIncidenciasTecnico = new InformacionIncidenciasTecnico();
+                    informacionIncidenciasTecnico.setVisible(true);
                 }
             }
         });
