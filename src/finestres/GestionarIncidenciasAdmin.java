@@ -2,10 +2,22 @@ package finestres;
 
 import java.sql.*;
 import clases.Conexion;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -42,7 +54,7 @@ public class GestionarIncidenciasAdmin extends javax.swing.JFrame {
         user = Interface.usuario;
         id_usuario = Interface.IDuser;
 
-        setSize(1000, 420);
+        setSize(1000, 550);
         setResizable(false);
         setTitle("Administrador - Sesión de " + user);
         setLocationRelativeTo(null);
@@ -133,12 +145,12 @@ public class GestionarIncidenciasAdmin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         cmb_estatus = new javax.swing.JComboBox<>();
         jButton_Mostrar = new javax.swing.JButton();
+        jButton_Imprimir = new javax.swing.JButton();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
-        setMinimumSize(new java.awt.Dimension(1000, 420));
-        setPreferredSize(new java.awt.Dimension(1000, 420));
+        setMinimumSize(new java.awt.Dimension(1000, 550));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel_Titulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -146,8 +158,9 @@ public class GestionarIncidenciasAdmin extends javax.swing.JFrame {
         jLabel_Titulo.setText("Gestión de Incidentes");
         getContentPane().add(jLabel_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, -1, -1));
 
+        jLabel_footer.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
-        getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, -1, -1));
+        getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 460, -1, -1));
 
         jTable_incidentes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -162,7 +175,7 @@ public class GestionarIncidenciasAdmin extends javax.swing.JFrame {
         ));
         jScrollPane_incidentes.setViewportView(jTable_incidentes);
 
-        getContentPane().add(jScrollPane_incidentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 960, 180));
+        getContentPane().add(jScrollPane_incidentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 960, 210));
 
         jLabel1.setText("Estado:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 60, -1, -1));
@@ -180,8 +193,20 @@ public class GestionarIncidenciasAdmin extends javax.swing.JFrame {
                 jButton_MostrarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 300, 210, 35));
-        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 420));
+        getContentPane().add(jButton_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 340, 210, 35));
+
+        jButton_Imprimir.setBackground(new java.awt.Color(153, 153, 255));
+        jButton_Imprimir.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jButton_Imprimir.setForeground(java.awt.Color.white);
+        jButton_Imprimir.setText("Imprimir");
+        jButton_Imprimir.setBorder(null);
+        jButton_Imprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_ImprimirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton_Imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 400, 210, 35));
+        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 550));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -221,7 +246,7 @@ public class GestionarIncidenciasAdmin extends javax.swing.JFrame {
             }
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
-            
+
             //
             // Creo nuevamente la tabla de incidentes
             // ya que la había borrado previamente con los métodos setxxxCount(0)
@@ -252,7 +277,7 @@ public class GestionarIncidenciasAdmin extends javax.swing.JFrame {
                 model.addRow(celda); // añadimos la nueva fila ya rellenada  
             }
             con.close();
-            
+
         } catch (SQLException e) {
             System.err.println("Error al recuperar los registros de los Incidentes Admin " + e);
             JOptionPane.showMessageDialog(null, "Error al recuperar los registros de los Incidentes Admin, contacte con el Administrador");
@@ -263,6 +288,119 @@ public class GestionarIncidenciasAdmin extends javax.swing.JFrame {
         //
         ObtenerDatosTabla();
     }//GEN-LAST:event_jButton_MostrarActionPerformed
+
+    private void jButton_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ImprimirActionPerformed
+
+        // filtramos según el estado
+        String seleccion = cmb_estatus.getSelectedItem().toString();
+        Document documento = new Document(PageSize.A4.rotate(), 0, 0, 0, 0);
+        // toda código para crear archivo en pdf necesita estar
+        // dentro de una estructura try..catch
+        try {
+            // recupero la ruta del sistema operativo
+            String ruta = System.getProperty("user.home");
+            // lo guardo en el escritorio y le añado nombre y apellidos como filename
+            // y la extensión que lógicamente será pdf
+            ruta = ruta + "/Desktop/HistoricoIncidencias - user " + user + " Filtro " + seleccion + ".pdf";
+            PdfWriter.getInstance(documento, new FileOutputStream(ruta));
+
+            // inserto la cabecera del documento que será una imagen
+            // como la librería Image de itextpdf choca con la java.awt
+            // coloco directamente la llamada para eliminar el conflicto
+            com.itextpdf.text.Image header = com.itextpdf.text.Image.getInstance("src/imatges/BannerPDF.png");
+            // pongo el largo y la escala de visualización del header
+            header.scaleToFit(650, 1000);
+            // lo alineo al centro
+            header.setAlignment(Chunk.ALIGN_CENTER);
+            // creo un objeto de clase Paragraph para dar formato al texto
+            Paragraph parrafo = new Paragraph();
+            // lo alineo al centro
+            parrafo.setAlignment(Paragraph.ALIGN_CENTER);
+            parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY));
+            parrafo.add("Histórico Incidentes - Filtro: " + seleccion + "\n \n");
+            // doy formato al párrafo
+            parrafo.setFont(FontFactory.getFont("Tahoma", 6, Font.NORMAL, BaseColor.DARK_GRAY));
+
+            // una vez definido todo, abro el documento
+            // e inserto el banner y el párafo inicial
+            documento.open();
+            documento.add(header);
+            documento.add(parrafo);
+
+            // creo una tabla con los datos generales que vienen de la bd
+            // tablaClientes tendrá 5 columnas
+            PdfPTable tabla = new PdfPTable(7);
+            float[] columnWidths = new float[]{10f, 45f, 25f, 20f, 50f, 30f, 60f};
+            tabla.setWidths(columnWidths);
+
+            tabla.addCell("ID");
+            tabla.addCell("Nombre y apellidos");
+            tabla.addCell("Fecha");
+            tabla.addCell("Tipo");
+            tabla.addCell("Descripción");
+            tabla.addCell("Estado");
+            tabla.addCell("Descripción intervención");
+
+            // consultamos a la bd la información que irá en el pdf
+            try {
+                Connection con = Conexion.conector();
+
+                String sql = "SELECT * FROM usuarios USU, incidentes INCID, intervenciones INTER, estados EST, tipos ";
+                sql += "where idUsuario=INCID.Usuarios_idUsuario ";
+                sql += "AND idIncidente = Incidentes_idIncidente AND ";
+                sql += "idIntervencion = Intervenciones_idIntervencion AND ";
+                sql += "idTipo = tipos_idTipo ";
+
+                // si tenemnos el filtro de activo, inactivo o incidencia abierta
+                //
+                // Query selectivo dependiendo del filtro status del jcomboBox (cmb_estatus)
+                //
+                switch (seleccion) {
+                    case "Inicio":
+                    case "Asignado":
+                    case "En Proceso":
+                    case "Finalizado":
+                        sql += " AND estado= '" + seleccion + "' ";
+                        break;
+                    default: // Todos
+                        break;
+                }
+                sql += "ORDER BY idIncidente DESC, idIntervencion DESC";
+
+                PreparedStatement pst = con.prepareStatement(sql);
+                ResultSet rs = pst.executeQuery();
+                //lleno tabla de los clientes con los valores devueltos de la consulta
+                if (rs.next()) {
+                    do {
+
+                        tabla.addCell(Integer.toString(rs.getInt("idIncidente")));
+                        tabla.addCell(rs.getString("nombre") + " " + rs.getString("apellidos"));
+                        tabla.addCell(rs.getTimestamp("fecha_crea").toString());
+                        tabla.addCell(rs.getString("Tipo"));
+                        tabla.addCell(rs.getString("INCID.descripcion"));
+                        tabla.addCell(rs.getString("estado"));
+                        tabla.addCell(rs.getString("INTER.descripcion"));
+
+                    } while (rs.next());
+                    //envío la tablaCliente al documento
+                    documento.add(tabla);
+                }
+            } catch (SQLException e) {
+                System.err.println("Error al generar el listado de incidentes " + e);
+                JOptionPane.showMessageDialog(null, "Error al generar el listado de incidentes, contacte con el Administrador");
+            }
+
+            documento.close();
+            JOptionPane.showMessageDialog(null, "Listado de incidentes creado correctamente");
+
+            // Catch de la generación del documento pdf
+            // DocumentException, gestión de los errores del documento
+            // IOException, gestión de los errores de entrada/salida de datos
+        } catch (DocumentException | IOException e) {
+            System.err.println("Error al generar pdf o en ruta de la imagen " + e);
+            JOptionPane.showMessageDialog(null, "Error al generar el PDF, contacte con el Administrador");
+        }
+    }//GEN-LAST:event_jButton_ImprimirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -301,6 +439,7 @@ public class GestionarIncidenciasAdmin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cmb_estatus;
+    private javax.swing.JButton jButton_Imprimir;
     private javax.swing.JButton jButton_Mostrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel_Titulo;

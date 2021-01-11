@@ -19,17 +19,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FalloHardware extends javax.swing.JFrame {
 
-    String user = "";
+    String user = "", nombre = "";
     int IDuser = 0, IDequipo = 0;
     int IDequipo_update = 0;
-    //
-    // sesion_usuario actuará como Flag 
-    // la ventana de Cliente no dejará de ejecutarse si 
-    // he arrancado esta ventana desde la sesión de Administrador
-    //
-    int sesion_usuario;
     // model interactuará con mi tabla (j_Table_equipos) creada en el form
     DefaultTableModel model = new DefaultTableModel();
+
 
     /*
      * Constructor del form FalloHardware
@@ -38,27 +33,12 @@ public class FalloHardware extends javax.swing.JFrame {
         initComponents();
         user = Interface.usuario;
         IDuser = Interface.IDuser;
-        sesion_usuario = Administrador.sesion_usuario;
 
         setSize(700, 450);
         setResizable(false);
         setTitle("Rol: Cliente - Sesión de " + user);
         setLocationRelativeTo(null);
-        //
-        // dentro del constructor creo una estructura condicional para que no se
-        // cierre este Interface si he iniciado sesión de Administrador y no
-        // finalice a menos que se cierre la Interface de Administrador.java
-        // 
-        // En cambio, si estoy he iniciado sesión como Cliente el Interface
-        // Cliente.java se cerrará y por tanto finalizará el programa
-        //
-        if (sesion_usuario == 1) {
-            // he iniciado sesión como Administrador
-            setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        } else {
-            // he iniciado sesión como Cliente
-            setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        }
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         // Fondo de pantalla de mi aplicación
         ImageIcon wallpaper = new ImageIcon("src/imatges/wallpaperPrincipal.jpg");
@@ -68,31 +48,16 @@ public class FalloHardware extends javax.swing.JFrame {
         this.repaint();
 
         //
-        // relleno los campos de nombre y los títulos del formulario
-        //
-        try {
-            Connection con = Conexion.conector();
-            String sql = "select * from Usuarios where idUsuario = '" + IDuser + "'";
-            PreparedStatement pst = con.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
-
-            if (rs.next()) {
-                setTitle("Información del usuario " + rs.getString("nombre") + " " + rs.getString("apellidos") + " - Sesión de " + user);
-
-                txt_nombre.setText(rs.getString("nombre") + " " + rs.getString("apellidos"));
-            }
-            con.close();
-        } catch (SQLException e) {
-            System.err.println("Error al cargar el Cliente " + e);
-            JOptionPane.showMessageDialog(null, "Error al mostrar el Cliente, contacte con el Administrador");
-        }
-        //
         // relleno la tabla con los equipos registrados del cliente
         //
         try {
             Connection con = Conexion.conector();
-            String sql = "select idEquipos, tipo, marca, modelo, num_serie, habilitado from "
-                    + "Equipos where usuarios_idUsuario = '" + IDuser + "'";
+            String sql = "SELECT idEquipos, tipo, marca, modelo, EQU.habilitado, nombre, apellidos ";
+            sql += "FROM equipos EQU, Usuarios USU, roles_has_usuarios RHU ";
+            sql += "WHERE USU.idUsuario = EQU.Usuarios_idUsuario ";
+            sql += "AND USU.idUsuario = RHU.Usuarios_idUsuario ";
+            sql += "AND USU.idUsuario = " + IDuser + " ";
+
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
 
@@ -107,17 +72,27 @@ public class FalloHardware extends javax.swing.JFrame {
             model.addColumn("Status");
 
             while (rs.next()) {
+                if (rs.getRow() == 1) {
+                    nombre = rs.getString("nombre") + " " + rs.getString("apellidos");
+                    setTitle("Información del usuario " + nombre + " - Sesión de " + user);
+                    txt_nombre.setText(nombre);
+                }
                 //creo vector de tipo objectos
-                Object[] celda = new Object[6];
+                Object[] fila = new Object[6];
                 //paso la celda del idEquipo como int para no tener el
                 // error que tuve en GestionarClientes
-                celda[0] = rs.getInt("idEquipos");
-                for (int i = 1; i < 6; i++) {
-                    celda[i] = rs.getObject(i + 1);
-                }
-                model.addRow(celda);
+                fila[0] = rs.getInt("idEquipos");
+                fila[1] = rs.getString("tipo");
+                fila[2] = rs.getString("tipo");
+                fila[3] = rs.getString("marca");
+                fila[4] = rs.getString("modelo");
+                fila[5] = rs.getString("EQU.habilitado");
+
+                model.addRow(fila);
             }
+
             con.close();
+
         } catch (SQLException e) {
             System.err.println("Error al cargar los equipos " + e);
             JOptionPane.showMessageDialog(null, "Error al mostrar equipos, contacte con el Administrador");
@@ -194,6 +169,7 @@ public class FalloHardware extends javax.swing.JFrame {
         jLabel_Titulo.setText("Reportar un Fallo de Hardware");
         getContentPane().add(jLabel_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, -1));
 
+        jLabel_footer.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
         getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 390, -1, -1));
 
@@ -285,6 +261,23 @@ public class FalloHardware extends javax.swing.JFrame {
             descripcion = "IDEquipo: " + IDequipo + ". \n" + jTextPane_Descripcion.getText();
             jTextPane_Descripcion.setText(descripcion);
             
+            // lo primero es actualizar el status del equipo (EQU.habilitado = 2)
+            // "Equipo con incidencia abierta"
+            
+            try {
+                // acceso a la base de datos para modificar la información
+                Connection con = Conexion.conector();
+                String sql = "UPDATE Equipos SET habilitado = 2 WHERE idEquipos = '" + IDequipo + "'";
+                PreparedStatement pst = con.prepareStatement(sql);
+                pst.executeUpdate();
+
+                con.close();
+                
+            } catch (SQLException e) {
+                System.err.println("Error al actualizar datos del Equipo. FalloHardware " + e);
+                JOptionPane.showMessageDialog(null, "Error al actualizar datos del Equipo. FalloHardware, contacte con el Administrador");
+            }
+
             // creo un nuevo incidente Tabla Incidentes
             try {
                 Connection con = Conexion.conector();

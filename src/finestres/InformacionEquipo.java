@@ -21,6 +21,7 @@ public class InformacionEquipo extends javax.swing.JFrame {
     int IDcliente_update = 0, IDequipo = 0;
     String user = "", nom_cliente = "";
     int IDuser = 0;
+    int estatus = 0;
 
     /**
      * Constructor del form InformacionEquipo
@@ -29,56 +30,58 @@ public class InformacionEquipo extends javax.swing.JFrame {
         initComponents();
         user = Interface.usuario;
         IDuser = Interface.IDuser;
-        IDequipo = Informacion_Cliente.IDequipo;
+        IDequipo = GestionarEquipos.IDequipo_update;
         IDcliente_update = GestionarClientes.IDcliente_update;
-
-        // recuperamos el nombre del cliente de la tabla Usuarios
-        try {
-            Connection con = Conexion.conector();
-            String sql = "select  nombre, apellidos from Usuarios where "
-                    + " idUsuario = '" + IDcliente_update + "'";
-            PreparedStatement pst = con.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
-
-            if (rs.next()) {
-                nom_cliente = rs.getString("nombre") + " " + rs.getString("apellidos");
-            }
-        } catch (SQLException e) {
-            System.err.println("Error al consultar el nombre del cliente en InformacionEquipo " + e);
-            JOptionPane.showMessageDialog(null, "Error al consultar el nombre del cliente en InformacionEquipo, contacte con el Administrador");
-        }
 
         // recuperamos datos del equipo de la tabla Equipos
         try {
+
             Connection con = Conexion.conector();
-            String sql = "select  * from Equipos E where idEquipos = '" + IDequipo + "'";
+            String sql = "SELECT  * FROM Usuarios, Equipos E WHERE ";
+            sql += "idUsuario = Usuarios_idUsuario AND ";
+            sql += "idEquipos = " + IDequipo;
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {
                 cmb_tipoequipo.setSelectedItem(rs.getString("tipo"));
                 cmb_marcas.setSelectedItem(rs.getString("marca"));
-                if (rs.getString("E.habilitado").equals("1")) {
-                    cmb_estatus.setSelectedItem("Activo");
-                } else {
-                    cmb_estatus.setSelectedItem("Inactivo");
+                estatus = rs.getInt("E.habilitado");
+                nom_cliente = rs.getString("nombre") + " " + rs.getString("apellidos");
+                switch (estatus) {
+                    case 0:
+                        cmb_estatus.setSelectedItem("Inactivo");
+                        break;
+                    case 1:
+                        cmb_estatus.setSelectedItem("Activo");
+                        break;
+                    case 2:
+                        jLabel_Titulo.setText("Información del Equipo - Sólo consulta");
+                        cmb_estatus.setSelectedItem("Abierta incidencia");
+                        cmb_estatus.enable(false);
+                        cmb_marcas.enable(false);
+                        cmb_tipoequipo.enable(false);
+                        txt_NombreCliente.setEditable(false);
+                        txt_modelo.setEditable(false);
+                        txt_num_serie.setEditable(false);
+                        txt_ultima_Modificacion.setEditable(false);
+                        txt_fecha.setEditable(false);
+                        jTextPane_observaciones.setEditable(false);
+
+                        break;
+                    default:
+                        break;
                 }
+                txt_NombreCliente.setText(nom_cliente);
                 txt_modelo.setText(rs.getString("modelo"));
                 txt_num_serie.setText(rs.getString("num_serie"));
                 txt_ultima_Modificacion.setText(Integer.toString(rs.getInt("usuarios_idUsuario")));
-                //
-                // obtenemos la fecha de la  bd en formato Date
-                // y la formateamos y convertimos en String
-                DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", new Locale("es", "ES"));
-                Date fecha = rs.getDate("fecha_compra");
-                
-                String strFecha = dateFormat.format(fecha);
-                txt_fecha.setText(strFecha);
+                txt_fecha.setText(rs.getTimestamp("fecha_compra").toString());
                 // observaciones del form
                 jTextPane_observaciones.setText(rs.getString("observaciones"));
-                jTextPane_comentariosTecnico.setText(rs.getString("observaciones"));
-                //jLabel_revisionTecnicaDe.setText("Comentarios del técnic
-                //o: "+rs.getString("observaciones"));
+
+                con.close();
+
             }
         } catch (SQLException e) {
             System.err.println("Error al consultar datos del Equipo " + e);
@@ -87,7 +90,7 @@ public class InformacionEquipo extends javax.swing.JFrame {
 
         // ahora si que puedo ponerlo porque ya tengo el valor de nombre_cliente
         setTitle("Equipo del cliente " + nom_cliente);
-        setSize(670, 530);
+        setSize(800, 550);
         setResizable(false);  // no se modificar el tamaño del interfaz
         setLocationRelativeTo(null); // centrar la interfaz al ejecutar
 
@@ -101,7 +104,6 @@ public class InformacionEquipo extends javax.swing.JFrame {
         jLabel_Wallpaper.setIcon(icono);
         this.repaint();
 
-        txt_NombreCliente.setText(nom_cliente);
     }
 
     //
@@ -132,11 +134,8 @@ public class InformacionEquipo extends javax.swing.JFrame {
         jLabel_Nombre6 = new javax.swing.JLabel();
         jLabel_Nombre7 = new javax.swing.JLabel();
         jLabel_Nombre8 = new javax.swing.JLabel();
-        jLabel_revisionTecnicaDe = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPane_observaciones = new javax.swing.JTextPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane_comentariosTecnico = new javax.swing.JTextPane();
         txt_NombreCliente = new javax.swing.JTextField();
         txt_modelo = new javax.swing.JTextField();
         txt_num_serie = new javax.swing.JTextField();
@@ -151,113 +150,107 @@ public class InformacionEquipo extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
+        setMinimumSize(new java.awt.Dimension(800, 550));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel_Titulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel_Titulo.setForeground(java.awt.Color.white);
         jLabel_Titulo.setText("Información de equipo");
-        getContentPane().add(jLabel_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
+        getContentPane().add(jLabel_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, -1, -1));
 
-        jLabel_Nombre.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel_Nombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel_Nombre.setForeground(java.awt.Color.white);
         jLabel_Nombre.setText("Nombre del  cliente:");
         getContentPane().add(jLabel_Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
 
-        jLabel_Nombre1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel_Nombre1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel_Nombre1.setForeground(java.awt.Color.white);
         jLabel_Nombre1.setText("Tipo de equipo:");
         getContentPane().add(jLabel_Nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
 
-        jLabel_Nombre2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel_Nombre2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel_Nombre2.setForeground(java.awt.Color.white);
         jLabel_Nombre2.setText("Marca:");
         getContentPane().add(jLabel_Nombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
 
-        jLabel_Nombre3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel_Nombre3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel_Nombre3.setForeground(java.awt.Color.white);
         jLabel_Nombre3.setText("Modelo:");
         getContentPane().add(jLabel_Nombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
 
-        jLabel_Nombre4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel_Nombre4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel_Nombre4.setForeground(java.awt.Color.white);
         jLabel_Nombre4.setText("Número de serie:");
         getContentPane().add(jLabel_Nombre4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, -1, -1));
 
-        jLabel_Nombre5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel_Nombre5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel_Nombre5.setForeground(java.awt.Color.white);
         jLabel_Nombre5.setText("Fecha:");
-        getContentPane().add(jLabel_Nombre5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, -1, -1));
+        getContentPane().add(jLabel_Nombre5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, -1, -1));
 
-        jLabel_Nombre6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel_Nombre6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel_Nombre6.setForeground(java.awt.Color.white);
-        jLabel_Nombre6.setText("Última modificación por:");
+        jLabel_Nombre6.setText("Última modificación del cliente por:");
         getContentPane().add(jLabel_Nombre6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, -1, -1));
 
-        jLabel_Nombre7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel_Nombre7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel_Nombre7.setForeground(java.awt.Color.white);
         jLabel_Nombre7.setText("Status:");
-        getContentPane().add(jLabel_Nombre7, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 60, -1, -1));
+        getContentPane().add(jLabel_Nombre7, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 70, -1, -1));
 
-        jLabel_Nombre8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel_Nombre8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel_Nombre8.setForeground(java.awt.Color.white);
         jLabel_Nombre8.setText("Observaciones:");
-        getContentPane().add(jLabel_Nombre8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, -1, -1));
+        getContentPane().add(jLabel_Nombre8, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, -1, -1));
 
-        jLabel_revisionTecnicaDe.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel_revisionTecnicaDe.setForeground(java.awt.Color.white);
-        jLabel_revisionTecnicaDe.setText("Comentarios adicionales:");
-        getContentPane().add(jLabel_revisionTecnicaDe, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, -1, -1));
-
+        jTextPane_observaciones.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jScrollPane1.setViewportView(jTextPane_observaciones);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, 330, 120));
-
-        jTextPane_comentariosTecnico.setEditable(false);
-        jScrollPane2.setViewportView(jTextPane_comentariosTecnico);
-
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 280, 330, 120));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, 330, 120));
 
         txt_NombreCliente.setEditable(false);
         txt_NombreCliente.setBackground(new java.awt.Color(153, 153, 255));
-        txt_NombreCliente.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        txt_NombreCliente.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txt_NombreCliente.setForeground(java.awt.Color.white);
         txt_NombreCliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_NombreCliente.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txt_NombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 210, -1));
 
         txt_modelo.setBackground(new java.awt.Color(153, 153, 255));
-        txt_modelo.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        txt_modelo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txt_modelo.setForeground(java.awt.Color.white);
         txt_modelo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_modelo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txt_modelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 210, -1));
 
         txt_num_serie.setBackground(new java.awt.Color(153, 153, 255));
-        txt_num_serie.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        txt_num_serie.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txt_num_serie.setForeground(java.awt.Color.white);
         txt_num_serie.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_num_serie.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txt_num_serie, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 210, -1));
 
         txt_ultima_Modificacion.setBackground(new java.awt.Color(153, 153, 255));
-        txt_ultima_Modificacion.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        txt_ultima_Modificacion.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txt_ultima_Modificacion.setForeground(java.awt.Color.white);
         txt_ultima_Modificacion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_ultima_Modificacion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txt_ultima_Modificacion.setEnabled(false);
         getContentPane().add(txt_ultima_Modificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 210, -1));
 
+        txt_fecha.setEditable(false);
         txt_fecha.setBackground(new java.awt.Color(153, 153, 255));
-        txt_fecha.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        txt_fecha.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txt_fecha.setForeground(java.awt.Color.white);
         txt_fecha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_fecha.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txt_fecha.setEnabled(false);
-        getContentPane().add(txt_fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, 180, -1));
+        getContentPane().add(txt_fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 180, -1));
 
+        cmb_tipoequipo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmb_tipoequipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laptop", "Desktop", "Impresora", "Multifunción", "Plotter" }));
         getContentPane().add(cmb_tipoequipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
 
+        cmb_marcas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmb_marcas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acer", "Apple", "Asus", "Brother", "Dell", "HP", "Lenovo", "MSI", "Samsung", "Toshiba", "Xerox" }));
         cmb_marcas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -266,11 +259,12 @@ public class InformacionEquipo extends javax.swing.JFrame {
         });
         getContentPane().add(cmb_marcas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
 
-        cmb_estatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo", "Nuevo ingreso", "No reparado", "En revisión", "Reparado", "Entregado" }));
-        getContentPane().add(cmb_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, -1, -1));
+        cmb_estatus.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cmb_estatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo", "Abierta incidencia" }));
+        getContentPane().add(cmb_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 90, -1, -1));
 
         jButton_Actualizar.setBackground(new java.awt.Color(153, 153, 255));
-        jButton_Actualizar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jButton_Actualizar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton_Actualizar.setForeground(java.awt.Color.white);
         jButton_Actualizar.setText("Actualizar equipo");
         jButton_Actualizar.setBorder(null);
@@ -279,11 +273,12 @@ public class InformacionEquipo extends javax.swing.JFrame {
                 jButton_ActualizarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 400, 210, 35));
+        getContentPane().add(jButton_Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 320, 210, 35));
 
+        jLabel_footer.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
-        getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 460, -1, -1));
-        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 530));
+        getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 460, -1, -1));
+        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 550));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -293,73 +288,90 @@ public class InformacionEquipo extends javax.swing.JFrame {
         int validacion = 0, estatus_cmb = 0;
         // variables de alojamiento temporal de la información a modificar
         String tipo_equipo, marca, modelo, num_serie, observaciones;
-        // guardo la información de los combo Box
-        tipo_equipo = cmb_tipoequipo.getSelectedItem().toString();
-        marca = cmb_marcas.getSelectedItem().toString();
-        estatus_cmb = cmb_estatus.getSelectedIndex() + 1;
-        // y ahora la de los campos de texto
-        modelo = txt_modelo.getText().trim();
-        num_serie = txt_num_serie.getText().trim();
-        observaciones = jTextPane_observaciones.getText();
-        //verifico que los campos no están vacíos
-        if (modelo.equals("")) {
-            validacion++;
-            txt_modelo.setBackground(Color.red);
-        }
-        if (num_serie.equals("")) {
-            validacion++;
-            txt_num_serie.setBackground(Color.red);
-        }
-        if (observaciones.equals("")) {
-            jTextPane_observaciones.setText("Sin observaciones");
-            observaciones = jTextPane_observaciones.getText();
-        }
-
-        if (validacion == 0) {
-
-            try {
-                // acceso a la base de datos para modificar la información
-                Connection con = Conexion.conector();
-                String sql = "update Equipos set tipo=?, marca=?, modelo=?, num_serie=?, "
-                        + "observaciones=?, habilitado=? where idEquipos = '" + IDequipo + "'";
-                PreparedStatement pst = con.prepareStatement(sql);
-
-                // envío los valores de las variables temporales a la bd
-                pst.setString(1, tipo_equipo);
-                pst.setString(2, marca);
-                pst.setString(3, modelo);
-                pst.setString(4, num_serie);
-                pst.setString(5, observaciones);
-                // sigue activo o lo desactivamos
-                // si está activo es 1, sino es 0
-                if (estatus_cmb != 1) {
-                    estatus_cmb = 0;
-                }
-                pst.setInt(6, estatus_cmb);
-
-                pst.executeUpdate();
-
-                con.close();
-
-                txt_NombreCliente.setBackground(Color.green);
-                txt_fecha.setBackground(Color.green);
-                txt_modelo.setBackground(Color.green);
-                txt_num_serie.setBackground(Color.green);
-                txt_ultima_Modificacion.setText(user);
-                
-                JOptionPane.showMessageDialog(null, "Equipo actualizado correctamente");
-                Limpiar();
-                this.dispose();
-
-            } catch (SQLException e) {
-                System.err.println("Error al actualiza datos del Equipo " + e);
-                JOptionPane.showMessageDialog(null, "Error al actualizar datos del equipo, contacte con el Administrador");
-            }
+        
+        if (estatus == 2) { //  si el equipo tiene una incidencia abierta no lo podemos actualizar
+            
+            jButton_Actualizar.enable(false);
+            JOptionPane.showMessageDialog(null, "Abierta incidencia de este equipo. Disponible únicamente consulta de la información hasta resolución");
+            
         } else {
-            JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos");
+
+            // guardo la información de los combo Box
+            tipo_equipo = cmb_tipoequipo.getSelectedItem().toString();
+            marca = cmb_marcas.getSelectedItem().toString();
+            estatus_cmb = cmb_estatus.getSelectedIndex();
+            // y ahora la de los campos de texto
+            modelo = txt_modelo.getText().trim();
+            num_serie = txt_num_serie.getText().trim();
+            observaciones = jTextPane_observaciones.getText();
+            //verifico que los campos no están vacíos
+            if (modelo.equals("")) {
+                validacion++;
+                txt_modelo.setBackground(Color.red);
+            }
+            if (num_serie.equals("")) {
+                validacion++;
+                txt_num_serie.setBackground(Color.red);
+            }
+            if (observaciones.equals("")) {
+                jTextPane_observaciones.setText("Sin observaciones");
+                observaciones = jTextPane_observaciones.getText();
+            }
+
+            if (validacion == 0) {
+
+                try {
+                    // acceso a la base de datos para modificar la información
+                    Connection con = Conexion.conector();
+                    String sql = "UPDATE Equipos SET tipo=?, marca=?, modelo=?, num_serie=?, ";
+                    sql += "observaciones=?, habilitado=? ";
+                    sql += "WHERE idEquipos = '" + IDequipo + "'";
+                    PreparedStatement pst = con.prepareStatement(sql);
+
+                    // envío los valores de las variables temporales a la bd
+                    pst.setString(1, tipo_equipo);
+                    pst.setString(2, marca);
+                    pst.setString(3, modelo);
+                    pst.setString(4, num_serie);
+                    pst.setString(5, observaciones);
+                    // que pasa con su estado
+                    switch (estatus_cmb) {
+                        case 0: // el equipo está activo
+                            pst.setInt(6, 1);
+                            break;
+                        case 1: // el equipo está inactivo
+                            pst.setInt(6, 0);
+                            break;
+                        case 2: // el equipo tiene una incidencia abierta
+                            pst.setInt(6, 2);
+                            break;
+                        default:
+                            break;
+                    }
+
+                    pst.executeUpdate();
+
+                    con.close();
+
+                    txt_NombreCliente.setBackground(Color.green);
+                    txt_fecha.setBackground(Color.green);
+                    txt_modelo.setBackground(Color.green);
+                    txt_num_serie.setBackground(Color.green);
+                    txt_ultima_Modificacion.setText(user);
+
+                    JOptionPane.showMessageDialog(null, "Equipo actualizado correctamente");
+                    Limpiar();
+                    this.dispose();
+
+                } catch (SQLException e) {
+                    System.err.println("Error al actualizar datos del Equipo " + e);
+                    JOptionPane.showMessageDialog(null, "Error al actualizar datos del equipo, contacte con el Administrador");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos");
+            }
+
         }
-
-
     }//GEN-LAST:event_jButton_ActualizarActionPerformed
 
     private void cmb_marcasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_marcasActionPerformed
@@ -418,10 +430,7 @@ public class InformacionEquipo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_Titulo;
     private javax.swing.JLabel jLabel_Wallpaper;
     private javax.swing.JLabel jLabel_footer;
-    private javax.swing.JLabel jLabel_revisionTecnicaDe;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextPane jTextPane_comentariosTecnico;
     private javax.swing.JTextPane jTextPane_observaciones;
     private javax.swing.JTextField txt_NombreCliente;
     private javax.swing.JTextField txt_fecha;
@@ -430,7 +439,7 @@ public class InformacionEquipo extends javax.swing.JFrame {
     private javax.swing.JTextField txt_ultima_Modificacion;
     // End of variables declaration//GEN-END:variables
 
-    public void Limpiar(){
+    public void Limpiar() {
         txt_NombreCliente.setText("");
         txt_fecha.setText("");
         txt_modelo.setText("");

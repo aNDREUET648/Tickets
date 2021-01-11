@@ -14,25 +14,14 @@ import javax.swing.WindowConstants;
 public class Administrador extends javax.swing.JFrame {
 
     String user, nombre_usuario, apellido_usuario;
-    //
-    // sesion_usuario actua como Flag 
-    // y nos servirá para enviar datos entre interfaces Tecnico y Cliente
-    // por eso la defino como public static int
-    //
-    public static int sesion_usuario;
-
+    
     /*
      * Constructor del form Administrador
      */
     public Administrador() {
         initComponents();
         user = Interface.usuario;
-        //
-        // sesion_usuario=1 le dice a la aplicación que se ha iniciado
-        // la sesión como Administrador
-        // la emplearemos en Tecnico.java y Cliente.java
-        sesion_usuario = 1;
-
+     
         setSize(650, 450);
         setResizable(false);
         setTitle("Rol: Administrador - Sesión de " + user);
@@ -84,13 +73,11 @@ public class Administrador extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel_NombreUsuario = new javax.swing.JLabel();
-        jButton_CrearUsuario = new javax.swing.JButton();
         jButton_GestionarUsuarios = new javax.swing.JButton();
         jButton_GestionarIncidenciasAdmin = new javax.swing.JButton();
         jButton_Tecnico = new javax.swing.JButton();
-        jButton_Tecnicoss = new javax.swing.JButton();
-        jButton_AcercaDe = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jButton_Cliente = new javax.swing.JButton();
+        jButton_GestionarEquipos = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -108,78 +95,77 @@ public class Administrador extends javax.swing.JFrame {
         jLabel_NombreUsuario.setText("jLabel1");
         getContentPane().add(jLabel_NombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jButton_CrearUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/addUser.png"))); // NOI18N
-        jButton_CrearUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_CrearUsuarioActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton_CrearUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 120, 100));
-
+        jButton_GestionarUsuarios.setBackground(new java.awt.Color(10, 47, 63));
         jButton_GestionarUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/informationuser.png"))); // NOI18N
+        jButton_GestionarUsuarios.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_GestionarUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_GestionarUsuariosActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_GestionarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 120, 100));
+        getContentPane().add(jButton_GestionarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 80, 80));
 
+        jButton_GestionarIncidenciasAdmin.setBackground(new java.awt.Color(10, 47, 63));
         jButton_GestionarIncidenciasAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/creatividad.png"))); // NOI18N
+        jButton_GestionarIncidenciasAdmin.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_GestionarIncidenciasAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_GestionarIncidenciasAdminActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_GestionarIncidenciasAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 120, 100));
+        getContentPane().add(jButton_GestionarIncidenciasAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, 80, 80));
 
+        jButton_Tecnico.setBackground(new java.awt.Color(10, 47, 63));
         jButton_Tecnico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/capturista.png"))); // NOI18N
+        jButton_Tecnico.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_Tecnico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_TecnicoActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Tecnico, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 120, 100));
+        getContentPane().add(jButton_Tecnico, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 80, 80));
 
-        jButton_Tecnicoss.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/tecnico.png"))); // NOI18N
-        jButton_Tecnicoss.addActionListener(new java.awt.event.ActionListener() {
+        jButton_Cliente.setBackground(new java.awt.Color(10, 47, 63));
+        jButton_Cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/tecnico.png"))); // NOI18N
+        jButton_Cliente.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButton_Cliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_TecnicossActionPerformed(evt);
+                jButton_ClienteActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Tecnicoss, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, 120, 100));
+        getContentPane().add(jButton_Cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 80, 80));
 
-        jButton_AcercaDe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/geekipedia.png"))); // NOI18N
-        jButton_AcercaDe.addActionListener(new java.awt.event.ActionListener() {
+        jButton_GestionarEquipos.setBackground(new java.awt.Color(10, 47, 63));
+        jButton_GestionarEquipos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/equipos.png"))); // NOI18N
+        jButton_GestionarEquipos.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButton_GestionarEquipos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_AcercaDeActionPerformed(evt);
+                jButton_GestionarEquiposActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_AcercaDe, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 240, 120, 100));
-
-        jLabel1.setForeground(java.awt.Color.white);
-        jLabel1.setText("Crear Usuario");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
+        getContentPane().add(jButton_GestionarEquipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 80, 80));
 
         jLabel2.setForeground(java.awt.Color.white);
         jLabel2.setText("Gestionar Usuarios");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, -1, -1));
 
         jLabel3.setForeground(java.awt.Color.white);
-        jLabel3.setText("Creatividad");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, -1, -1));
+        jLabel3.setText("Gestionar Incidencias");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 170, -1, -1));
 
         jLabel4.setForeground(java.awt.Color.white);
-        jLabel4.setText("Técnico");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, -1, -1));
+        jLabel4.setText("Menú Rol Técnico");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 320, -1, -1));
 
         jLabel5.setForeground(java.awt.Color.white);
-        jLabel5.setText("Cliente");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 340, -1, -1));
+        jLabel5.setText("Menú Rol Cliente");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 320, -1, -1));
 
         jLabel6.setForeground(java.awt.Color.white);
-        jLabel6.setText("Acerca de");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 340, -1, -1));
+        jLabel6.setText("Gestionar Equipos Usuarios");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, -1, -1));
 
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Andreu Garcia Coll - UIB 2020");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 380, -1, -1));
 
@@ -188,12 +174,6 @@ public class Administrador extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton_CrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CrearUsuarioActionPerformed
-        // Creo una instacia de clases
-        RegistrarUsuarios registrarUsuarios = new RegistrarUsuarios();
-        registrarUsuarios.setVisible(true);
-    }//GEN-LAST:event_jButton_CrearUsuarioActionPerformed
 
     private void jButton_GestionarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GestionarUsuariosActionPerformed
 
@@ -217,15 +197,19 @@ public class Administrador extends javax.swing.JFrame {
         tecnico.setVisible(true);
     }//GEN-LAST:event_jButton_TecnicoActionPerformed
 
-    private void jButton_TecnicossActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_TecnicossActionPerformed
+    private void jButton_ClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ClienteActionPerformed
         // Creo una instacia de clases
         Cliente cliente = new Cliente();
         cliente.setVisible(true);
-    }//GEN-LAST:event_jButton_TecnicossActionPerformed
+    }//GEN-LAST:event_jButton_ClienteActionPerformed
 
-    private void jButton_AcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AcercaDeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_AcercaDeActionPerformed
+    private void jButton_GestionarEquiposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GestionarEquiposActionPerformed
+        
+        // creo una instancia de clases
+        GestionarEquipos gestionarEquipos = new GestionarEquipos();
+        gestionarEquipos.setVisible(true);
+        
+    }//GEN-LAST:event_jButton_GestionarEquiposActionPerformed
 
     /**
      * @param args the command line arguments
@@ -263,13 +247,11 @@ public class Administrador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton_AcercaDe;
-    private javax.swing.JButton jButton_CrearUsuario;
+    private javax.swing.JButton jButton_Cliente;
+    private javax.swing.JButton jButton_GestionarEquipos;
     private javax.swing.JButton jButton_GestionarIncidenciasAdmin;
     private javax.swing.JButton jButton_GestionarUsuarios;
     private javax.swing.JButton jButton_Tecnico;
-    private javax.swing.JButton jButton_Tecnicoss;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

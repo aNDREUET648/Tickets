@@ -148,9 +148,10 @@ public class GestionarIncidenciasTecnico extends javax.swing.JFrame {
 
         jLabel_Titulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel_Titulo.setForeground(java.awt.Color.white);
-        jLabel_Titulo.setText("Gestión de Incidentes de Técnico");
-        getContentPane().add(jLabel_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, -1, -1));
+        jLabel_Titulo.setText("Gestión de Incidentes");
+        getContentPane().add(jLabel_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, -1, -1));
 
+        jLabel_footer.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
         getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, -1, -1));
 
@@ -193,17 +194,16 @@ public class GestionarIncidenciasTecnico extends javax.swing.JFrame {
 
     private void jButton_MostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_MostrarActionPerformed
 
-        // filtramos según el estado
+        // filtro según el estado
         String seleccion = cmb_estatus.getSelectedItem().toString();
-        String sql = "";
-        // borramos el contenido de la tabla 
+        // borro el contenido de la tabla 
         // limpia las filas
         model.setRowCount(0);
         // limpia las columnas
         model.setColumnCount(0);
 
         try {
-
+            String sql="";
             Connection con = Conexion.conector();
             // ahora vendría la instrucción hacia la bd pero ahora voy a utilizar dos instrucciones dinámicas a la bd.
             // una instrucción mostrará todos los incidentes y la otra filtrará según el estado

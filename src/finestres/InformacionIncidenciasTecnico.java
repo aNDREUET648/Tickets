@@ -189,7 +189,6 @@ public class InformacionIncidenciasTecnico extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
         setMinimumSize(new java.awt.Dimension(800, 650));
-        setPreferredSize(new java.awt.Dimension(800, 650));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel_Titulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -296,8 +295,17 @@ public class InformacionIncidenciasTecnico extends javax.swing.JFrame {
         txt_nivel.setEnabled(false);
         getContentPane().add(txt_nivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 130, 80, 25));
 
+        cmb_estado.setBackground(new java.awt.Color(0, 0, 0));
         cmb_estado.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        cmb_estado.setForeground(new java.awt.Color(22, 22, 22));
         cmb_estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "En Proceso", "Finalizado" }));
+        cmb_estado.setAutoscrolls(true);
+        cmb_estado.setBorder(null);
+        cmb_estado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_estadoActionPerformed(evt);
+            }
+        });
         getContentPane().add(cmb_estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 170, 130, -1));
 
         jButton_Actualizar.setBackground(new java.awt.Color(153, 153, 255));
@@ -323,6 +331,7 @@ public class InformacionIncidenciasTecnico extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane_intervencion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 400, 70));
 
+        jLabel_footer.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
         getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 540, -1, -1));
 
@@ -372,6 +381,7 @@ public class InformacionIncidenciasTecnico extends javax.swing.JFrame {
                 // Si no ha escrito nada en lo que ha estado haciendo
                 // le aviso o no sale de ahí
                 JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos");
+                jTextPane_intervencion.requestFocus();
 
             } else {
 
@@ -456,6 +466,10 @@ public class InformacionIncidenciasTecnico extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton_ActualizarActionPerformed
+
+    private void cmb_estadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_estadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmb_estadoActionPerformed
 
     /**
      * @param args the command line arguments

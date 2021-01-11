@@ -25,7 +25,7 @@ public class RestaurarPassword extends javax.swing.JFrame {
         user = Interface.usuario;
         user_update = GestionarUsuarios.user_update;
 
-        setSize(360, 260);
+        setSize(400, 300);
         setResizable(false);
         setTitle("Cambio de Password para " + user_update);
         setLocationRelativeTo(null);
@@ -66,6 +66,7 @@ public class RestaurarPassword extends javax.swing.JFrame {
         txt_password = new javax.swing.JPasswordField();
         txt_passwordConfirmacion = new javax.swing.JPasswordField();
         jButton_RestaurarPassword = new javax.swing.JButton();
+        jLabel_footer = new javax.swing.JLabel();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -76,27 +77,27 @@ public class RestaurarPassword extends javax.swing.JFrame {
         jLabel1.setText("Cambio de password");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, -1, -1));
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setForeground(java.awt.Color.white);
         jLabel7.setText("Nuevo Password:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, -1));
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setForeground(java.awt.Color.white);
         jLabel8.setText("Confirmar Password:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
 
         txt_password.setBackground(new java.awt.Color(153, 153, 255));
-        txt_password.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        txt_password.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_password.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_password.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 210, -1));
+        getContentPane().add(txt_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 210, -1));
 
         txt_passwordConfirmacion.setBackground(new java.awt.Color(153, 153, 255));
-        txt_passwordConfirmacion.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        txt_passwordConfirmacion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_passwordConfirmacion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_passwordConfirmacion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_passwordConfirmacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 210, -1));
+        getContentPane().add(txt_passwordConfirmacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 210, -1));
 
         jButton_RestaurarPassword.setBackground(new java.awt.Color(153, 153, 255));
         jButton_RestaurarPassword.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -108,8 +109,12 @@ public class RestaurarPassword extends javax.swing.JFrame {
                 jButton_RestaurarPasswordActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_RestaurarPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 210, 35));
-        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 260));
+        getContentPane().add(jButton_RestaurarPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 210, 35));
+
+        jLabel_footer.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
+        getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, -1, -1));
+        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -203,6 +208,7 @@ public class RestaurarPassword extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel_Wallpaper;
+    private javax.swing.JLabel jLabel_footer;
     private javax.swing.JPasswordField txt_password;
     private javax.swing.JPasswordField txt_passwordConfirmacion;
     // End of variables declaration//GEN-END:variables

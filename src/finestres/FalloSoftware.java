@@ -19,12 +19,6 @@ public class FalloSoftware extends javax.swing.JFrame {
     String user = "";
     int IDuser = 0, IDequipo = 0;
     int IDequipo_update = 0;
-    //
-    // sesion_usuario actuará como Flag 
-    // la ventana de Cliente no dejará de ejecutarse si 
-    // he arrancado esta ventana desde la sesión de Administrador
-    //
-    int sesion_usuario;
     // model interactuará con mi tabla (j_Table_equipos) creada en el form
     DefaultTableModel model = new DefaultTableModel();
 
@@ -35,27 +29,12 @@ public class FalloSoftware extends javax.swing.JFrame {
         initComponents();
         user = Interface.usuario;
         IDuser = Interface.IDuser;
-        sesion_usuario = Administrador.sesion_usuario;
 
         setSize(700, 370);
         setResizable(false);
         setTitle("Rol: Cliente - Sesión de " + user);
         setLocationRelativeTo(null);
-        //
-        // dentro del constructor creo una estructura condicional para que no se
-        // cierre este Interface si he iniciado sesión de Administrador y no
-        // finalice a menos que se cierre la Interface de Administrador.java
-        // 
-        // En cambio, si estoy he iniciado sesión como Cliente el Interface
-        // Cliente.java se cerrará y por tanto finalizará el programa
-        //
-        if (sesion_usuario == 1) {
-            // he iniciado sesión como Administrador
-            setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        } else {
-            // he iniciado sesión como Cliente
-            setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        }
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         // Fondo de pantalla de mi aplicación
         ImageIcon wallpaper = new ImageIcon("src/imatges/wallpaperPrincipal.jpg");
@@ -123,7 +102,6 @@ public class FalloSoftware extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
         setMinimumSize(new java.awt.Dimension(700, 370));
-        setPreferredSize(new java.awt.Dimension(700, 370));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel_Titulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -191,6 +169,7 @@ public class FalloSoftware extends javax.swing.JFrame {
         cmb_software.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sistema Operativo", "Word", "Excel", "Access", "PowerPoint", "SAP", "Cartografía", "Herramientas Empresariales", "Otros" }));
         getContentPane().add(cmb_software, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, -1, -1));
 
+        jLabel_footer.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
         getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, -1, -1));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 370));

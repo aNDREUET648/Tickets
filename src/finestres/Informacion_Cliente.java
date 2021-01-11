@@ -46,6 +46,7 @@ public class Informacion_Cliente extends javax.swing.JFrame {
     public static int IDequipo = 0;
     String user = "";
     int IDuser = 0;
+    int habilitado = 0; // status de mi equipo (Activo, Inactivo, Incidencia abierta)
 
     /**
      * Constructor del form Informacion_Cliente
@@ -56,7 +57,7 @@ public class Informacion_Cliente extends javax.swing.JFrame {
         IDuser = Interface.IDuser;
         IDcliente_update = GestionarClientes.IDcliente_update;
 
-        setSize(750, 470);
+        setSize(1000, 500);
         setResizable(false);
         setLocationRelativeTo(null);
 
@@ -80,11 +81,12 @@ public class Informacion_Cliente extends javax.swing.JFrame {
 
             if (rs.next()) {
                 setTitle("Información del cliente " + rs.getString("nombre") + " " + rs.getString("apellidos") + " - Sesión de " + user);
-                jLabel_Titulo.setText("Información del cliente " + rs.getString("nombre") + " " + rs.getString("apellidos"));
+                jLabel_Titulo.setText("Información del cliente ");
 
                 txt_nombre.setText(rs.getString("nombre"));
-                txt_email.setText(rs.getString("email"));
                 txt_apellidos.setText(rs.getString("apellidos"));
+                txt_username.setText(rs.getString("user"));
+                txt_email.setText(rs.getString("email"));
                 txt_telefono.setText(rs.getString("telefono"));
                 txt_ultimaModificacion.setText(Integer.toString(rs.getInt("registrado_por")));
             }
@@ -97,6 +99,7 @@ public class Informacion_Cliente extends javax.swing.JFrame {
         // rellenamos la tabla con los equipos registrados del cliente
         //
         try {
+
             Connection con = Conexion.conector();
             String sql = "select * from Equipos where usuarios_idUsuario = '" + IDcliente_update + "'";
             PreparedStatement pst = con.prepareStatement(sql);
@@ -109,16 +112,33 @@ public class Informacion_Cliente extends javax.swing.JFrame {
             model.addColumn("Tipo de equipo");
             model.addColumn("Marca");
             model.addColumn("Modelo");
+            model.addColumn("Número de serie");
+            model.addColumn("Status");
 
             while (rs.next()) {
                 //creo vector de tipo objectos
-                Object[] celda = new Object[4];
-                //paso la celda del idEquipo como int para no tener el
-                // error que tuve en GestionarClientes
-                celda[0]=rs.getInt("idEquipos");
-                for (int i = 1; i < 4; i++) {
-                    celda[i] = rs.getObject(i + 1);
+                Object[] celda = new Object[6];
+
+                celda[0] = rs.getInt("idEquipos");
+                celda[1] = rs.getString("tipo");
+                celda[2] = rs.getString("marca");
+                celda[3] = rs.getString("modelo");
+                celda[4] = rs.getString("num_serie");
+                habilitado = rs.getInt("habilitado");
+                switch (habilitado) {
+                    case 0:
+                        celda[5] = "Activo";
+                        break;
+                    case 1:
+                        celda[5] = "Inactivo";
+                        break;
+                    case 2:
+                        celda[5] = "Incidencia abierta";
+                        break;
+                    default:
+                        break;
                 }
+
                 model.addRow(celda);
             }
             con.close();
@@ -180,12 +200,14 @@ public class Informacion_Cliente extends javax.swing.JFrame {
         jLabel_Nombre = new javax.swing.JLabel();
         jLabel_email = new javax.swing.JLabel();
         jLabel_apellidos = new javax.swing.JLabel();
+        jLabel_username = new javax.swing.JLabel();
         jLabel_telefono = new javax.swing.JLabel();
         jLabel_UltimaModificacion = new javax.swing.JLabel();
         txt_nombre = new javax.swing.JTextField();
         txt_email = new javax.swing.JTextField();
         txt_apellidos = new javax.swing.JTextField();
         txt_telefono = new javax.swing.JTextField();
+        txt_username = new javax.swing.JTextField();
         txt_ultimaModificacion = new javax.swing.JTextField();
         jButton_Registrar = new javax.swing.JButton();
         jButton_Actualizar = new javax.swing.JButton();
@@ -195,7 +217,7 @@ public class Informacion_Cliente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
-        setPreferredSize(new java.awt.Dimension(750, 470));
+        setMinimumSize(new java.awt.Dimension(1000, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTable_equipos.setModel(new javax.swing.table.DefaultTableModel(
@@ -211,76 +233,88 @@ public class Informacion_Cliente extends javax.swing.JFrame {
         ));
         jScrollPane_equipos.setViewportView(jTable_equipos);
 
-        getContentPane().add(jScrollPane_equipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 480, 180));
+        getContentPane().add(jScrollPane_equipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 670, 180));
 
         jLabel_Titulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel_Titulo.setForeground(java.awt.Color.white);
         jLabel_Titulo.setText("Información del Cliente");
-        getContentPane().add(jLabel_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        getContentPane().add(jLabel_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, -1, -1));
 
-        jLabel_Nombre.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel_Nombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel_Nombre.setForeground(java.awt.Color.white);
         jLabel_Nombre.setText("Nombre:");
         getContentPane().add(jLabel_Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
-        jLabel_email.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel_email.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel_email.setForeground(java.awt.Color.white);
         jLabel_email.setText("em@il:");
-        getContentPane().add(jLabel_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+        getContentPane().add(jLabel_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
 
-        jLabel_apellidos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel_apellidos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel_apellidos.setForeground(java.awt.Color.white);
         jLabel_apellidos.setText("Apellidos:");
-        getContentPane().add(jLabel_apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
+        getContentPane().add(jLabel_apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
-        jLabel_telefono.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel_username.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel_username.setForeground(java.awt.Color.white);
+        jLabel_username.setText("username:");
+        getContentPane().add(jLabel_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
+
+        jLabel_telefono.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel_telefono.setForeground(java.awt.Color.white);
         jLabel_telefono.setText("telefono");
-        getContentPane().add(jLabel_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
+        getContentPane().add(jLabel_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
 
-        jLabel_UltimaModificacion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel_UltimaModificacion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel_UltimaModificacion.setForeground(java.awt.Color.white);
         jLabel_UltimaModificacion.setText("Última modificación por:");
-        getContentPane().add(jLabel_UltimaModificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
+        getContentPane().add(jLabel_UltimaModificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
 
         txt_nombre.setBackground(new java.awt.Color(153, 153, 255));
-        txt_nombre.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        txt_nombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_nombre.setForeground(java.awt.Color.white);
         txt_nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_nombre.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 210, -1));
 
         txt_email.setBackground(new java.awt.Color(153, 153, 255));
-        txt_email.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        txt_email.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_email.setForeground(java.awt.Color.white);
         txt_email.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_email.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 210, -1));
+        getContentPane().add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 210, -1));
 
         txt_apellidos.setBackground(new java.awt.Color(153, 153, 255));
-        txt_apellidos.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        txt_apellidos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_apellidos.setForeground(java.awt.Color.white);
         txt_apellidos.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_apellidos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 210, -1));
+        getContentPane().add(txt_apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 210, -1));
 
         txt_telefono.setBackground(new java.awt.Color(153, 153, 255));
-        txt_telefono.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        txt_telefono.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_telefono.setForeground(java.awt.Color.white);
         txt_telefono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_telefono.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 210, -1));
+        getContentPane().add(txt_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 210, -1));
+
+        txt_username.setBackground(new java.awt.Color(153, 153, 255));
+        txt_username.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_username.setForeground(java.awt.Color.white);
+        txt_username.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_username.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 210, -1));
 
         txt_ultimaModificacion.setBackground(new java.awt.Color(153, 153, 255));
-        txt_ultimaModificacion.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        txt_ultimaModificacion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_ultimaModificacion.setForeground(java.awt.Color.white);
         txt_ultimaModificacion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_ultimaModificacion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txt_ultimaModificacion.setEnabled(false);
-        getContentPane().add(txt_ultimaModificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 210, -1));
+        getContentPane().add(txt_ultimaModificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 210, -1));
 
         jButton_Registrar.setBackground(new java.awt.Color(153, 153, 255));
-        jButton_Registrar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jButton_Registrar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton_Registrar.setForeground(java.awt.Color.white);
         jButton_Registrar.setText("Registrar equipo");
         jButton_Registrar.setBorder(null);
@@ -289,10 +323,10 @@ public class Informacion_Cliente extends javax.swing.JFrame {
                 jButton_RegistrarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, 210, 35));
+        getContentPane().add(jButton_Registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 270, 210, 35));
 
         jButton_Actualizar.setBackground(new java.awt.Color(153, 153, 255));
-        jButton_Actualizar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jButton_Actualizar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton_Actualizar.setForeground(java.awt.Color.white);
         jButton_Actualizar.setText("Actualizar cliente");
         jButton_Actualizar.setBorder(null);
@@ -301,7 +335,7 @@ public class Informacion_Cliente extends javax.swing.JFrame {
                 jButton_ActualizarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 310, 210, 35));
+        getContentPane().add(jButton_Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 320, 210, 35));
 
         jButton_ImprimirReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/impresora.png"))); // NOI18N
         jButton_ImprimirReporte.addActionListener(new java.awt.event.ActionListener() {
@@ -309,11 +343,12 @@ public class Informacion_Cliente extends javax.swing.JFrame {
                 jButton_ImprimirReporteActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_ImprimirReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 250, 120, 100));
+        getContentPane().add(jButton_ImprimirReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 260, 120, 100));
 
+        jLabel_footer.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
-        getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, -1, -1));
-        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 470));
+        getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 400, -1, -1));
+        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -452,9 +487,8 @@ public class Informacion_Cliente extends javax.swing.JFrame {
                     //envío la tablaCliente al documento
                     documento.add(tablaCliente);
                 }
-                
+
                 //con.close();
-                
                 Paragraph parrafo2 = new Paragraph();
                 // lo alineo al centro
                 parrafo2.setAlignment(Paragraph.ALIGN_CENTER);
@@ -493,9 +527,8 @@ public class Informacion_Cliente extends javax.swing.JFrame {
                         //envío la tablaEquipos al documento
                         documento.add(tablaEquipos);
                     }
-                    
+
                     //con2.close();
-                    
                 } catch (SQLException e) {
                     System.err.println("Error al generar listado de equipos del cliente " + e);
                     JOptionPane.showMessageDialog(null, "Error al generar listado de equipos del cliente, contacte con el Administrador");
@@ -564,6 +597,7 @@ public class Informacion_Cliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_email;
     private javax.swing.JLabel jLabel_footer;
     private javax.swing.JLabel jLabel_telefono;
+    private javax.swing.JLabel jLabel_username;
     private javax.swing.JScrollPane jScrollPane_equipos;
     private javax.swing.JTable jTable_equipos;
     private javax.swing.JTextField txt_apellidos;
@@ -571,6 +605,7 @@ public class Informacion_Cliente extends javax.swing.JFrame {
     private javax.swing.JTextField txt_nombre;
     private javax.swing.JTextField txt_telefono;
     private javax.swing.JTextField txt_ultimaModificacion;
+    private javax.swing.JTextField txt_username;
     // End of variables declaration//GEN-END:variables
 
     public void Limpiar() {

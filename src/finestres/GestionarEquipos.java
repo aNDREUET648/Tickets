@@ -34,6 +34,8 @@ public class GestionarEquipos extends javax.swing.JFrame {
     // model es la que nos va a permitir poder general el click en la tabla
     // y establecer la interacción con los datos que se muestren en la tabla
     DefaultTableModel model = new DefaultTableModel();
+    // con que usuario he iniciado sesión y determinar que tipo de rol estoy trabajando
+    int usuario_sesion;
 
     /**
      * Constructor del form GestionarClientes
@@ -42,8 +44,9 @@ public class GestionarEquipos extends javax.swing.JFrame {
         initComponents();
         user = Interface.usuario;
         id_usuario = Interface.IDuser;
+        usuario_sesion = Interface.usuario_sesion;
 
-        setSize(650, 380);
+        setSize(800, 400);
         setResizable(false);
         setTitle("Técnico - Sesión de " + user);
         setLocationRelativeTo(null);
@@ -60,7 +63,32 @@ public class GestionarEquipos extends javax.swing.JFrame {
 
         try {
             Connection con = Conexion.conector();
-            String sql = "select idEquipos, tipo, marca, modelo, num_serie, habilitado from Equipos";
+
+            String sql = "SELECT * FROM equipos EQU, Usuarios USU, roles_has_usuarios RHU ";
+            sql += "WHERE USU.idUsuario = EQU.Usuarios_idUsuario AND ";
+            sql += "USU.idUsuario = RHU.Usuarios_idUsuario AND ";
+            //
+            // Query selectivo dependiendo del rol del usuario
+            //
+            switch (usuario_sesion) {
+                case 0: // el que hace la consulta es un Cliente
+                    sql += "USU.idUsuario = " + id_usuario + " ";
+                    break;
+                case 1: // el que hace la consulta es un Administrador
+                    // para no tener errores de sintaxis
+                    // añado esta sentencia sql que es una TAUTOLOGÍA
+                    // para que se ejecute siempre, porque no necesitava ninguna
+                    // pero el AND de arriba me obliga a poner algo
+                    sql += "EQU.habilitado = EQU.habilitado "; // todos los equipos
+                    break;
+                case 2: // el que hace la consulta es un Técnico
+                    sql += "RHU.Roles_idRol = 3 "; // equipos de Clientes
+                    break;
+                default:
+                    break;
+            }
+            sql += "ORDER BY apellidos, nombre ";
+
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             //
@@ -70,28 +98,54 @@ public class GestionarEquipos extends javax.swing.JFrame {
             // creo el contenedor y hago visible la tabla dentro de él
             jScrollPane_equipos.setViewportView(jTable_equipos);
             // definimos las columnas que estarán en el jScrollPane
-            model.addColumn("ID");
+            if (usuario_sesion == 0) {
+                // si es un cliente que muestre sólo el ID del equipo
+                model.addColumn("ID");
+            } else {
+                // si es un Administrador o un Técnico que muestre de quien son los equipos
+                model.addColumn("Nombre y apellidos");
+            }
+
             model.addColumn("Tipo");
             model.addColumn("Marca");
             model.addColumn("Modelo");
-            model.addColumn("Número de Serie");
+
+            if (usuario_sesion == 0) {
+                // si es un cliente que muestre sólo el ID del equipo
+                model.addColumn("Número de Serie");
+            } else {
+                // si es un Administrador o un Técnico que muestre de quien son los equipos
+                model.addColumn("ID equipo");
+            }
+
             model.addColumn("Status");
             // y relleno la tabla
             while (rs.next()) {
-                /*
-                estoy probando el casting de abajo. Aquí el idEquipos es int pero 
-                cuando lo lee celda[0]=rs.getObject(i+1) lo ve como tipo long
-                lo arreglo guardando celda[0] independiente rs.getInt("idEquipos")
-                Why?
-                JOptionPane.showMessageDialog(null, "ID DEL CLIENTE " + rs.getInt("idEquipos"));
-                 */
                 // creo vector de tipo objetos
                 Object[] celda = new Object[6]; // 6 columnas
-                celda[0] = rs.getInt("idEquipos");
-                for (int i = 1; i < 6; i++) {
-                    // bucle para ir llenando cada columna de la fila
-                    // la primera fila del rs.next() es 1 y no 0 (i+1)
-                    celda[i] = rs.getObject(i + 1);
+                if (usuario_sesion == 0) {
+                    // si es un cliente que muestre sólo el ID del equipo
+                    celda[0] = rs.getInt("idEquipos");
+                    celda[4] = rs.getString("num_serie");
+                } else {
+                    // si es un Administrador o un Técnico que muestre de quien son los equipos
+                    celda[0] = rs.getString("nombre") + " " + rs.getString("apellidos");
+                    celda[4] = rs.getInt("idEquipos");
+                }
+                celda[1] = rs.getString("tipo");
+                celda[2] = rs.getString("marca");
+                celda[3] = rs.getString("modelo");
+
+                switch (rs.getInt("EQU.habilitado")) {
+                    case 0:
+                        celda[5] = "Inactivo";
+                        break;
+                    case 1:
+                        celda[5] = "Activo";
+                        break;
+                    case 2:
+                        celda[5] = "Incidencia";
+                        break;
                 }
                 // agregar nueva fila
                 model.addRow(celda); // añadimos la nueva fila ya rellenada  
@@ -134,14 +188,13 @@ public class GestionarEquipos extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
-        setMinimumSize(new java.awt.Dimension(650, 380));
-        setPreferredSize(new java.awt.Dimension(630, 380));
+        setMinimumSize(new java.awt.Dimension(800, 400));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setForeground(java.awt.Color.white);
         jLabel1.setText("Equipos registrados");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, -1, -1));
 
         jTable_equipos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -156,13 +209,14 @@ public class GestionarEquipos extends javax.swing.JFrame {
         ));
         jScrollPane_equipos.setViewportView(jTable_equipos);
 
-        getContentPane().add(jScrollPane_equipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 630, 180));
+        getContentPane().add(jScrollPane_equipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 760, 180));
 
+        jLabel_footer.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
-        getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 320, -1, -1));
+        getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 340, -1, -1));
 
-        cmb_estatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Activo", "Inactivo", "Nuevo ingreso", "No reparado", "En revisión", "Reparado", "Entregado" }));
-        getContentPane().add(cmb_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 40, 130, -1));
+        cmb_estatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Activo", "Inactivo", "Incidencia abierta" }));
+        getContentPane().add(cmb_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 40, 130, -1));
 
         jButton_Mostrar.setBackground(new java.awt.Color(153, 153, 255));
         jButton_Mostrar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -174,16 +228,17 @@ public class GestionarEquipos extends javax.swing.JFrame {
                 jButton_MostrarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 250, 210, 35));
-        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 380));
+        getContentPane().add(jButton_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 270, 210, 35));
+        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 400));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_MostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_MostrarActionPerformed
-
-        String seleccion = cmb_estatus.getSelectedItem().toString();
-        String query = "";
+        // seleccion actuará como flag, dependiendo del tipo de rol
+        // realizará un Query distinto en el string sql en concreto del
+        // filtro de estado (Todos, Activo, Inactivo, Incidencia abierta)
+        int seleccion = cmb_estatus.getSelectedIndex();
         // borramos el contenido de la tabla 
         // limpia las filas
         model.setRowCount(0);
@@ -192,21 +247,48 @@ public class GestionarEquipos extends javax.swing.JFrame {
 
         try {
             Connection con = Conexion.conector();
-            // ahora vendría la instrucción hacia la bd pero ahora voy
-            // a utilizar dos instrucciones dinámicas a la bd
-            // una instrucción mostrará todos los registros
-            // la otra según el filtro (Activo, Inactivo)
-            if (seleccion.equalsIgnoreCase("Todos")) {
-                query = "select idEquipos, tipo, marca, modelo, num_serie, habilitado from Equipos";
-            } else {
-                if (seleccion.equalsIgnoreCase("Inactivo")) {
-                    query = "select idEquipos, tipo, marca, modelo, num_serie, habilitado from Equipos where habilitado = 0";
-                } else {
-                    query = "select idEquipos, tipo, marca, modelo, num_serie, habilitado from Equipos where habilitado = 1";
-                    //query = "select idEquipos,tipo,marca,modelo,num_serie,habilitado from Equipos where estatus='"+seleccion+"'";
-                }
+            String sql = "SELECT * FROM equipos EQU, Usuarios USU, roles_has_usuarios RHU ";
+            sql += "WHERE USU.idUsuario = EQU.Usuarios_idUsuario AND ";
+            sql += "USU.idUsuario = RHU.Usuarios_idUsuario AND ";
+            //
+            // Query selectivo dependiendo del filtro status del jcomboBox (cmb_estatus)
+            //
+            switch (seleccion) {
+                case 1:
+                    sql += "EQU.habilitado = 1 AND ";
+                    break;
+                case 2:
+                    sql += "EQU.habilitado = 0 AND ";
+                    break;
+                case 3:
+                    sql += "EQU.habilitado = 2 AND ";
+                    break;
+                default:
+                    break;
             }
-            PreparedStatement pst = con.prepareStatement(query);
+            //
+            // Query selectivo dependiendo del rol del usuario
+            //
+            switch (usuario_sesion) {
+                case 0: // el que hace la consulta es un Cliente
+                    sql += "USU.idUsuario = " + id_usuario + " ";
+                    break;
+                case 1: // el que hace la consulta es un Administrador
+                    // para no tener errores de sintaxis
+                    // añado esta sentencia sql que es una TAUTOLOGÍA
+                    // para que se ejecute siempre, porque no necesitava ninguna
+                    // pero el AND de arriba me obliga a poner algo
+                    sql += "EQU.habilitado = EQU.habilitado "; // todos los equipos
+                    break;
+                case 2: // el que hace la consulta es un Técnico
+                    sql += "RHU.Roles_idRol = 3 "; // equipos de Clientes
+                    break;
+                default:
+                    break;
+            }
+            sql += "ORDER BY apellidos, nombre ";
+
+            PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             //
             // Creo nuevamente la tabla de equipos
@@ -216,35 +298,62 @@ public class GestionarEquipos extends javax.swing.JFrame {
             // creo el contenedor y hago visible la tabla dentro de él
             jScrollPane_equipos.setViewportView(jTable_equipos);
             // definimos las columnas que estarán en el jScrollPane
-            model.addColumn("ID");
+
+            if (usuario_sesion == 0) {
+                // si es un cliente que muestre sólo el ID del equipo
+                model.addColumn("ID");
+            } else {
+                // si es un Administrador o un Técnico que muestre de quien son los equipos
+                model.addColumn("Nombre y apellidos");
+            }
+
             model.addColumn("Tipo");
             model.addColumn("Marca");
             model.addColumn("Modelo");
-            model.addColumn("Número de Serie");
+
+            if (usuario_sesion == 0) {
+                // si es un cliente que muestre sólo el ID del equipo
+                model.addColumn("Número de Serie");
+            } else {
+                // si es un Administrador o un Técnico que muestre de quien son los equipos
+                model.addColumn("ID equipo");
+            }
+
             model.addColumn("Status");
             // y relleno la tabla
 
             while (rs.next()) {
-                /*
-                estoy probando el casting de abajo. Aquí el idEquipos es int pero 
-                cuando lo lee celda[0]=rs.getObject(i+1) lo ve como tipo long
-                lo arreglo guardando celda[0] independiente rs.getInt("idEquipos")
-                Why?
-                JOptionPane.showMessageDialog(null, "ID EQUIPO " + rs.getInt("idEquipos"));
-                 */
                 // creo vector de tipo objetos
                 Object[] celda = new Object[6]; // 6 columnas
-                celda[0] = rs.getInt("idEquipos");
-                for (int i = 1; i < 6; i++) {
-                    // bucle para ir llenando cada columna de la fila
-                    // la primera fila del rs.next() es 1 y no 0 (i+1)
-                    celda[i] = rs.getObject(i + 1);
+                if (usuario_sesion == 0) {
+                    // si es un cliente que muestre sólo el ID del equipo
+                    celda[0] = rs.getInt("idEquipos");
+                    celda[4] = rs.getString("num_serie");
+                } else {
+                    // si es un Administrador o un Técnico que muestre de quien son los equipos
+                    celda[0] = rs.getString("nombre") + " " + rs.getString("apellidos");
+                    celda[4] = rs.getInt("idEquipos");
+                }
+                celda[1] = rs.getString("tipo");
+                celda[2] = rs.getString("marca");
+                celda[3] = rs.getString("modelo");
+
+                switch (rs.getInt("EQU.habilitado")) {
+                    case 0:
+                        celda[5] = "Inactivo";
+                        break;
+                    case 1:
+                        celda[5] = "Activo";
+                        break;
+                    case 2:
+                        celda[5] = "Incidencia";
+                        break;
                 }
                 // agregar nueva fila
                 model.addRow(celda); // añadimos la nueva fila ya rellenada   
             }
             con.close();
-            
+
         } catch (SQLException e) {
             System.err.println("Error al recuperar los registros de la tabla Equipos" + e);
             JOptionPane.showMessageDialog(null, "Error al recuperar los registros de la tabla Equipos, contacte con el Administrador");
@@ -254,7 +363,7 @@ public class GestionarEquipos extends javax.swing.JFrame {
         // para la realización del filtraje
         //
         ObtenerDatosTabla();
-        
+
 
     }//GEN-LAST:event_jButton_MostrarActionPerformed
 
@@ -290,6 +399,7 @@ public class GestionarEquipos extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GestionarEquipos().setVisible(true);
+
             }
         });
     }
@@ -318,6 +428,13 @@ public class GestionarEquipos extends javax.swing.JFrame {
                 // la cual me permitirá obtener la información del cliente
                 int fila_point = jTable_equipos.rowAtPoint(e.getPoint());
                 int columna_point = 0;
+                if (usuario_sesion == 0) {
+                    // si es un cliente coge el id del equipo de la primera columna
+                    columna_point = 0;
+                } else {
+                    // si es técnico o administrador la tiene en la 5ª columna
+                    columna_point = 4;
+                }
 
                 if (fila_point > -1) {
                     // ahora que tengo una fila seleccionada
@@ -327,8 +444,8 @@ public class GestionarEquipos extends javax.swing.JFrame {
                     // guardamos el valor del ID del cliente seleccionado al clickar
                     IDequipo_update = (int) model.getValueAt(fila_point, columna_point);
                     // creo una instancia entre clases
-                    InformacionEquipoCliente info = new InformacionEquipoCliente();
-                    info.setVisible(true);
+                    InformacionEquipo informacionEquipo = new InformacionEquipo();
+                    informacionEquipo.setVisible(true);
                 }
             }
         });

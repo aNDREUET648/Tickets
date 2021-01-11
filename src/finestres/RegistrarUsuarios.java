@@ -16,6 +16,7 @@ import javax.swing.WindowConstants;
 public class RegistrarUsuarios extends javax.swing.JFrame {
 
     String user;
+    int IDuser;
 
     /*
      * Constructor del form RegistrarUsuarios
@@ -23,11 +24,15 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
     public RegistrarUsuarios() {
         initComponents();
         user = Interface.usuario;
+        IDuser = Interface.IDuser;
 
         setTitle("Agregar un nuevo usuario - Sesión de " + user);
-        setSize(630, 350);
+        setSize(630, 370);
         setResizable(false);
         setLocationRelativeTo(null);
+        
+        // contentPane.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{textField, textField_2, textField_1}));
+        
         
         //impedimos que el programa finalice cuando la interface se cierre
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -65,11 +70,13 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         txt_nombre = new javax.swing.JTextField();
         txt_email = new javax.swing.JTextField();
         txt_apellidos = new javax.swing.JTextField();
         txt_username = new javax.swing.JTextField();
         txt_password = new javax.swing.JPasswordField();
+        txt_telefono = new javax.swing.JTextField();
         cmb_rol = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jLabel_footer = new javax.swing.JLabel();
@@ -77,6 +84,7 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
+        setMinimumSize(new java.awt.Dimension(630, 370));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -84,40 +92,47 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
         jLabel1.setText("Registro de usuarios");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(java.awt.Color.white);
         jLabel2.setText("Nombre:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setForeground(java.awt.Color.white);
         jLabel3.setText("em@il:");
         jLabel3.setToolTipText("");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setForeground(java.awt.Color.white);
         jLabel4.setText("Apellidos:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setForeground(java.awt.Color.white);
         jLabel5.setText("Rol de:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setForeground(java.awt.Color.white);
         jLabel6.setText("Username:");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, -1, -1));
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setForeground(java.awt.Color.white);
         jLabel7.setText("Password:");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, -1, -1));
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setForeground(java.awt.Color.white);
+        jLabel8.setText("Teléfono:");
+        jLabel8.setToolTipText("");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 170, -1, -1));
+
         txt_nombre.setBackground(new java.awt.Color(153, 153, 255));
-        txt_nombre.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        txt_nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_nombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_nombre.setForeground(java.awt.Color.white);
+        txt_nombre.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_nombre.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txt_nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,30 +142,33 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
         getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 210, -1));
 
         txt_email.setBackground(new java.awt.Color(153, 153, 255));
-        txt_email.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        txt_email.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_email.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_email.setForeground(java.awt.Color.white);
+        txt_email.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_email.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txt_email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_emailActionPerformed(evt);
             }
         });
-        getContentPane().add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 210, -1));
+        getContentPane().add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 210, -1));
 
         txt_apellidos.setBackground(new java.awt.Color(153, 153, 255));
-        txt_apellidos.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        txt_apellidos.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_apellidos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_apellidos.setForeground(java.awt.Color.white);
+        txt_apellidos.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_apellidos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txt_apellidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_apellidosActionPerformed(evt);
             }
         });
-        getContentPane().add(txt_apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 210, -1));
+        getContentPane().add(txt_apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 210, -1));
 
         txt_username.setBackground(new java.awt.Color(153, 153, 255));
-        txt_username.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        txt_username.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_username.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_username.setForeground(java.awt.Color.white);
+        txt_username.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_username.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txt_username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,25 +178,43 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
         getContentPane().add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, 210, -1));
 
         txt_password.setBackground(new java.awt.Color(153, 153, 255));
-        txt_password.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        txt_password.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_password.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_password.setForeground(java.awt.Color.white);
+        txt_password.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_password.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txt_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 130, 210, -1));
 
+        txt_telefono.setBackground(new java.awt.Color(153, 153, 255));
+        txt_telefono.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_telefono.setForeground(java.awt.Color.white);
+        txt_telefono.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txt_telefono.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txt_telefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_telefonoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txt_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, 210, -1));
+
+        cmb_rol.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmb_rol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Tecnico", "Cliente" }));
         getContentPane().add(cmb_rol, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/add.png"))); // NOI18N
+        jButton1.setBackground(new java.awt.Color(153, 153, 255));
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton1.setForeground(java.awt.Color.white);
+        jButton1.setText("Registrar Usuario");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 170, 120, 100));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, 210, 35));
 
+        jLabel_footer.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
         getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, -1, -1));
-        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 350));
+        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 370));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -259,7 +295,8 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
                         //  insertamos los datos en la tabla de Usuarios
                         //
                         Connection con2 = Conexion.conector();
-                        String sql2 = "insert into Usuarios (nombre, apellidos, user, password, email, habilitado) values (?,?,?,?,?,?)";
+                        String sql2 = "INSERT INTO Usuarios (nombre, apellidos, user, password, email, habilitado, registrado_por) ";
+                        sql2 += "values (?, ?, ?, ?, ?, ?, ?)";
                         PreparedStatement pst2 = con2.prepareStatement(sql2);
 
                         // pst2.setInt(1, 0); // el IdUsuario es autoincremental no escribo nada
@@ -269,6 +306,7 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
                         pst2.setString(4, password);     // password
                         pst2.setString(5, email);        // email
                         pst2.setString(6, "1");          // habilitado
+                        pst2.setInt(7, IDuser);     // el que dió de alta el usuario
 
                         int resultado = pst2.executeUpdate();
 
@@ -321,6 +359,10 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void txt_telefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_telefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_telefonoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -366,12 +408,14 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel_Wallpaper;
     private javax.swing.JLabel jLabel_footer;
     private javax.swing.JTextField txt_apellidos;
     private javax.swing.JTextField txt_email;
     private javax.swing.JTextField txt_nombre;
     private javax.swing.JPasswordField txt_password;
+    private javax.swing.JTextField txt_telefono;
     private javax.swing.JTextField txt_username;
     // End of variables declaration//GEN-END:variables
 

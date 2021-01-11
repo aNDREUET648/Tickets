@@ -19,6 +19,16 @@ public class Interface extends javax.swing.JFrame {
     public static String usuario = "";
     // IDuser enviará su valor a otras interfaces
     public static int IDuser = 0;
+    // usuario_sesion. 
+    // Igual que arriba pero para saber si cierro o no cierro interfaces
+    //  0 sesión de un Cliente
+    //  1 sesión de un Administrador
+    //  2 sesión de un Técnico
+    //  actua como Flag y nos servirá para enviar datos entre 
+    //  interfaces Aministrador, Tecnico y Cliente
+    // por eso la defino como public static int
+    //
+    public static int usuario_sesion = 0;
 
 
     /*
@@ -80,7 +90,7 @@ public class Interface extends javax.swing.JFrame {
         jLabelIconoUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/user.png"))); // NOI18N
         jLabelIconoUser.setText("jLabel1");
         jLabelIconoUser.setMaximumSize(new java.awt.Dimension(300, 470));
-        getContentPane().add(jLabelIconoUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 130, 170));
+        getContentPane().add(jLabelIconoUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 130, 160));
 
         jLabelUser.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabelUser.setForeground(new java.awt.Color(255, 255, 255));
@@ -95,12 +105,14 @@ public class Interface extends javax.swing.JFrame {
         jTextUser.setBackground(new java.awt.Color(22, 122, 218));
         jTextUser.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jTextUser.setForeground(new java.awt.Color(222, 222, 222));
+        jTextUser.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(jTextUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 270, 145, 30));
 
         jPassword.setBackground(new java.awt.Color(22, 122, 218));
         jPassword.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jPassword.setForeground(new java.awt.Color(222, 222, 222));
         jPassword.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jPassword.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPassword.setCaretColor(new java.awt.Color(255, 255, 255));
         jPassword.setName(""); // NOI18N
         jPassword.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -121,6 +133,7 @@ public class Interface extends javax.swing.JFrame {
         });
         getContentPane().add(jButtonInicioSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 400, -1, -1));
 
+        jLabelFondo.setBackground(new java.awt.Color(20, 20, 20));
         jLabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/wallpaperPrincipal.jpg"))); // NOI18N
         getContentPane().add(jLabelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 300, 470));
 
@@ -158,16 +171,28 @@ public class Interface extends javax.swing.JFrame {
                     // me guardo el idUsuario para emplearlo en otros formularios
                     //  
                     IDuser = rs.getInt("idUsuario");
-                    
+
                     if ("1".equals(habilitado)) {
                         if (rol.equalsIgnoreCase("Administrador")) {
                             dispose(); // destruirá la ventana de Interface(login) y sus componentes
+                            // sesion_usuario=1 le dice a la aplicación que se ha iniciado
+                            // la sesión como Administrador
+                            // la emplearemos en Tecnico.java y Cliente.java
+                            usuario_sesion = 1;
                             new Administrador().setVisible(true);
                         } else if (rol.equalsIgnoreCase("Tecnico")) {
                             dispose(); // destruirá la ventana de Interface(login) y sus componentes
+                            // sesion_usuario=2 le dice a la aplicación que se ha iniciado
+                            // la sesión como Técnico
+                            // la emplearemos en Cliente.java
+                            usuario_sesion = 2;
                             new Tecnico().setVisible(true);
                         } else if (rol.equalsIgnoreCase("Cliente")) {
                             dispose(); // destruirá la ventana de Interface(login) y sus componentes
+                            // sesion_usuario=0 le dice a la aplicación que se ha iniciado
+                            // la sesión como Cliente
+                            // no se si la emplearemos pero queda definida para futuras ampliaciones
+                            usuario_sesion = 0;
                             new Cliente().setVisible(true);
                         } else {
                             JOptionPane.showMessageDialog(null, "Tickets NO PIULA " + usuario + " " + rol + " " + habilitado);
@@ -193,7 +218,7 @@ public class Interface extends javax.swing.JFrame {
     private void jPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordKeyPressed
         // si pulso Enter tiene que hacer lo mismo que si le doy al 
         // botón de iniciar sesión
-        if (evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             JOptionPane.showMessageDialog(null, "Pulsa en Iniciar Sesión");
         }
     }//GEN-LAST:event_jPasswordKeyPressed
