@@ -139,9 +139,10 @@ public class GestionarUsuarios extends javax.swing.JFrame {
         jLabel1.setText("Usuarios registrados");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, -1, -1));
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(java.awt.Color.white);
         jLabel2.setText("Rol:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 40, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 40, -1, -1));
 
         jTable_usuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -158,51 +159,58 @@ public class GestionarUsuarios extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 960, 200));
 
+        cmb_estatus.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmb_estatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Administrador", "Tecnico", "Cliente" }));
+        cmb_estatus.setToolTipText("Filtraje de los usuarios para su visualización y exportación ");
         cmb_estatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmb_estatusActionPerformed(evt);
             }
         });
-        getContentPane().add(cmb_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 40, 130, -1));
+        getContentPane().add(cmb_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 30, 130, 30));
 
-        jButton_Mostrar.setBackground(new java.awt.Color(153, 153, 255));
+        jButton_Mostrar.setBackground(new java.awt.Color(10, 47, 63));
         jButton_Mostrar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton_Mostrar.setForeground(java.awt.Color.white);
-        jButton_Mostrar.setText("Mostrar");
-        jButton_Mostrar.setBorder(null);
+        jButton_Mostrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/buscar.png"))); // NOI18N
+        jButton_Mostrar.setToolTipText("Pulsa para filtrar");
+        jButton_Mostrar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_Mostrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_MostrarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 290, 210, 35));
+        getContentPane().add(jButton_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 30, 30, 30));
 
         jButton_RegistrarUsuarios.setBackground(new java.awt.Color(10, 47, 63));
         jButton_RegistrarUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/addUser.png"))); // NOI18N
+        jButton_RegistrarUsuarios.setToolTipText("Añadir un nuevo usuario (Administrador, Técnico o Cliente)");
         jButton_RegistrarUsuarios.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_RegistrarUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_RegistrarUsuariosActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_RegistrarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 80, 80));
+        getContentPane().add(jButton_RegistrarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 300, 80, 80));
 
-        jButton_Imprimir.setBackground(new java.awt.Color(153, 153, 255));
+        jButton_Imprimir.setBackground(new java.awt.Color(10, 47, 63));
         jButton_Imprimir.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton_Imprimir.setForeground(java.awt.Color.white);
-        jButton_Imprimir.setText("Imprimir");
-        jButton_Imprimir.setBorder(null);
+        jButton_Imprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/impresora.png"))); // NOI18N
+        jButton_Imprimir.setToolTipText("Listado de Usuarios registrados (PDF)");
+        jButton_Imprimir.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_Imprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_ImprimirActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 350, 210, 35));
+        getContentPane().add(jButton_Imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 300, 80, 80));
 
         jLabel_footer.setForeground(java.awt.Color.white);
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
         getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 410, -1, -1));
+
+        jLabel_Wallpaper.setToolTipText("");
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 500));
 
         pack();
@@ -288,8 +296,9 @@ public class GestionarUsuarios extends javax.swing.JFrame {
     private void jButton_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ImprimirActionPerformed
 
         // filtramos según el estado
-        String seleccion = cmb_estatus.getSelectedItem().toString();
-        Document documento = new Document(PageSize.A4.rotate(), 0, 0, 0, 0);
+        int seleccion = cmb_estatus.getSelectedIndex();
+        String filtro = cmb_estatus.getSelectedItem().toString();
+        Document documento = new Document(PageSize.A4.rotate(), 0, 0, 0, 10);
         // toda código para crear archivo en pdf necesita estar
         // dentro de una estructura try..catch
         try {
@@ -297,7 +306,7 @@ public class GestionarUsuarios extends javax.swing.JFrame {
             String ruta = System.getProperty("user.home");
             // lo guardo en el escritorio y le añado nombre y apellidos como filename
             // y la extensión que lógicamente será pdf
-            ruta = ruta + "/Desktop/HistoricoIncidencias - user " + user + " Filtro " + seleccion + ".pdf";
+            ruta = ruta + "/Desktop/Listado de Usuarios -  Filtro " + filtro + ".pdf";
             PdfWriter.getInstance(documento, new FileOutputStream(ruta));
 
             // inserto la cabecera del documento que será una imagen
@@ -305,7 +314,7 @@ public class GestionarUsuarios extends javax.swing.JFrame {
             // coloco directamente la llamada para eliminar el conflicto
             com.itextpdf.text.Image header = com.itextpdf.text.Image.getInstance("src/imatges/BannerPDF.png");
             // pongo el largo y la escala de visualización del header
-            header.scaleToFit(650, 1000);
+            header.scaleToFit(860, 100);
             // lo alineo al centro
             header.setAlignment(Chunk.ALIGN_CENTER);
             // creo un objeto de clase Paragraph para dar formato al texto
@@ -313,7 +322,7 @@ public class GestionarUsuarios extends javax.swing.JFrame {
             // lo alineo al centro
             parrafo.setAlignment(Paragraph.ALIGN_CENTER);
             parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY));
-            parrafo.add("Histórico Incidentes - Filtro: " + seleccion + "\n \n");
+            parrafo.add("Listado de Usuarios - Filtro: " + filtro + "\n \n");
             // doy formato al párrafo
             parrafo.setFont(FontFactory.getFont("Tahoma", 6, Font.NORMAL, BaseColor.DARK_GRAY));
 
@@ -326,42 +335,38 @@ public class GestionarUsuarios extends javax.swing.JFrame {
             // creo una tabla con los datos generales que vienen de la bd
             // tablaClientes tendrá 5 columnas
             PdfPTable tabla = new PdfPTable(7);
-            float[] columnWidths = new float[]{10f, 45f, 25f, 20f, 50f, 30f, 60f};
+            float[] columnWidths = new float[]{10f, 60f, 55f, 28f, 28f, 30f, 18f};
             tabla.setWidths(columnWidths);
 
             tabla.addCell("ID");
-            tabla.addCell("Nombre y apellidos");
-            tabla.addCell("Fecha");
-            tabla.addCell("Tipo");
-            tabla.addCell("Descripción");
+            tabla.addCell("Apellidos y nombre");
+            tabla.addCell("em@il");
+            tabla.addCell("Teléfono");
+            tabla.addCell("user");
+            tabla.addCell("Rol");
             tabla.addCell("Estado");
-            tabla.addCell("Descripción intervención");
 
             // consultamos a la bd la información que irá en el pdf
             try {
                 Connection con = Conexion.conector();
 
-                String sql = "SELECT * FROM usuarios USU, incidentes INCID, intervenciones INTER, estados EST, tipos ";
-                sql += "where idUsuario=INCID.Usuarios_idUsuario ";
-                sql += "AND idIncidente = Incidentes_idIncidente AND ";
-                sql += "idIntervencion = Intervenciones_idIntervencion AND ";
-                sql += "idTipo = tipos_idTipo ";
-
-                // si tenemnos el filtro de activo, inactivo o incidencia abierta
+                String sql = "SELECT  idUsuario, apellidos, nombre, user, email, telefono, rol, U.habilitado FROM ";
+                sql += "Usuarios U, Roles_has_Usuarios, Roles WHERE ";
+                sql += "Usuarios_idUsuario = idUsuario AND ";
+                sql += "Roles_idRol = idRol ";
                 //
                 // Query selectivo dependiendo del filtro status del jcomboBox (cmb_estatus)
                 //
                 switch (seleccion) {
-                    case "Inicio":
-                    case "Asignado":
-                    case "En Proceso":
-                    case "Finalizado":
-                        sql += " AND estado= '" + seleccion + "' ";
+                    case 1: // "Administrador"
+                    case 2: // "Tecnico"
+                    case 3: // "Cliente"
+                        sql += " AND idRol = " + seleccion + " ";
                         break;
-                    default: // Todos
+                    default: // "Todos"
                         break;
                 }
-                sql += "ORDER BY idIncidente DESC, idIntervencion DESC";
+                sql += "ORDER BY apellidos, nombre";
 
                 PreparedStatement pst = con.prepareStatement(sql);
                 ResultSet rs = pst.executeQuery();
@@ -369,25 +374,29 @@ public class GestionarUsuarios extends javax.swing.JFrame {
                 if (rs.next()) {
                     do {
 
-                        tabla.addCell(Integer.toString(rs.getInt("idIncidente")));
-                        tabla.addCell(rs.getString("nombre") + " " + rs.getString("apellidos"));
-                        tabla.addCell(rs.getTimestamp("fecha_crea").toString());
-                        tabla.addCell(rs.getString("Tipo"));
-                        tabla.addCell(rs.getString("INCID.descripcion"));
-                        tabla.addCell(rs.getString("estado"));
-                        tabla.addCell(rs.getString("INTER.descripcion"));
+                        tabla.addCell(Integer.toString(rs.getInt("idUsuario")));
+                        tabla.addCell(rs.getString("apellidos") + ", " + rs.getString("nombre"));
+                        tabla.addCell(rs.getString("email"));
+                        tabla.addCell(rs.getString("telefono"));
+                        tabla.addCell(rs.getString("user"));
+                        tabla.addCell(rs.getString("rol"));
+                        if (rs.getString("U.habilitado").equals("1")) {
+                            tabla.addCell("Activo");
+                        } else {
+                            tabla.addCell("Inactivo");
+                        }
 
                     } while (rs.next());
                     //envío la tablaCliente al documento
                     documento.add(tabla);
                 }
             } catch (SQLException e) {
-                System.err.println("Error al generar el listado de incidentes " + e);
-                JOptionPane.showMessageDialog(null, "Error al generar el listado de incidentes, contacte con el Administrador");
+                System.err.println("Error al generar el listado de usuarios " + e);
+                JOptionPane.showMessageDialog(null, "Error al generar el listado de usuarios, contacte con el Administrador");
             }
 
             documento.close();
-            JOptionPane.showMessageDialog(null, "Listado de incidentes creado correctamente");
+            JOptionPane.showMessageDialog(null, "Listado de usuarios creado correctamente");
 
             // Catch de la generación del documento pdf
             // DocumentException, gestión de los errores del documento

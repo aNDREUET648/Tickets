@@ -3,14 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/aNDREUET/Documents/NetBeansProjects/Tickets/src/finestres/FalloHardware.java</file>
-            <file>file:/C:/Users/aNDREUET/Documents/NetBeansProjects/Tickets/src/finestres/RegistrarUsuarios.java</file>
-            <file>file:/C:/Users/aNDREUET/Documents/NetBeansProjects/Tickets/src/finestres/GestionarClientes.java</file>
+            <file>file:/C:/Users/aNDREUET/Documents/NetBeansProjects/Tickets/src/finestres/GestionarIncidenciasAdmin.java</file>
             <file>file:/C:/Users/aNDREUET/Documents/NetBeansProjects/Tickets/src/finestres/Informacion_Cliente.java</file>
-            <file>file:/C:/Users/aNDREUET/Documents/NetBeansProjects/Tickets/src/finestres/Administrador.java</file>
+            <file>file:/C:/Users/aNDREUET/Documents/NetBeansProjects/Tickets/src/finestres/GestionarClientes.java</file>
+            <file>file:/C:/Users/aNDREUET/Documents/NetBeansProjects/Tickets/src/finestres/FalloOtro.java</file>
+            <file>file:/C:/Users/aNDREUET/Documents/NetBeansProjects/Tickets/src/finestres/GestionarUsuarios.java</file>
             <file>file:/C:/Users/aNDREUET/Documents/NetBeansProjects/Tickets/src/finestres/GestionarEquipos.java</file>
-            <file>file:/C:/Users/aNDREUET/Documents/NetBeansProjects/Tickets/src/finestres/Interface.java</file>
             <file>file:/C:/Users/aNDREUET/Documents/NetBeansProjects/Tickets/src/finestres/InformacionIncidenciasAdmin.java</file>
+            <file>file:/C:/Users/aNDREUET/Documents/NetBeansProjects/Tickets/src/finestres/FalloSoftware.java</file>
+            <file>file:/C:/Users/aNDREUET/Documents/NetBeansProjects/Tickets/src/finestres/InformacionEquipo.java</file>
+            <file>file:/C:/Users/aNDREUET/Documents/NetBeansProjects/Tickets/src/finestres/RegistrarEquipo.java</file>
+            <file>file:/C:/Users/aNDREUET/Documents/NetBeansProjects/Tickets/src/finestres/InformacionEquipoCliente.java</file>
+            <file>file:/C:/Users/aNDREUET/Documents/NetBeansProjects/Tickets/src/finestres/FalloHardware.java</file>
+            <file>file:/C:/Users/aNDREUET/Documents/NetBeansProjects/Tickets/src/finestres/GestionarEquiposClientes.java</file>
+            <file>file:/C:/Users/aNDREUET/Documents/NetBeansProjects/Tickets/src/finestres/InformacionIncidenciasCliente.java</file>
+            <file>file:/C:/Users/aNDREUET/Documents/NetBeansProjects/Tickets/src/finestres/GestionarIncidenciasCliente.java</file>
         </group>
     </open-files>
 </project-private>

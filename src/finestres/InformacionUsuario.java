@@ -156,6 +156,7 @@ public class InformacionUsuario extends javax.swing.JFrame {
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
         setMinimumSize(new java.awt.Dimension(1000, 550));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -199,42 +200,42 @@ public class InformacionUsuario extends javax.swing.JFrame {
         jLabel_Nombre6.setText("Registrado por:");
         getContentPane().add(jLabel_Nombre6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
 
-        txt_nombre.setBackground(new java.awt.Color(153, 153, 255));
+        txt_nombre.setBackground(new java.awt.Color(16, 72, 75));
         txt_nombre.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txt_nombre.setForeground(java.awt.Color.white);
-        txt_nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txt_nombre.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 210, -1));
+        txt_nombre.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txt_nombre.setBorder(null);
+        getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 210, 25));
 
-        txt_email.setBackground(new java.awt.Color(153, 153, 255));
+        txt_email.setBackground(new java.awt.Color(16, 72, 75));
         txt_email.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txt_email.setForeground(java.awt.Color.white);
-        txt_email.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txt_email.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 210, -1));
+        txt_email.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txt_email.setBorder(null);
+        getContentPane().add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 210, 25));
 
-        txt_apellidos.setBackground(new java.awt.Color(153, 153, 255));
+        txt_apellidos.setBackground(new java.awt.Color(16, 72, 75));
         txt_apellidos.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txt_apellidos.setForeground(java.awt.Color.white);
-        txt_apellidos.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txt_apellidos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 210, -1));
+        txt_apellidos.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txt_apellidos.setBorder(null);
+        getContentPane().add(txt_apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 210, 25));
 
-        txt_username.setBackground(new java.awt.Color(153, 153, 255));
+        txt_username.setBackground(new java.awt.Color(16, 72, 75));
         txt_username.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txt_username.setForeground(java.awt.Color.white);
-        txt_username.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txt_username.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txt_username.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txt_username.setBorder(null);
         txt_username.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        getContentPane().add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 210, -1));
+        getContentPane().add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 210, 25));
 
-        txt_RegistradoPor.setBackground(new java.awt.Color(153, 153, 255));
+        txt_RegistradoPor.setBackground(new java.awt.Color(16, 72, 75));
         txt_RegistradoPor.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txt_RegistradoPor.setForeground(java.awt.Color.white);
         txt_RegistradoPor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txt_RegistradoPor.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txt_RegistradoPor.setBorder(null);
         txt_RegistradoPor.setEnabled(false);
-        getContentPane().add(txt_RegistradoPor, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 210, -1));
+        getContentPane().add(txt_RegistradoPor, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 90, 25));
 
         cmb_habilitado.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmb_habilitado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
@@ -244,10 +245,11 @@ public class InformacionUsuario extends javax.swing.JFrame {
         cmb_rol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Tecnico", "Cliente" }));
         getContentPane().add(cmb_rol, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, -1, -1));
 
-        jButton_Actualizar.setBackground(new java.awt.Color(153, 153, 255));
+        jButton_Actualizar.setBackground(new java.awt.Color(10, 47, 63));
         jButton_Actualizar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton_Actualizar.setForeground(java.awt.Color.white);
         jButton_Actualizar.setText("Actualizar Usuario");
+        jButton_Actualizar.setToolTipText("Actualizar datos del usuario");
         jButton_Actualizar.setBorder(null);
         jButton_Actualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -256,10 +258,11 @@ public class InformacionUsuario extends javax.swing.JFrame {
         });
         getContentPane().add(jButton_Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 320, 210, 35));
 
-        jButton_RestaurarPassword.setBackground(new java.awt.Color(153, 153, 255));
+        jButton_RestaurarPassword.setBackground(new java.awt.Color(10, 47, 63));
         jButton_RestaurarPassword.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton_RestaurarPassword.setForeground(java.awt.Color.white);
         jButton_RestaurarPassword.setText("Restaurar Password");
+        jButton_RestaurarPassword.setToolTipText("Cambiar Password del usuario");
         jButton_RestaurarPassword.setBorder(null);
         jButton_RestaurarPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -268,10 +271,11 @@ public class InformacionUsuario extends javax.swing.JFrame {
         });
         getContentPane().add(jButton_RestaurarPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 320, 210, 35));
 
-        jButton_RegistrarEquipo.setBackground(new java.awt.Color(153, 153, 255));
+        jButton_RegistrarEquipo.setBackground(new java.awt.Color(10, 47, 63));
         jButton_RegistrarEquipo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton_RegistrarEquipo.setForeground(java.awt.Color.white);
         jButton_RegistrarEquipo.setText("Registrar equipo");
+        jButton_RegistrarEquipo.setToolTipText("Agregar un nuevo equipo para este usuario");
         jButton_RegistrarEquipo.setBorder(null);
         jButton_RegistrarEquipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

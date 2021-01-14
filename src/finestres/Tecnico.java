@@ -68,7 +68,7 @@ public class Tecnico extends javax.swing.JFrame {
                 nombre_usuario = rs.getString("nombre");
                 apellido_usuario = rs.getString("apellidos");
                 // visualizo en el Interface de Técnico nombre y apellidos user
-                jLabel_NombreUsuario.setText("Bienvenido " + nombre_usuario + " " + apellido_usuario);
+                jLabel_NombreUsuario.setText(" " + nombre_usuario + " " + apellido_usuario);
             }
         } catch (SQLException e) {
             System.err.println("Error en la consulta del nombre del Técnico " + e);
@@ -112,6 +112,7 @@ public class Tecnico extends javax.swing.JFrame {
 
         jLabel_NombreUsuario.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
         jLabel_NombreUsuario.setForeground(java.awt.Color.white);
+        jLabel_NombreUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/badge-tech.png"))); // NOI18N
         jLabel_NombreUsuario.setText("jLabel1");
         getContentPane().add(jLabel_NombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
@@ -137,6 +138,7 @@ public class Tecnico extends javax.swing.JFrame {
 
         jButton_GestionarClientes.setBackground(new java.awt.Color(10, 47, 63));
         jButton_GestionarClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/informationuser.png"))); // NOI18N
+        jButton_GestionarClientes.setToolTipText("Altas, consultas, listados y registro de equipos de usuario");
         jButton_GestionarClientes.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_GestionarClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,7 +147,10 @@ public class Tecnico extends javax.swing.JFrame {
         });
         getContentPane().add(jButton_GestionarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 80, 80));
 
-        jButton_GestionarIncidencias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/apoyo-tecnico.png"))); // NOI18N
+        jButton_GestionarIncidencias.setBackground(new java.awt.Color(10, 47, 63));
+        jButton_GestionarIncidencias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/incidencias.png"))); // NOI18N
+        jButton_GestionarIncidencias.setToolTipText("Gestionar incidentes");
+        jButton_GestionarIncidencias.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_GestionarIncidencias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_GestionarIncidenciasActionPerformed(evt);
@@ -154,7 +159,8 @@ public class Tecnico extends javax.swing.JFrame {
         getContentPane().add(jButton_GestionarIncidencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, 80, 80));
 
         jButton_Cliente.setBackground(new java.awt.Color(10, 47, 63));
-        jButton_Cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/tecnico.png"))); // NOI18N
+        jButton_Cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/menu_cliente.png"))); // NOI18N
+        jButton_Cliente.setToolTipText("Acceso al Menú del Cliente");
         jButton_Cliente.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_Cliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,6 +171,7 @@ public class Tecnico extends javax.swing.JFrame {
 
         jButton_GestionarEquipos.setBackground(new java.awt.Color(10, 47, 63));
         jButton_GestionarEquipos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/equipos.png"))); // NOI18N
+        jButton_GestionarEquipos.setToolTipText("Consultas, modificaciones y listados ");
         jButton_GestionarEquipos.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_GestionarEquipos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

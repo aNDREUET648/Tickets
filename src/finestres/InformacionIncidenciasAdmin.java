@@ -2,12 +2,20 @@ package finestres;
 
 import java.sql.*;
 import clases.Conexion;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -44,7 +52,7 @@ public class InformacionIncidenciasAdmin extends javax.swing.JFrame {
         // establecemos un formato de fecha y hora
         //String strDateFormat = "dd-MMM-aaaa - hh: mm: ss";
 
-        setSize(800, 500);
+        setSize(1000, 650);
         setResizable(false);  // no se modificar el tamaño del interfaz
         setLocationRelativeTo(null); // centrar la interfaz al ejecutar
 
@@ -87,7 +95,7 @@ public class InformacionIncidenciasAdmin extends javax.swing.JFrame {
             model.addColumn("Descripción");
             model.addColumn("Nivel");
             model.addColumn("Prioridad");
-            model.addColumn("ID Asignado");
+            model.addColumn("ID Técnico");
 
             // y relleno la tabla
             while (rs.next()) {
@@ -216,19 +224,20 @@ public class InformacionIncidenciasAdmin extends javax.swing.JFrame {
         jTable_intervenciones = new javax.swing.JTable();
         jScrollPane_descripcion = new javax.swing.JScrollPane();
         jTextPane_descripcion = new javax.swing.JTextPane();
+        jButton_Imprimir = new javax.swing.JButton();
         jButton_Actualizar = new javax.swing.JButton();
         jLabel_footer = new javax.swing.JLabel();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
-        setMinimumSize(new java.awt.Dimension(800, 500));
+        setMinimumSize(new java.awt.Dimension(1000, 650));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel_Titulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel_Titulo.setForeground(java.awt.Color.white);
         jLabel_Titulo.setText("Gestión del Incidente");
-        getContentPane().add(jLabel_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
+        getContentPane().add(jLabel_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, -1, -1));
 
         jLabel_Titulo1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel_Titulo1.setForeground(java.awt.Color.white);
@@ -258,62 +267,58 @@ public class InformacionIncidenciasAdmin extends javax.swing.JFrame {
         jLabel_Nombre4.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel_Nombre4.setForeground(java.awt.Color.white);
         jLabel_Nombre4.setText("Fecha creación:");
-        getContentPane().add(jLabel_Nombre4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, -1, -1));
+        getContentPane().add(jLabel_Nombre4, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 50, -1, -1));
 
         jLabel_Nombre7.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel_Nombre7.setForeground(java.awt.Color.white);
         jLabel_Nombre7.setText("Asignar a:");
-        getContentPane().add(jLabel_Nombre7, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, -1, -1));
+        getContentPane().add(jLabel_Nombre7, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 90, -1, -1));
 
         jLabel_Nombre8.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel_Nombre8.setForeground(java.awt.Color.white);
         jLabel_Nombre8.setText("Establer prioridad:");
-        getContentPane().add(jLabel_Nombre8, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 140, -1, -1));
+        getContentPane().add(jLabel_Nombre8, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 140, -1, -1));
 
         jLabel_Nombre9.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel_Nombre9.setForeground(java.awt.Color.white);
         jLabel_Nombre9.setText("Escalar nivel:");
-        getContentPane().add(jLabel_Nombre9, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 180, -1, -1));
+        getContentPane().add(jLabel_Nombre9, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 180, -1, -1));
 
         txt_tipo.setEditable(false);
-        txt_tipo.setBackground(new java.awt.Color(153, 153, 255));
+        txt_tipo.setBackground(new java.awt.Color(16, 72, 75));
         txt_tipo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txt_tipo.setForeground(java.awt.Color.white);
         txt_tipo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_tipo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txt_tipo.setEnabled(false);
         getContentPane().add(txt_tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 80, 25));
 
         txt_idIncidente.setEditable(false);
-        txt_idIncidente.setBackground(new java.awt.Color(153, 153, 255));
+        txt_idIncidente.setBackground(new java.awt.Color(16, 72, 75));
         txt_idIncidente.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txt_idIncidente.setForeground(java.awt.Color.white);
         txt_idIncidente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_idIncidente.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txt_idIncidente.setEnabled(false);
         getContentPane().add(txt_idIncidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 50, 25));
 
         txt_nombre.setEditable(false);
-        txt_nombre.setBackground(new java.awt.Color(153, 153, 255));
+        txt_nombre.setBackground(new java.awt.Color(16, 72, 75));
         txt_nombre.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txt_nombre.setForeground(java.awt.Color.white);
         txt_nombre.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_nombre.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txt_nombre.setEnabled(false);
         getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 240, 25));
 
         txt_fechaincidente.setEditable(false);
-        txt_fechaincidente.setBackground(new java.awt.Color(153, 153, 255));
+        txt_fechaincidente.setBackground(new java.awt.Color(16, 72, 75));
         txt_fechaincidente.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txt_fechaincidente.setForeground(java.awt.Color.white);
         txt_fechaincidente.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_fechaincidente.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txt_fechaincidente.setEnabled(false);
-        getContentPane().add(txt_fechaincidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 50, 190, 25));
+        getContentPane().add(txt_fechaincidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 50, 190, 25));
 
         cmb_asignar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmb_asignar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item1", "Item2" }));
-        getContentPane().add(cmb_asignar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 90, 300, -1));
+        getContentPane().add(cmb_asignar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 90, 300, -1));
 
         cmb_prioridad.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         cmb_prioridad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Baja", "Media", "Alta", "Grave", "Critica" }));
@@ -322,11 +327,11 @@ public class InformacionIncidenciasAdmin extends javax.swing.JFrame {
                 cmb_prioridadActionPerformed(evt);
             }
         });
-        getContentPane().add(cmb_prioridad, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 130, 90, -1));
+        getContentPane().add(cmb_prioridad, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 130, 90, -1));
 
         cmb_nivel.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         cmb_nivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Basico", "Tecnico", "Externo" }));
-        getContentPane().add(cmb_nivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 170, 130, -1));
+        getContentPane().add(cmb_nivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 170, 130, -1));
 
         jTable_intervenciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -341,30 +346,42 @@ public class InformacionIncidenciasAdmin extends javax.swing.JFrame {
         ));
         jScrollPane_intervenciones.setViewportView(jTable_intervenciones);
 
-        getContentPane().add(jScrollPane_intervenciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 760, 150));
+        getContentPane().add(jScrollPane_intervenciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 920, 150));
 
+        jTextPane_descripcion.setEditable(false);
         jTextPane_descripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextPane_descripcion.setEnabled(false);
         jScrollPane_descripcion.setViewportView(jTextPane_descripcion);
 
         getContentPane().add(jScrollPane_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 270, 70));
 
-        jButton_Actualizar.setBackground(new java.awt.Color(153, 153, 255));
+        jButton_Imprimir.setBackground(new java.awt.Color(10, 47, 63));
+        jButton_Imprimir.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jButton_Imprimir.setForeground(java.awt.Color.white);
+        jButton_Imprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/impresora.png"))); // NOI18N
+        jButton_Imprimir.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButton_Imprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_ImprimirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton_Imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 390, 80, 80));
+
+        jButton_Actualizar.setBackground(new java.awt.Color(10, 47, 63));
         jButton_Actualizar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton_Actualizar.setForeground(java.awt.Color.white);
-        jButton_Actualizar.setText("Asignar");
+        jButton_Actualizar.setText("Asignar y actualizar");
         jButton_Actualizar.setBorder(null);
         jButton_Actualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_ActualizarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 400, 210, 35));
+        getContentPane().add(jButton_Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 390, 210, 35));
 
         jLabel_footer.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
-        getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 430, -1, -1));
-        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
+        getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 550, -1, -1));
+        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 650));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -472,6 +489,128 @@ public class InformacionIncidenciasAdmin extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton_ActualizarActionPerformed
 
+    private void jButton_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ImprimirActionPerformed
+
+        Document documento = new Document(PageSize.A4.rotate(), 0, 0, 0, 10);
+        // toda código para crear archivo en pdf necesita estar
+        // dentro de una estructura try..catch
+        try {
+            // recupero la ruta del sistema operativo
+            String ruta = System.getProperty("user.home");
+            // lo guardo en el escritorio y le añado nombre y apellidos como filename
+            // y la extensión que lógicamente será pdf
+            ruta = ruta + "/Desktop/Registro Incidencia número " + IDincidente + ".pdf";
+            PdfWriter.getInstance(documento, new FileOutputStream(ruta));
+
+            // inserto la cabecera del documento que será una imagen
+            // como la librería Image de itextpdf choca con la java.awt
+            // coloco directamente la llamada para eliminar el conflicto
+            com.itextpdf.text.Image header = com.itextpdf.text.Image.getInstance("src/imatges/BannerPDF.png");
+            // pongo el largo y la escala de visualización del header
+            header.scaleToFit(860, 100);
+            // lo alineo al centro
+            header.setAlignment(Chunk.ALIGN_CENTER);
+            // creo un objeto de clase Paragraph para dar formato al texto
+            Paragraph parrafo = new Paragraph();
+            // lo alineo al centro
+            parrafo.setAlignment(Paragraph.ALIGN_CENTER);
+            parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY));
+            parrafo.add("Registro del Incidente \n \n");
+
+            // una vez definido todo, abro el documento
+            // e inserto el banner y el párafo inicial
+            documento.open();
+            documento.add(header);
+            documento.add(parrafo);
+
+            // consultamos a la bd la información que irá en el pdf
+            try {
+                Connection con = Conexion.conector();
+
+                String sql = "SELECT * FROM usuarios USU, incidentes INCID, intervenciones INTER, estados EST, tipos, niveles NIV, prioridades PRI, roles ROL, roles_has_usuarios RHU ";
+                sql += "WHERE idUsuario=INCID.Usuarios_idUsuario ";
+                sql += "AND idIncidente = Incidentes_idIncidente AND ";
+                sql += "idRol = Roles_idRol AND ";
+                sql += "idUsuario = RHU.Usuarios_idUsuario AND ";
+                sql += "idIntervencion = EST.Intervenciones_idIntervencion AND ";
+                sql += "idIntervencion = NIV.Intervenciones_idIntervencion AND ";
+                sql += "idIntervencion = PRI.Intervenciones_idIntervencion AND ";
+                sql += "idTipo = tipos_idTipo AND ";
+                sql += "idIncidente = " + IDincidente + " ";
+                sql += "ORDER BY idIntervencion DESC";
+
+                PreparedStatement pst = con.prepareStatement(sql);
+                ResultSet rs = pst.executeQuery();
+
+                if (rs.next()) {
+                    if (rs.getRow() == 1) {
+                        //
+                        // Cabecera y datos generales del Incidente
+                        //
+                        Paragraph parrafo2 = new Paragraph();
+
+                        parrafo2.setAlignment(Paragraph.ALIGN_JUSTIFIED);
+                        parrafo2.setFont(FontFactory.getFont("Tahoma", 16, Font.NORMAL, BaseColor.DARK_GRAY));
+                        parrafo2.add("                         ID incidencia: " + IDincidente + "                                                                   "
+                                + "Fecha creacion: " + rs.getDate("fecha_crea").toString() + "\n");
+                        parrafo2.add("                         Nombre y apellidos: " + rs.getString("nombre") + " " + rs.getString("apellidos") + "                              "
+                                + "Rol: " + rs.getString("rol") + "\n");
+                        parrafo2.add("                         Tipo: " + rs.getString("tipo") + "            \n\n");
+                        parrafo2.add("                    Descripción Incidente: ");
+
+                        Paragraph parrafo3 = new Paragraph();
+                        parrafo3.setFont(FontFactory.getFont("Tahoma", 14, Font.BOLD, BaseColor.DARK_GRAY));
+                        parrafo3.setIndentationLeft(90);
+                        parrafo3.setIndentationRight(150);
+                        parrafo3.add(rs.getString("INCID.descripcion") + "            \n\n\n");
+
+                        documento.add(parrafo2);
+                        documento.add(parrafo3);
+                    }
+
+                    // creo una tabla con los datos generales que vienen de la bd
+                    // tablaClientes tendrá 5 columnas
+                    PdfPTable tabla = new PdfPTable(5);
+
+                    float[] columnWidths = new float[]{28f, 90f, 20f, 13f, 13f};
+                    tabla.setWidths(columnWidths);
+                    tabla.setWidthPercentage(95);
+
+                    tabla.addCell("Fecha/Hora intervención");
+                    tabla.addCell("Descripción");
+                    tabla.addCell("Estado");
+                    tabla.addCell("Nivel");
+                    tabla.addCell("Prioridad");
+
+                    do {
+
+                        tabla.addCell(rs.getTimestamp("fecha_intervencion").toString());
+                        tabla.addCell(rs.getString("INTER.descripcion"));
+                        tabla.addCell(rs.getString("estado"));
+                        tabla.addCell(rs.getString("nivel"));
+                        tabla.addCell(rs.getString("prioridad"));
+
+                    } while (rs.next());
+                    //envío la tablaCliente al documento
+                    documento.add(tabla);
+                }
+            } catch (SQLException e) {
+                System.err.println("Error al generar el listado de incidentes " + e);
+                JOptionPane.showMessageDialog(null, "Error al generar el listado de incidentes, contacte con el Administrador");
+            }
+
+            documento.close();
+            JOptionPane.showMessageDialog(null, "Listado de incidentes creado correctamente");
+
+            // Catch de la generación del documento pdf
+            // DocumentException, gestión de los errores del documento
+            // IOException, gestión de los errores de entrada/salida de datos
+        } catch (DocumentException | IOException e) {
+            System.err.println("Error al generar pdf o en ruta de la imagen " + e);
+            JOptionPane.showMessageDialog(null, "Error al generar el PDF, contacte con el Administrador");
+        }
+    }//GEN-LAST:event_jButton_ImprimirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -512,6 +651,7 @@ public class InformacionIncidenciasAdmin extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmb_nivel;
     private javax.swing.JComboBox<String> cmb_prioridad;
     private javax.swing.JButton jButton_Actualizar;
+    private javax.swing.JButton jButton_Imprimir;
     private javax.swing.JLabel jLabel_Nombre;
     private javax.swing.JLabel jLabel_Nombre1;
     private javax.swing.JLabel jLabel_Nombre2;

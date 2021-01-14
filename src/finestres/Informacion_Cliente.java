@@ -14,6 +14,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import java.awt.Color;
 import java.awt.Image;
@@ -270,50 +271,50 @@ public class Informacion_Cliente extends javax.swing.JFrame {
         jLabel_UltimaModificacion.setText("Última modificación por:");
         getContentPane().add(jLabel_UltimaModificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
 
-        txt_nombre.setBackground(new java.awt.Color(153, 153, 255));
-        txt_nombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_nombre.setBackground(new java.awt.Color(16, 72, 75));
+        txt_nombre.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txt_nombre.setForeground(java.awt.Color.white);
-        txt_nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_nombre.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_nombre.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 210, -1));
 
-        txt_email.setBackground(new java.awt.Color(153, 153, 255));
-        txt_email.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_email.setBackground(new java.awt.Color(16, 72, 75));
+        txt_email.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txt_email.setForeground(java.awt.Color.white);
-        txt_email.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_email.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_email.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 210, -1));
 
-        txt_apellidos.setBackground(new java.awt.Color(153, 153, 255));
-        txt_apellidos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_apellidos.setBackground(new java.awt.Color(16, 72, 75));
+        txt_apellidos.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txt_apellidos.setForeground(java.awt.Color.white);
-        txt_apellidos.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_apellidos.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_apellidos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txt_apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 210, -1));
 
-        txt_telefono.setBackground(new java.awt.Color(153, 153, 255));
-        txt_telefono.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_telefono.setBackground(new java.awt.Color(16, 72, 75));
+        txt_telefono.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txt_telefono.setForeground(java.awt.Color.white);
-        txt_telefono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_telefono.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_telefono.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txt_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 210, -1));
 
-        txt_username.setBackground(new java.awt.Color(153, 153, 255));
-        txt_username.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_username.setBackground(new java.awt.Color(16, 72, 75));
+        txt_username.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txt_username.setForeground(java.awt.Color.white);
-        txt_username.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_username.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_username.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 210, -1));
 
-        txt_ultimaModificacion.setBackground(new java.awt.Color(153, 153, 255));
-        txt_ultimaModificacion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_ultimaModificacion.setBackground(new java.awt.Color(16, 72, 75));
+        txt_ultimaModificacion.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txt_ultimaModificacion.setForeground(java.awt.Color.white);
         txt_ultimaModificacion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_ultimaModificacion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txt_ultimaModificacion.setEnabled(false);
-        getContentPane().add(txt_ultimaModificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 210, -1));
+        getContentPane().add(txt_ultimaModificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 150, -1));
 
-        jButton_Registrar.setBackground(new java.awt.Color(153, 153, 255));
+        jButton_Registrar.setBackground(new java.awt.Color(10, 47, 63));
         jButton_Registrar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton_Registrar.setForeground(java.awt.Color.white);
         jButton_Registrar.setText("Registrar equipo");
@@ -325,7 +326,7 @@ public class Informacion_Cliente extends javax.swing.JFrame {
         });
         getContentPane().add(jButton_Registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 270, 210, 35));
 
-        jButton_Actualizar.setBackground(new java.awt.Color(153, 153, 255));
+        jButton_Actualizar.setBackground(new java.awt.Color(10, 47, 63));
         jButton_Actualizar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton_Actualizar.setForeground(java.awt.Color.white);
         jButton_Actualizar.setText("Actualizar cliente");
@@ -337,7 +338,9 @@ public class Informacion_Cliente extends javax.swing.JFrame {
         });
         getContentPane().add(jButton_Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 320, 210, 35));
 
+        jButton_ImprimirReporte.setBackground(new java.awt.Color(10, 47, 63));
         jButton_ImprimirReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/impresora.png"))); // NOI18N
+        jButton_ImprimirReporte.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_ImprimirReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_ImprimirReporteActionPerformed(evt);
@@ -348,6 +351,8 @@ public class Informacion_Cliente extends javax.swing.JFrame {
         jLabel_footer.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
         getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 400, -1, -1));
+
+        jLabel_Wallpaper.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 500));
 
         pack();
@@ -363,10 +368,11 @@ public class Informacion_Cliente extends javax.swing.JFrame {
     private void jButton_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ActualizarActionPerformed
 
         int validacion = 0; // flag por si quedaron campos de texto vacíos
-        String nombre, apellidos, email, telefono;
+        String nombre, apellidos, username, email, telefono;
 
         nombre = txt_nombre.getText().trim();
         apellidos = txt_apellidos.getText().trim();
+        username = txt_username.getText().trim();
         email = txt_email.getText().trim();
         telefono = txt_telefono.getText().trim();
 
@@ -376,6 +382,10 @@ public class Informacion_Cliente extends javax.swing.JFrame {
         }
         if (apellidos.equals("")) {
             txt_apellidos.setBackground(Color.RED);
+            validacion++;
+        }
+        if (username.equals("")) {
+            txt_username.setBackground(Color.RED);
             validacion++;
         }
         if (email.equals("")) {
@@ -405,6 +415,7 @@ public class Informacion_Cliente extends javax.swing.JFrame {
 
                 txt_nombre.setBackground(Color.green);
                 txt_apellidos.setBackground(Color.green);
+                txt_username.setBackground(Color.green);
                 txt_email.setBackground(Color.green);
                 txt_telefono.setBackground(Color.green);
                 txt_ultimaModificacion.setText(user);
@@ -425,14 +436,14 @@ public class Informacion_Cliente extends javax.swing.JFrame {
     private void jButton_ImprimirReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ImprimirReporteActionPerformed
 
         // creamos un objeto de la clase Document (de iTextpdf)    
-        Document documento = new Document();
+        Document documento = new Document(PageSize.A4, 1, 0, 0, 10);
         // la documentos creados con itextpdf van dentro de un try catch
         try {
             // recupero la ruta del sistema operativo
             String ruta = System.getProperty("user.home");
             // lo guardo en el escritorio y le añado nombre y apellidos como filename
             // y la extensión que lógicamente será pdf
-            ruta = ruta + "/Desktop/" + txt_nombre.getText().trim() + " " + txt_apellidos.getText().trim() + ".pdf";
+            ruta = ruta + "/Desktop/Registro de " + txt_nombre.getText().trim() + " " + txt_apellidos.getText().trim() + ".pdf";
             PdfWriter.getInstance(documento, new FileOutputStream(ruta));
 
             // inserto la cabecera del documento que será una imagen
@@ -440,31 +451,24 @@ public class Informacion_Cliente extends javax.swing.JFrame {
             // coloco directamente la llamada para eliminar el conflicto
             com.itextpdf.text.Image header = com.itextpdf.text.Image.getInstance("src/imatges/BannerPDF.png");
             // pongo el largo y la escala de visualización del header
-            header.scaleToFit(650, 100);
+            header.scaleToFit(600, 95);
             // lo alineo al centro
             header.setAlignment(Chunk.ALIGN_CENTER);
-            // creo un objeto de clase Paragraph para dar formato al texto
-            Paragraph parrafo = new Paragraph();
-            // lo alineo al centro
-            parrafo.setAlignment(Paragraph.ALIGN_CENTER);
-            parrafo.add("Información del cliente \n \n");
-            // doy formato al párrafo
-            parrafo.setFont(FontFactory.getFont("Tahoma", 10, Font.BOLD, BaseColor.DARK_GRAY));
-
             // una vez definido todo, abro el documento
             // e inserto el banner y el párafo inicial
             documento.open();
             documento.add(header);
-            documento.add(parrafo);
 
-            // creo una tabla con los datos generales que vienen de la bd
-            // tablaClientes tendrá 5 columnas
-            PdfPTable tablaCliente = new PdfPTable(5);
-            tablaCliente.addCell("ID");
-            tablaCliente.addCell("Nombre");
-            tablaCliente.addCell("Apellidos");
-            tablaCliente.addCell("em@il");
-            tablaCliente.addCell("Teléfono");
+            
+            // creo un objeto de clase Paragraph para dar formato al texto
+            Paragraph parrafo = new Paragraph();
+            // lo alineo al centro
+            parrafo.setAlignment(Paragraph.ALIGN_CENTER);
+            
+            // doy formato al párrafo
+            parrafo.setFont(FontFactory.getFont("Tahoma", 20, Font.BOLD, BaseColor.DARK_GRAY));
+            parrafo.add("Información del cliente \n \n");
+            documento.add(parrafo);
 
             // consultamos a la bd la información que irá en el pdf
             try {
@@ -475,60 +479,79 @@ public class Informacion_Cliente extends javax.swing.JFrame {
                 ResultSet rs = pst.executeQuery();
                 //lleno tablaCliente con los valores devueltos de la consulta
                 if (rs.next()) {
-                    do {
+                    //
+                    // Cabecera y datos generales del Incidente
+                    //
+                    Paragraph parrafo2 = new Paragraph();
 
-                        tablaCliente.addCell(rs.getString(1));
-                        tablaCliente.addCell(rs.getString(2));
-                        tablaCliente.addCell(rs.getString(3));
-                        tablaCliente.addCell(rs.getString(4));
-                        tablaCliente.addCell(rs.getString(5));
-
-                    } while (rs.next());
-                    //envío la tablaCliente al documento
-                    documento.add(tablaCliente);
+                    parrafo2.setAlignment(Paragraph.ALIGN_JUSTIFIED);
+                    parrafo2.setFont(FontFactory.getFont("Tahoma", 14, Font.NORMAL, BaseColor.DARK_GRAY));
+                    parrafo2.add("                         ID Cliente: " + Integer.toString(rs.getInt("idUsuario")) + "  \n\n");
+                    parrafo2.add("                         Nombre y apellidos: " + rs.getString("nombre") + " " + rs.getString("apellidos") + "\n");
+                    parrafo2.add("                         em@il: " + rs.getString("email") + "\n");
+                    parrafo2.add("                         Teléfono: " + rs.getString("telefono") + "\n\n\n\n\n");
+                    documento.add(parrafo2);
                 }
+                con.close();
 
-                //con.close();
-                Paragraph parrafo2 = new Paragraph();
-                // lo alineo al centro
-                parrafo2.setAlignment(Paragraph.ALIGN_CENTER);
-                parrafo2.add("\n \n Equipos registrados \n \n");
-                // doy formato al párrafo
-                parrafo2.setFont(FontFactory.getFont("Tahoma", 10, Font.BOLD, BaseColor.DARK_GRAY));
+                Paragraph parrafo3 = new Paragraph();
+                parrafo3.setAlignment(Paragraph.ALIGN_CENTER);
+                parrafo3.setFont(FontFactory.getFont("Tahoma", 16, Font.BOLD, BaseColor.DARK_GRAY));
 
-                documento.add(parrafo2);
-
-                PdfPTable tablaEquipos = new PdfPTable(4);
+                PdfPTable tablaEquipos = new PdfPTable(6);
+                float[] columnWidths = new float[]{25f, 25f, 25f, 25f, 25f, 25f};
+                tablaEquipos.setWidths(columnWidths);
+                tablaEquipos.setWidthPercentage(95);
                 tablaEquipos.addCell("ID");
                 tablaEquipos.addCell("Tipo");
                 tablaEquipos.addCell("Marca");
-                tablaEquipos.addCell("Status");
+                tablaEquipos.addCell("Modelo");
+                tablaEquipos.addCell("Número de serie");
+                tablaEquipos.addCell("Estado");
 
                 try {
                     Connection con2 = Conexion.conector();
-                    String sql2 = "select  idEquipos, tipo, marca, habilitado "
+                    String sql2 = "select  idEquipos, tipo, marca, modelo, num_serie, habilitado "
                             + "from Equipos where  usuarios_idUsuario = '" + IDcliente_update + "'";
                     PreparedStatement pst2 = con2.prepareStatement(sql2);
                     ResultSet rs2 = pst2.executeQuery();
                     //lleno tablaEquipos con los valores devueltos de la consulta
                     if (rs2.next()) {
+
+                        parrafo3.add("Equipos registrados \n \n");
+
                         do {
 
                             tablaEquipos.addCell(rs2.getString(1));
                             tablaEquipos.addCell(rs2.getString(2));
                             tablaEquipos.addCell(rs2.getString(3));
-                            if (rs2.getInt(4) == 1) {
-                                tablaEquipos.addCell("Activo");
-                            } else {
-                                tablaEquipos.addCell("Inactivo");
+                            tablaEquipos.addCell(rs2.getString(4));
+                            tablaEquipos.addCell(rs2.getString(5));
+                            switch (rs2.getInt(6)) {
+                                case 1:
+                                    tablaEquipos.addCell("Activo");
+                                    break;
+                                case 0:
+                                    tablaEquipos.addCell("Inactivo");
+                                    break;
+                                case 2:
+                                    tablaEquipos.addCell("Incidencia");
+                                    break;
+                                default: // aquí no debería entrar nunca
+                                    tablaEquipos.addCell("XD");
+                                    break;
                             }
 
                         } while (rs2.next());
-                        //envío la tablaEquipos al documento
-                        documento.add(tablaEquipos);
+
+                    } else {
+                        parrafo3.add("Sin equipos registrados \n \n");
                     }
 
-                    //con2.close();
+                    documento.add(parrafo3);
+                    documento.add(tablaEquipos);
+                    con2.close();
+
                 } catch (SQLException e) {
                     System.err.println("Error al generar listado de equipos del cliente " + e);
                     JOptionPane.showMessageDialog(null, "Error al generar listado de equipos del cliente, contacte con el Administrador");

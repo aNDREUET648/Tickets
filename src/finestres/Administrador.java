@@ -47,7 +47,7 @@ public class Administrador extends javax.swing.JFrame {
             if (rs.next()) {
                 nombre_usuario = rs.getString("nombre");
                 apellido_usuario = rs.getString("apellidos");
-                jLabel_NombreUsuario.setText("Bienvenido " + nombre_usuario + " " + apellido_usuario);
+                jLabel_NombreUsuario.setText(" " + nombre_usuario + " " + apellido_usuario);
             }
         } catch (SQLException e) {
             System.err.println("Error en la consulta del nombre del Administrador " + e);
@@ -92,11 +92,13 @@ public class Administrador extends javax.swing.JFrame {
 
         jLabel_NombreUsuario.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
         jLabel_NombreUsuario.setForeground(java.awt.Color.white);
+        jLabel_NombreUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/badge-admin.png"))); // NOI18N
         jLabel_NombreUsuario.setText("jLabel1");
         getContentPane().add(jLabel_NombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         jButton_GestionarUsuarios.setBackground(new java.awt.Color(10, 47, 63));
         jButton_GestionarUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/informationuser.png"))); // NOI18N
+        jButton_GestionarUsuarios.setToolTipText("Altas, consultas, listados y registro de equipos de usuario");
         jButton_GestionarUsuarios.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_GestionarUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,7 +108,8 @@ public class Administrador extends javax.swing.JFrame {
         getContentPane().add(jButton_GestionarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 80, 80));
 
         jButton_GestionarIncidenciasAdmin.setBackground(new java.awt.Color(10, 47, 63));
-        jButton_GestionarIncidenciasAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/creatividad.png"))); // NOI18N
+        jButton_GestionarIncidenciasAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/incidencias.png"))); // NOI18N
+        jButton_GestionarIncidenciasAdmin.setToolTipText("Asignar incidencias, establecer prioridades y niveles, listados");
         jButton_GestionarIncidenciasAdmin.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_GestionarIncidenciasAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,7 +119,8 @@ public class Administrador extends javax.swing.JFrame {
         getContentPane().add(jButton_GestionarIncidenciasAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, 80, 80));
 
         jButton_Tecnico.setBackground(new java.awt.Color(10, 47, 63));
-        jButton_Tecnico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/capturista.png"))); // NOI18N
+        jButton_Tecnico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/menu_tecnico.png"))); // NOI18N
+        jButton_Tecnico.setToolTipText("Acceso al Menú del Técnico");
         jButton_Tecnico.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_Tecnico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,7 +130,8 @@ public class Administrador extends javax.swing.JFrame {
         getContentPane().add(jButton_Tecnico, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 80, 80));
 
         jButton_Cliente.setBackground(new java.awt.Color(10, 47, 63));
-        jButton_Cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/tecnico.png"))); // NOI18N
+        jButton_Cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/menu_cliente.png"))); // NOI18N
+        jButton_Cliente.setToolTipText("Acceso al Menú del Cliente");
         jButton_Cliente.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_Cliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,6 +142,7 @@ public class Administrador extends javax.swing.JFrame {
 
         jButton_GestionarEquipos.setBackground(new java.awt.Color(10, 47, 63));
         jButton_GestionarEquipos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/equipos.png"))); // NOI18N
+        jButton_GestionarEquipos.setToolTipText("Consultas, modificaciones y listados ");
         jButton_GestionarEquipos.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_GestionarEquipos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,6 +176,7 @@ public class Administrador extends javax.swing.JFrame {
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 380, -1, -1));
 
         jLabel_Wallpaper.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
+        jLabel_Wallpaper.setToolTipText("");
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 450));
 
         pack();

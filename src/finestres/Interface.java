@@ -76,9 +76,9 @@ public class Interface extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButtonExit.setBackground(new java.awt.Color(0, 50, 150));
+        jButtonExit.setBackground(new java.awt.Color(10, 47, 63));
         jButtonExit.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButtonExit.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonExit.setForeground(java.awt.Color.white);
         jButtonExit.setText("Salir");
         jButtonExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,7 +87,8 @@ public class Interface extends javax.swing.JFrame {
         });
         getContentPane().add(jButtonExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, -1, -1));
 
-        jLabelIconoUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/user.png"))); // NOI18N
+        jLabelIconoUser.setBackground(new java.awt.Color(10, 47, 63));
+        jLabelIconoUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/users.png"))); // NOI18N
         jLabelIconoUser.setText("jLabel1");
         jLabelIconoUser.setMaximumSize(new java.awt.Dimension(300, 470));
         getContentPane().add(jLabelIconoUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 130, 160));
@@ -102,14 +103,14 @@ public class Interface extends javax.swing.JFrame {
         jLabelPass.setText("Contraseña:");
         getContentPane().add(jLabelPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, -1));
 
-        jTextUser.setBackground(new java.awt.Color(22, 122, 218));
-        jTextUser.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTextUser.setBackground(new java.awt.Color(16, 72, 75));
+        jTextUser.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jTextUser.setForeground(new java.awt.Color(222, 222, 222));
         jTextUser.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(jTextUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 270, 145, 30));
 
-        jPassword.setBackground(new java.awt.Color(22, 122, 218));
-        jPassword.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPassword.setBackground(new java.awt.Color(16, 72, 75));
+        jPassword.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jPassword.setForeground(new java.awt.Color(222, 222, 222));
         jPassword.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jPassword.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -122,9 +123,9 @@ public class Interface extends javax.swing.JFrame {
         });
         getContentPane().add(jPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 310, 145, 30));
 
-        jButtonInicioSesion.setBackground(new java.awt.Color(0, 50, 150));
+        jButtonInicioSesion.setBackground(new java.awt.Color(10, 47, 63));
         jButtonInicioSesion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButtonInicioSesion.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonInicioSesion.setForeground(java.awt.Color.white);
         jButtonInicioSesion.setText("Iniciar Sesión");
         jButtonInicioSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

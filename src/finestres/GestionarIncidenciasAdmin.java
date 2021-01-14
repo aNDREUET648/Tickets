@@ -177,35 +177,38 @@ public class GestionarIncidenciasAdmin extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane_incidentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 960, 210));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setForeground(java.awt.Color.white);
         jLabel1.setText("Estado:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 60, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 60, -1, -1));
 
+        cmb_estatus.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmb_estatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Inicio", "Asignado", "En Proceso", "Finalizado" }));
-        getContentPane().add(cmb_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 60, 130, -1));
+        getContentPane().add(cmb_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 50, 130, 30));
 
-        jButton_Mostrar.setBackground(new java.awt.Color(153, 153, 255));
+        jButton_Mostrar.setBackground(new java.awt.Color(10, 47, 63));
         jButton_Mostrar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton_Mostrar.setForeground(java.awt.Color.white);
-        jButton_Mostrar.setText("Mostrar");
-        jButton_Mostrar.setBorder(null);
+        jButton_Mostrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/buscar.png"))); // NOI18N
+        jButton_Mostrar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_Mostrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_MostrarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 340, 210, 35));
+        getContentPane().add(jButton_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 50, 30, 30));
 
-        jButton_Imprimir.setBackground(new java.awt.Color(153, 153, 255));
+        jButton_Imprimir.setBackground(new java.awt.Color(10, 47, 63));
         jButton_Imprimir.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton_Imprimir.setForeground(java.awt.Color.white);
-        jButton_Imprimir.setText("Imprimir");
-        jButton_Imprimir.setBorder(null);
+        jButton_Imprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/impresora.png"))); // NOI18N
+        jButton_Imprimir.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_Imprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_ImprimirActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 400, 210, 35));
+        getContentPane().add(jButton_Imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 340, 80, 80));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 550));
 
         pack();
@@ -301,7 +304,7 @@ public class GestionarIncidenciasAdmin extends javax.swing.JFrame {
             String ruta = System.getProperty("user.home");
             // lo guardo en el escritorio y le añado nombre y apellidos como filename
             // y la extensión que lógicamente será pdf
-            ruta = ruta + "/Desktop/HistoricoIncidencias - user " + user + " Filtro " + seleccion + ".pdf";
+            ruta = ruta + "/Desktop/Histórico Incidencias - user " + user + " Filtro " + seleccion + ".pdf";
             PdfWriter.getInstance(documento, new FileOutputStream(ruta));
 
             // inserto la cabecera del documento que será una imagen
@@ -309,7 +312,7 @@ public class GestionarIncidenciasAdmin extends javax.swing.JFrame {
             // coloco directamente la llamada para eliminar el conflicto
             com.itextpdf.text.Image header = com.itextpdf.text.Image.getInstance("src/imatges/BannerPDF.png");
             // pongo el largo y la escala de visualización del header
-            header.scaleToFit(650, 1000);
+            header.scaleToFit(860, 100);
             // lo alineo al centro
             header.setAlignment(Chunk.ALIGN_CENTER);
             // creo un objeto de clase Paragraph para dar formato al texto
@@ -330,7 +333,8 @@ public class GestionarIncidenciasAdmin extends javax.swing.JFrame {
             // creo una tabla con los datos generales que vienen de la bd
             // tablaClientes tendrá 5 columnas
             PdfPTable tabla = new PdfPTable(7);
-            float[] columnWidths = new float[]{10f, 45f, 25f, 20f, 50f, 30f, 60f};
+            float[] columnWidths = new float[]{10f, 50f, 25f, 20f, 50f, 25f, 60f};
+            tabla.setWidthPercentage(95);
             tabla.setWidths(columnWidths);
 
             tabla.addCell("ID");

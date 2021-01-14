@@ -146,21 +146,22 @@ public class RegistrarEquipoUsuario extends javax.swing.JFrame {
         jLabel_Nombre5.setText("Observaciones:");
         getContentPane().add(jLabel_Nombre5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, -1, -1));
 
-        txt_nombreCliente.setBackground(new java.awt.Color(153, 153, 255));
+        txt_nombreCliente.setEditable(false);
+        txt_nombreCliente.setBackground(new java.awt.Color(16, 72, 75));
         txt_nombreCliente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_nombreCliente.setForeground(java.awt.Color.white);
         txt_nombreCliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_nombreCliente.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txt_nombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 210, -1));
 
-        txt_modelo.setBackground(new java.awt.Color(153, 153, 255));
+        txt_modelo.setBackground(new java.awt.Color(16, 72, 75));
         txt_modelo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_modelo.setForeground(java.awt.Color.white);
         txt_modelo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_modelo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txt_modelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 210, -1));
 
-        txt_num_serie.setBackground(new java.awt.Color(153, 153, 255));
+        txt_num_serie.setBackground(new java.awt.Color(16, 72, 75));
         txt_num_serie.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_num_serie.setForeground(java.awt.Color.white);
         txt_num_serie.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -175,7 +176,7 @@ public class RegistrarEquipoUsuario extends javax.swing.JFrame {
         cmb_marcas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acer", "Apple", "Asus", "Brother", "Dell", "HP", "Lenovo", "MSI", "Samsung", "Toshiba", "Xerox" }));
         getContentPane().add(cmb_marcas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
 
-        jButton_Registrar.setBackground(new java.awt.Color(153, 153, 255));
+        jButton_Registrar.setBackground(new java.awt.Color(10, 47, 63));
         jButton_Registrar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton_Registrar.setForeground(java.awt.Color.white);
         jButton_Registrar.setText("Registrar equipo");

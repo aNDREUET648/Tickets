@@ -2,10 +2,22 @@ package finestres;
 
 import java.sql.*;
 import clases.Conexion;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -46,7 +58,7 @@ public class GestionarEquipos extends javax.swing.JFrame {
         id_usuario = Interface.IDuser;
         usuario_sesion = Interface.usuario_sesion;
 
-        setSize(800, 400);
+        setSize(800, 450);
         setResizable(false);
         setTitle("Técnico - Sesión de " + user);
         setLocationRelativeTo(null);
@@ -100,10 +112,10 @@ public class GestionarEquipos extends javax.swing.JFrame {
             // definimos las columnas que estarán en el jScrollPane
             if (usuario_sesion == 0) {
                 // si es un cliente que muestre sólo el ID del equipo
-                model.addColumn("ID");
+                model.addColumn("ID equipo");
             } else {
                 // si es un Administrador o un Técnico que muestre de quien son los equipos
-                model.addColumn("Nombre y apellidos");
+                model.addColumn("Apellidos y nombre");
             }
 
             model.addColumn("Tipo");
@@ -129,7 +141,7 @@ public class GestionarEquipos extends javax.swing.JFrame {
                     celda[4] = rs.getString("num_serie");
                 } else {
                     // si es un Administrador o un Técnico que muestre de quien son los equipos
-                    celda[0] = rs.getString("nombre") + " " + rs.getString("apellidos");
+                    celda[0] = rs.getString("apellidos") + ", " + rs.getString("nombre");
                     celda[4] = rs.getInt("idEquipos");
                 }
                 celda[1] = rs.getString("tipo");
@@ -179,22 +191,30 @@ public class GestionarEquipos extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jScrollPane_equipos = new javax.swing.JScrollPane();
         jTable_equipos = new javax.swing.JTable();
         jLabel_footer = new javax.swing.JLabel();
         cmb_estatus = new javax.swing.JComboBox<>();
         jButton_Mostrar = new javax.swing.JButton();
+        jButton_Imprimir = new javax.swing.JButton();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
-        setMinimumSize(new java.awt.Dimension(800, 400));
+        setMinimumSize(new java.awt.Dimension(800, 450));
+        setPreferredSize(new java.awt.Dimension(800, 450));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setForeground(java.awt.Color.white);
         jLabel1.setText("Equipos registrados");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setForeground(java.awt.Color.white);
+        jLabel2.setText("Estado:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 40, -1, -1));
 
         jTable_equipos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -213,23 +233,38 @@ public class GestionarEquipos extends javax.swing.JFrame {
 
         jLabel_footer.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
-        getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 340, -1, -1));
+        getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 380, -1, -1));
 
+        cmb_estatus.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmb_estatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Activo", "Inactivo", "Incidencia abierta" }));
-        getContentPane().add(cmb_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 40, 130, -1));
+        getContentPane().add(cmb_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 30, 130, 30));
 
-        jButton_Mostrar.setBackground(new java.awt.Color(153, 153, 255));
+        jButton_Mostrar.setBackground(new java.awt.Color(10, 47, 63));
         jButton_Mostrar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton_Mostrar.setForeground(java.awt.Color.white);
-        jButton_Mostrar.setText("Mostrar");
-        jButton_Mostrar.setBorder(null);
+        jButton_Mostrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/buscar.png"))); // NOI18N
+        jButton_Mostrar.setToolTipText("Pulsa para filtrar");
+        jButton_Mostrar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_Mostrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_MostrarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 270, 210, 35));
-        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 400));
+        getContentPane().add(jButton_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, 30, 30));
+
+        jButton_Imprimir.setBackground(new java.awt.Color(10, 47, 63));
+        jButton_Imprimir.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jButton_Imprimir.setForeground(java.awt.Color.white);
+        jButton_Imprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/impresora.png"))); // NOI18N
+        jButton_Imprimir.setToolTipText("Listado de Equipos registrados (PDF)");
+        jButton_Imprimir.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButton_Imprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_ImprimirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton_Imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 280, 80, 80));
+        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 450));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -301,7 +336,7 @@ public class GestionarEquipos extends javax.swing.JFrame {
 
             if (usuario_sesion == 0) {
                 // si es un cliente que muestre sólo el ID del equipo
-                model.addColumn("ID");
+                model.addColumn("ID equipo");
             } else {
                 // si es un Administrador o un Técnico que muestre de quien son los equipos
                 model.addColumn("Nombre y apellidos");
@@ -331,7 +366,7 @@ public class GestionarEquipos extends javax.swing.JFrame {
                     celda[4] = rs.getString("num_serie");
                 } else {
                     // si es un Administrador o un Técnico que muestre de quien son los equipos
-                    celda[0] = rs.getString("nombre") + " " + rs.getString("apellidos");
+                    celda[0] = rs.getString("apellidos") + ", " + rs.getString("nombre");
                     celda[4] = rs.getInt("idEquipos");
                 }
                 celda[1] = rs.getString("tipo");
@@ -366,6 +401,153 @@ public class GestionarEquipos extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButton_MostrarActionPerformed
+
+    private void jButton_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ImprimirActionPerformed
+
+        // filtramos según el estado
+        int seleccion = cmb_estatus.getSelectedIndex();
+        String filtro = cmb_estatus.getSelectedItem().toString();
+        Document documento = new Document(PageSize.A4.rotate(), 0, 0, 0, 10);
+        // toda código para crear archivo en pdf necesita estar
+        // dentro de una estructura try..catch
+        try {
+            // recupero la ruta del sistema operativo
+            String ruta = System.getProperty("user.home");
+            // lo guardo en el escritorio y le añado nombre y apellidos como filename
+            // y la extensión que lógicamente será pdf
+            ruta = ruta + "/Desktop/Listado de Equipos -  Filtro " + filtro + ".pdf";
+            PdfWriter.getInstance(documento, new FileOutputStream(ruta));
+
+            // inserto la cabecera del documento que será una imagen
+            // como la librería Image de itextpdf choca con la java.awt
+            // coloco directamente la llamada para eliminar el conflicto
+            com.itextpdf.text.Image header = com.itextpdf.text.Image.getInstance("src/imatges/BannerPDF.png");
+            // pongo el largo y la escala de visualización del header
+            header.scaleToFit(860, 100);
+            // lo alineo al centro
+            header.setAlignment(Chunk.ALIGN_CENTER);
+            // creo un objeto de clase Paragraph para dar formato al texto
+            Paragraph parrafo = new Paragraph();
+            // lo alineo al centro
+            parrafo.setAlignment(Paragraph.ALIGN_CENTER);
+            parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY));
+            parrafo.add("Listado de Usuarios - Filtro: " + filtro + "\n \n");
+            // doy formato al párrafo
+            parrafo.setFont(FontFactory.getFont("Tahoma", 6, Font.NORMAL, BaseColor.DARK_GRAY));
+
+            // una vez definido todo, abro el documento
+            // e inserto el banner y el párafo inicial
+            documento.open();
+            documento.add(header);
+            documento.add(parrafo);
+
+            // creo una tabla con los datos generales que vienen de la bd
+            // tablaClientes tendrá 5 columnas
+            PdfPTable tabla = new PdfPTable(7);
+            float[] columnWidths = new float[]{15f, 45f, 22f, 22f, 45f, 40f, 20f};
+            tabla.setWidthPercentage(95);
+            tabla.setWidths(columnWidths);
+
+            tabla.addCell("ID equipo");
+            tabla.addCell("Apellidos y nombre");
+            tabla.addCell("Tipo");
+            tabla.addCell("Marca");
+            tabla.addCell("Modelo");
+            tabla.addCell("Número de serie");
+            tabla.addCell("Estado actual");
+
+            // consultamos a la bd la información que irá en el pdf
+            try {
+                Connection con = Conexion.conector();
+
+                String sql = "SELECT * FROM equipos EQU, Usuarios USU, roles_has_usuarios RHU ";
+                sql += "WHERE USU.idUsuario = EQU.Usuarios_idUsuario AND ";
+                sql += "USU.idUsuario = RHU.Usuarios_idUsuario AND ";
+                //
+                // Query selectivo dependiendo del filtro status del jcomboBox (cmb_estatus)
+                //
+                switch (seleccion) {
+                    case 1: // estado = "Activo"
+                        sql += "EQU.habilitado = 1 AND ";
+                        break;
+                    case 2: // estado = "Inactivo"
+                        sql += "EQU.habilitado = 0 AND ";
+                        break;
+                    case 3: // estado = "Incidencia abierto"
+                        sql += "EQU.habilitado = 2 AND ";
+                        break;
+                    default: // estado = "Todos"
+                        break;
+                }
+                //
+                // Query selectivo dependiendo del rol del usuario
+                //
+                switch (usuario_sesion) {
+                    case 0: // el que hace la consulta es un Cliente
+                        sql += "USU.idUsuario = " + id_usuario + " ";
+                        break;
+                    case 1: // el que hace la consulta es un Administrador
+                        // para no tener errores de sintaxis
+                        // añado esta sentencia sql que es una TAUTOLOGÍA
+                        // para que se ejecute siempre, porque no necesitava ninguna
+                        // pero el AND de arriba me obliga a poner algo
+                        sql += "EQU.habilitado = EQU.habilitado "; // todos los equipos
+                        break;
+                    case 2: // el que hace la consulta es un Técnico
+                        sql += "RHU.Roles_idRol = 3 "; // equipos de Clientes
+                        break;
+                    default:
+                        break;
+                }
+                sql += "ORDER BY apellidos, nombre ";
+
+                PreparedStatement pst = con.prepareStatement(sql);
+                ResultSet rs = pst.executeQuery();
+                //lleno tabla de los clientes con los valores devueltos de la consulta
+                if (rs.next()) {
+                    do {
+
+                        tabla.addCell(Integer.toString(rs.getInt("idEquipos")));
+                        tabla.addCell(rs.getString("apellidos") + ", " + rs.getString("nombre"));
+                        tabla.addCell(rs.getString("tipo"));
+                        tabla.addCell(rs.getString("marca"));
+                        tabla.addCell(rs.getString("modelo"));
+                        tabla.addCell(rs.getString("num_serie"));
+                        switch (rs.getString("EQU.habilitado")) {
+                            case "1":
+                                tabla.addCell("Activo");
+                                break;
+                            case "0":
+                                tabla.addCell("Inactivo");
+                                break;
+                            case "2":
+                                tabla.addCell("Incidencia");
+                                break;
+                            default:  // no tocaría que aparecesiese este mensaje
+                                tabla.addCell("XD");
+                                break;
+                        }
+
+                    } while (rs.next());
+                    //envío la tablaCliente al documento
+                    documento.add(tabla);
+                }
+            } catch (SQLException e) {
+                System.err.println("Error al generar el listado de equipos " + e);
+                JOptionPane.showMessageDialog(null, "Error al generar el listado de equipos, contacte con el Administrador");
+            }
+
+            documento.close();
+            JOptionPane.showMessageDialog(null, "Listado de equipos creado correctamente");
+
+            // Catch de la generación del documento pdf
+            // DocumentException, gestión de los errores del documento
+            // IOException, gestión de los errores de entrada/salida de datos
+        } catch (DocumentException | IOException e) {
+            System.err.println("Error al generar pdf o en ruta de la imagen " + e);
+            JOptionPane.showMessageDialog(null, "Error al generar el PDF, contacte con el Administrador");
+        }
+    }//GEN-LAST:event_jButton_ImprimirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -406,8 +588,10 @@ public class GestionarEquipos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cmb_estatus;
+    private javax.swing.JButton jButton_Imprimir;
     private javax.swing.JButton jButton_Mostrar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel_Wallpaper;
     private javax.swing.JLabel jLabel_footer;
     private javax.swing.JScrollPane jScrollPane_equipos;

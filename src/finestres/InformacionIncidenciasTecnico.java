@@ -42,7 +42,7 @@ public class InformacionIncidenciasTecnico extends javax.swing.JFrame {
 
         DefaultTableModel model = new DefaultTableModel();
 
-        setSize(800, 650);
+        setSize(1000, 650);
         setResizable(false);  // no se modificar el tamaño del interfaz
         setLocationRelativeTo(null); // centrar la interfaz al ejecutar
 
@@ -88,7 +88,7 @@ public class InformacionIncidenciasTecnico extends javax.swing.JFrame {
             model.addColumn("Descripción");
             model.addColumn("Nivel");
             model.addColumn("Prioridad");
-            model.addColumn("ID Asignado");
+            model.addColumn("ID Técnico");
 
             while (rs.next()) {
                 /*
@@ -194,7 +194,7 @@ public class InformacionIncidenciasTecnico extends javax.swing.JFrame {
         jLabel_Titulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel_Titulo.setForeground(java.awt.Color.white);
         jLabel_Titulo.setText("Gestión del Incidente");
-        getContentPane().add(jLabel_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
+        getContentPane().add(jLabel_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, -1, -1));
 
         jLabel_Nombre.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel_Nombre.setForeground(java.awt.Color.white);
@@ -204,7 +204,7 @@ public class InformacionIncidenciasTecnico extends javax.swing.JFrame {
         jLabel_Nombre9.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel_Nombre9.setForeground(java.awt.Color.white);
         jLabel_Nombre9.setText("Establecer estado:");
-        getContentPane().add(jLabel_Nombre9, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 170, -1, -1));
+        getContentPane().add(jLabel_Nombre9, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 180, -1, -1));
 
         jLabel_Nombre1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel_Nombre1.setForeground(java.awt.Color.white);
@@ -224,7 +224,7 @@ public class InformacionIncidenciasTecnico extends javax.swing.JFrame {
         jLabel_Nombre4.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel_Nombre4.setForeground(java.awt.Color.white);
         jLabel_Nombre4.setText("Fecha creación:");
-        getContentPane().add(jLabel_Nombre4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 50, -1, -1));
+        getContentPane().add(jLabel_Nombre4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 60, -1, -1));
 
         jLabel_Nombre5.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel_Nombre5.setForeground(java.awt.Color.white);
@@ -234,15 +234,15 @@ public class InformacionIncidenciasTecnico extends javax.swing.JFrame {
         jLabel_Nombre6.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel_Nombre6.setForeground(java.awt.Color.white);
         jLabel_Nombre6.setText("Prioridad:");
-        getContentPane().add(jLabel_Nombre6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, -1, -1));
+        getContentPane().add(jLabel_Nombre6, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 100, -1, -1));
 
         jLabel_Nombre7.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel_Nombre7.setForeground(java.awt.Color.white);
         jLabel_Nombre7.setText("Nivel:");
-        getContentPane().add(jLabel_Nombre7, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, -1, -1));
+        getContentPane().add(jLabel_Nombre7, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 140, -1, -1));
 
         txt_tipo.setEditable(false);
-        txt_tipo.setBackground(new java.awt.Color(153, 153, 255));
+        txt_tipo.setBackground(new java.awt.Color(16, 72, 75));
         txt_tipo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txt_tipo.setForeground(java.awt.Color.white);
         txt_tipo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -251,7 +251,7 @@ public class InformacionIncidenciasTecnico extends javax.swing.JFrame {
         getContentPane().add(txt_tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 50, 100, 25));
 
         txt_idIncidente.setEditable(false);
-        txt_idIncidente.setBackground(new java.awt.Color(153, 153, 255));
+        txt_idIncidente.setBackground(new java.awt.Color(16, 72, 75));
         txt_idIncidente.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txt_idIncidente.setForeground(java.awt.Color.white);
         txt_idIncidente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -260,7 +260,7 @@ public class InformacionIncidenciasTecnico extends javax.swing.JFrame {
         getContentPane().add(txt_idIncidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 50, 25));
 
         txt_nombre.setEditable(false);
-        txt_nombre.setBackground(new java.awt.Color(153, 153, 255));
+        txt_nombre.setBackground(new java.awt.Color(16, 72, 75));
         txt_nombre.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txt_nombre.setForeground(java.awt.Color.white);
         txt_nombre.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -269,35 +269,33 @@ public class InformacionIncidenciasTecnico extends javax.swing.JFrame {
         getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 270, 25));
 
         txt_fechaincidente.setEditable(false);
-        txt_fechaincidente.setBackground(new java.awt.Color(153, 153, 255));
+        txt_fechaincidente.setBackground(new java.awt.Color(16, 72, 75));
         txt_fechaincidente.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txt_fechaincidente.setForeground(java.awt.Color.white);
         txt_fechaincidente.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_fechaincidente.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txt_fechaincidente.setEnabled(false);
-        getContentPane().add(txt_fechaincidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 50, 200, 25));
+        getContentPane().add(txt_fechaincidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 60, 200, 25));
 
         txt_prioridad.setEditable(false);
-        txt_prioridad.setBackground(new java.awt.Color(153, 153, 255));
+        txt_prioridad.setBackground(new java.awt.Color(16, 72, 75));
         txt_prioridad.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txt_prioridad.setForeground(java.awt.Color.white);
         txt_prioridad.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_prioridad.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txt_prioridad.setEnabled(false);
-        getContentPane().add(txt_prioridad, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 90, 80, 25));
+        getContentPane().add(txt_prioridad, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 100, 80, 25));
 
         txt_nivel.setEditable(false);
-        txt_nivel.setBackground(new java.awt.Color(153, 153, 255));
+        txt_nivel.setBackground(new java.awt.Color(16, 72, 75));
         txt_nivel.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txt_nivel.setForeground(java.awt.Color.white);
         txt_nivel.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_nivel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txt_nivel.setEnabled(false);
-        getContentPane().add(txt_nivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 130, 80, 25));
+        getContentPane().add(txt_nivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 140, 80, 25));
 
-        cmb_estado.setBackground(new java.awt.Color(0, 0, 0));
         cmb_estado.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        cmb_estado.setForeground(new java.awt.Color(22, 22, 22));
         cmb_estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "En Proceso", "Finalizado" }));
         cmb_estado.setAutoscrolls(true);
         cmb_estado.setBorder(null);
@@ -306,9 +304,9 @@ public class InformacionIncidenciasTecnico extends javax.swing.JFrame {
                 cmb_estadoActionPerformed(evt);
             }
         });
-        getContentPane().add(cmb_estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 170, 130, -1));
+        getContentPane().add(cmb_estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 180, 130, -1));
 
-        jButton_Actualizar.setBackground(new java.awt.Color(153, 153, 255));
+        jButton_Actualizar.setBackground(new java.awt.Color(10, 47, 63));
         jButton_Actualizar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton_Actualizar.setForeground(java.awt.Color.white);
         jButton_Actualizar.setText("Actualizar");
@@ -318,7 +316,7 @@ public class InformacionIncidenciasTecnico extends javax.swing.JFrame {
                 jButton_ActualizarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 450, 210, 35));
+        getContentPane().add(jButton_Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 440, 210, 35));
 
         jTextPane_descripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextPane_descripcion.setEnabled(false);
@@ -333,7 +331,7 @@ public class InformacionIncidenciasTecnico extends javax.swing.JFrame {
 
         jLabel_footer.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
-        getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 540, -1, -1));
+        getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 550, -1, -1));
 
         jLabel_Titulo1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel_Titulo1.setForeground(java.awt.Color.white);
@@ -353,11 +351,11 @@ public class InformacionIncidenciasTecnico extends javax.swing.JFrame {
         ));
         jScrollPane_intervenciones.setViewportView(jTable_intervenciones);
 
-        getContentPane().add(jScrollPane_intervenciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 760, 170));
+        getContentPane().add(jScrollPane_intervenciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 910, 170));
 
         jLabel_Wallpaper.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel_Wallpaper.setForeground(java.awt.Color.white);
-        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 650));
+        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 650));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

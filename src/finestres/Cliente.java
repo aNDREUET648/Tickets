@@ -69,7 +69,7 @@ public class Cliente extends javax.swing.JFrame {
                 nombre_usuario = rs.getString("nombre");
                 apellido_usuario = rs.getString("apellidos");
                 // visualizo en el Interface de Cliente nombre y apellidos user
-                jLabel_NombreUsuario.setText("Bienvenido " + nombre_usuario + " " + apellido_usuario);
+                jLabel_NombreUsuario.setText(" " + nombre_usuario + " " + apellido_usuario);
             }
         } catch (SQLException e) {
             System.err.println("Error en la consulta del nombre del Cliente " + e);
@@ -96,7 +96,6 @@ public class Cliente extends javax.swing.JFrame {
 
         jLabel_NombreUsuario = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -106,7 +105,6 @@ public class Cliente extends javax.swing.JFrame {
         jButton_FalloSoftware = new javax.swing.JButton();
         jButton_InformaProblema = new javax.swing.JButton();
         jButton_GestionarIncidenciasCliente = new javax.swing.JButton();
-        jButton_GraficaEstatus = new javax.swing.JButton();
         jButton_GestionarEquipos = new javax.swing.JButton();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
@@ -117,20 +115,17 @@ public class Cliente extends javax.swing.JFrame {
 
         jLabel_NombreUsuario.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
         jLabel_NombreUsuario.setForeground(java.awt.Color.white);
+        jLabel_NombreUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/badge-user.png"))); // NOI18N
         jLabel_NombreUsuario.setText("jLabel1");
         getContentPane().add(jLabel_NombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         jLabel3.setForeground(java.awt.Color.white);
         jLabel3.setText("Histórico Incidentes");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, -1, -1));
-
-        jLabel4.setForeground(java.awt.Color.white);
-        jLabel4.setText("Gráfica de status");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 300, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 300, -1, -1));
 
         jLabel5.setForeground(java.awt.Color.white);
         jLabel5.setText("Mis equipos");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 300, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 300, -1, -1));
 
         jLabel6.setForeground(java.awt.Color.white);
         jLabel6.setText("Fallo Hardware");
@@ -148,7 +143,10 @@ public class Cliente extends javax.swing.JFrame {
         jLabel11.setText("Andreu Garcia Coll - UIB 2020");
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 380, -1, -1));
 
-        jButton_FalloHardware.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/Fallo Hardware.PNG"))); // NOI18N
+        jButton_FalloHardware.setBackground(new java.awt.Color(10, 47, 63));
+        jButton_FalloHardware.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/Fallo-Hardware.PNG"))); // NOI18N
+        jButton_FalloHardware.setToolTipText("Incidente tipo Hardware");
+        jButton_FalloHardware.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_FalloHardware.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_FalloHardwareActionPerformed(evt);
@@ -156,7 +154,10 @@ public class Cliente extends javax.swing.JFrame {
         });
         getContentPane().add(jButton_FalloHardware, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 80, 80));
 
-        jButton_FalloSoftware.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/Problema Software.PNG"))); // NOI18N
+        jButton_FalloSoftware.setBackground(new java.awt.Color(10, 47, 63));
+        jButton_FalloSoftware.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/Problema-Software.PNG"))); // NOI18N
+        jButton_FalloSoftware.setToolTipText("Incidente tipo Software");
+        jButton_FalloSoftware.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_FalloSoftware.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_FalloSoftwareActionPerformed(evt);
@@ -164,7 +165,10 @@ public class Cliente extends javax.swing.JFrame {
         });
         getContentPane().add(jButton_FalloSoftware, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 80, 80));
 
-        jButton_InformaProblema.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/Informar Problema.PNG"))); // NOI18N
+        jButton_InformaProblema.setBackground(new java.awt.Color(10, 47, 63));
+        jButton_InformaProblema.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/Informar-Problema.PNG"))); // NOI18N
+        jButton_InformaProblema.setToolTipText("Cualquier otro tipo de incidente");
+        jButton_InformaProblema.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_InformaProblema.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_InformaProblemaActionPerformed(evt);
@@ -172,43 +176,31 @@ public class Cliente extends javax.swing.JFrame {
         });
         getContentPane().add(jButton_InformaProblema, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 100, 80, 80));
 
-        jButton_GestionarIncidenciasCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/Reportar Incidencias.PNG"))); // NOI18N
+        jButton_GestionarIncidenciasCliente.setBackground(new java.awt.Color(10, 47, 63));
+        jButton_GestionarIncidenciasCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/Reportar-Incidencias.PNG"))); // NOI18N
+        jButton_GestionarIncidenciasCliente.setToolTipText("Mis incidentes");
+        jButton_GestionarIncidenciasCliente.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_GestionarIncidenciasCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_GestionarIncidenciasClienteActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_GestionarIncidenciasCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 80, 80));
-
-        jButton_GraficaEstatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/grafica.png"))); // NOI18N
-        jButton_GraficaEstatus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_GraficaEstatusActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton_GraficaEstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 80, 80));
+        getContentPane().add(jButton_GestionarIncidenciasCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, 80, 80));
 
         jButton_GestionarEquipos.setBackground(new java.awt.Color(10, 47, 63));
         jButton_GestionarEquipos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/equipos.png"))); // NOI18N
+        jButton_GestionarEquipos.setToolTipText("Equipos que tengo registrados");
         jButton_GestionarEquipos.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_GestionarEquipos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_GestionarEquiposActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_GestionarEquipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, 80, 80));
+        getContentPane().add(jButton_GestionarEquipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 80, 80));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 450));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton_GraficaEstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GraficaEstatusActionPerformed
-
-        // creo una instancia de clases
-        GraficarEstatus graficarEstatus = new GraficarEstatus();
-        graficarEstatus.setVisible(true);
-
-    }//GEN-LAST:event_jButton_GraficaEstatusActionPerformed
 
     private void jButton_GestionarEquiposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GestionarEquiposActionPerformed
         
@@ -291,11 +283,9 @@ public class Cliente extends javax.swing.JFrame {
     private javax.swing.JButton jButton_FalloSoftware;
     private javax.swing.JButton jButton_GestionarEquipos;
     private javax.swing.JButton jButton_GestionarIncidenciasCliente;
-    private javax.swing.JButton jButton_GraficaEstatus;
     private javax.swing.JButton jButton_InformaProblema;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;

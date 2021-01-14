@@ -51,8 +51,6 @@ public class GestionarClientes extends javax.swing.JFrame {
     // model es la que nos va a permitir poder general el click en la tabla
     // y establecer la interacción con los datos que se muestren en la tabla
     DefaultTableModel model = new DefaultTableModel();
-    // cliente activo o inactivo
-    int activo = -1;
 
     /**
      * Constructor del form GestionarClientes
@@ -129,7 +127,7 @@ public class GestionarClientes extends javax.swing.JFrame {
         // Utilizo el método ObtenerDatosTabla
         // que nuevamente emplearé al darle al botón mostrar
         //
-        //ObtenerDatosTabla();
+        ObtenerDatosTabla();
     }
 
     //
@@ -171,8 +169,10 @@ public class GestionarClientes extends javax.swing.JFrame {
         jLabel1.setText("Clientes registrados");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, -1, -1));
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setForeground(java.awt.Color.white);
         jLabel2.setText("Estado:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 60, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 60, -1, -1));
 
         jTable_clientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -198,38 +198,39 @@ public class GestionarClientes extends javax.swing.JFrame {
                 jButton_RegistrarClientesActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_RegistrarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 80, 80));
+        getContentPane().add(jButton_RegistrarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 300, 80, 80));
 
-        jButton_Mostrar.setBackground(new java.awt.Color(153, 153, 255));
+        jButton_Mostrar.setBackground(new java.awt.Color(10, 47, 63));
         jButton_Mostrar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton_Mostrar.setForeground(java.awt.Color.white);
-        jButton_Mostrar.setText("Mostrar");
-        jButton_Mostrar.setBorder(null);
+        jButton_Mostrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/buscar.png"))); // NOI18N
+        jButton_Mostrar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_Mostrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_MostrarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 290, 210, 35));
+        getContentPane().add(jButton_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 50, 30, 30));
 
+        cmb_estatus.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmb_estatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Activo", "Inactivo" }));
-        getContentPane().add(cmb_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 60, 130, -1));
+        getContentPane().add(cmb_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 50, 130, 30));
 
         jLabel_footer.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
         getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 440, -1, -1));
 
-        jButton_Imprimir.setBackground(new java.awt.Color(153, 153, 255));
+        jButton_Imprimir.setBackground(new java.awt.Color(10, 47, 63));
         jButton_Imprimir.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton_Imprimir.setForeground(java.awt.Color.white);
-        jButton_Imprimir.setText("Imprimir");
+        jButton_Imprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/impresora.png"))); // NOI18N
         jButton_Imprimir.setBorder(null);
         jButton_Imprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_ImprimirActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 350, 210, 35));
+        getContentPane().add(jButton_Imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 300, 80, 80));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 500));
 
         pack();
@@ -245,7 +246,8 @@ public class GestionarClientes extends javax.swing.JFrame {
 
         // filtramos según el estado
         String seleccion = cmb_estatus.getSelectedItem().toString();
-        String sql = "";
+
+        // cliente activo o inactivo
         int activo = -1;
         switch (seleccion) {
             case "Activo":
@@ -264,7 +266,7 @@ public class GestionarClientes extends javax.swing.JFrame {
         model.setColumnCount(0);
 
         try {
-
+            String sql = "";
             Connection con = Conexion.conector();
             // ahora vendría la instrucción hacia la bd pero ahora voy a utilizar dos instrucciones dinámicas a la bd.
             // una instrucción mostrará todos los incidentes y la otra filtrará según el estado
@@ -319,12 +321,29 @@ public class GestionarClientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error al recuperar los registros de los Clientes Técnico, contacte con el Administrador");
         }
 
+        //
+        // Utilizo el método ObtenerDatosTabla
+        // que nuevamente emplearé al darle al botón mostrar
+        //
+        ObtenerDatosTabla();
+
     }//GEN-LAST:event_jButton_MostrarActionPerformed
 
     private void jButton_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ImprimirActionPerformed
 
         String sql, seleccion = cmb_estatus.getSelectedItem().toString();
-
+        // cliente activo o inactivo
+        int activo = -1;
+        switch (seleccion) {
+            case "Activo":
+                activo = 1;
+                break;
+            case "Inactivo":
+                activo = 0;
+                break;
+            default:
+                break;
+        }
         Document documento = new Document(PageSize.A4.rotate(), 10, 10, 0, 0);
         // toda código para crear archivo en pdf necesita estar
         // dentro de una estructura try..catch
@@ -333,7 +352,7 @@ public class GestionarClientes extends javax.swing.JFrame {
             String ruta = System.getProperty("user.home");
             // lo guardo en el escritorio y le añado nombre y apellidos como filename
             // y la extensión que lógicamente será pdf
-            ruta = ruta + "/Desktop/ListadoClientes - Técnico " + user + " .pdf";
+            ruta = ruta + "/Desktop/Listado Clientes - Filtro " + seleccion + ".pdf";
             PdfWriter.getInstance(documento, new FileOutputStream(ruta));
 
             // inserto la cabecera del documento que será una imagen
@@ -341,7 +360,7 @@ public class GestionarClientes extends javax.swing.JFrame {
             // coloco directamente la llamada para eliminar el conflicto
             com.itextpdf.text.Image header = com.itextpdf.text.Image.getInstance("src/imatges/BannerPDF.png");
             // pongo el largo y la escala de visualización del header
-            header.scaleToFit(650, 1000);
+            header.scaleToFit(860, 100);
             // lo alineo al centro
             header.setAlignment(Chunk.ALIGN_CENTER);
             // creo un objeto de clase Paragraph para dar formato al texto
@@ -349,7 +368,7 @@ public class GestionarClientes extends javax.swing.JFrame {
             // lo alineo al centro
             parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY));
             parrafo.setAlignment(Paragraph.ALIGN_CENTER);
-            parrafo.add("Listado de clientes \n \n");
+            parrafo.add("Listado de clientes - Filtro: " + seleccion + "\n \n");
             // doy formato al párrafo
             parrafo.setFont(FontFactory.getFont("Tahoma", 6, Font.NORMAL, BaseColor.DARK_GRAY));
 
@@ -362,29 +381,30 @@ public class GestionarClientes extends javax.swing.JFrame {
             // creo una tabla con los datos generales que vienen de la bd
             // tablaClientes tendrá 5 columnas
             PdfPTable tabla = new PdfPTable(6);
-            float[] columnWidths = new float[]{15f, 35f, 30f, 65f, 30f, 20f};
+            float[] columnWidths = new float[]{15f, 65f, 65f, 30f, 25f, 30f};
+            tabla.setWidthPercentage(95);
             tabla.setWidths(columnWidths);
 
             tabla.addCell("ID");
-            tabla.addCell("Nombre");
-            tabla.addCell("Apellidos");
+            tabla.addCell("Apellidos y nombre");
             tabla.addCell("em@il");
             tabla.addCell("Teléfono");
             tabla.addCell("user");
+            tabla.addCell("Estado");
 
             // consultamos a la bd la información que irá en el pdf
             try {
                 Connection con = Conexion.conector();
 
                 if (seleccion.equalsIgnoreCase("Todos")) {
-                    sql = "SELECT idUsuario, apellidos, nombre, email, telefono, user FROM ";
-                    sql += "Usuarios , Roles_has_Usuarios WHERE ";
+                    sql = "SELECT idUsuario, apellidos, nombre, email, telefono, user, USU.habilitado FROM ";
+                    sql += "Usuarios USU, Roles_has_Usuarios WHERE ";
                     sql += "Usuarios_idUsuario = idUsuario AND ";
                     sql += "Roles_idRol = 3 ";
                     sql += "ORDER BY apellidos, nombre";
                 } else {
 
-                    sql = "SELECT idUsuario, apellidos, nombre, user, email, registrado_por FROM ";
+                    sql = "SELECT idUsuario, apellidos, nombre, email, telefono, user, USU.habilitado FROM ";
                     sql += "Usuarios USU, Roles_has_Usuarios ROL WHERE ";
                     sql += "Usuarios_idUsuario = idUsuario AND ";
                     sql += "Roles_idRol = 3 AND ";
@@ -399,11 +419,15 @@ public class GestionarClientes extends javax.swing.JFrame {
                     do {
 
                         tabla.addCell(rs.getString(1));
-                        tabla.addCell(rs.getString(2));
-                        tabla.addCell(rs.getString(3));
+                        tabla.addCell(rs.getString(2) + ", " + rs.getString(3));
                         tabla.addCell(rs.getString(4));
                         tabla.addCell(rs.getString(5));
                         tabla.addCell(rs.getString(6));
+                        if (rs.getString("USU.habilitado").equals("1")) {
+                            tabla.addCell("Activo");
+                        } else {
+                            tabla.addCell("Inactivo");
+                        }
 
                     } while (rs.next());
                     //envío la tablaCliente al documento
