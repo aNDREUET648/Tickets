@@ -75,7 +75,7 @@ public class RestaurarPassword extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setForeground(java.awt.Color.white);
         jLabel1.setText("Cambio de password");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setForeground(java.awt.Color.white);
@@ -87,19 +87,19 @@ public class RestaurarPassword extends javax.swing.JFrame {
         jLabel8.setText("Confirmar Password:");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
 
-        txt_password.setBackground(new java.awt.Color(153, 153, 255));
+        txt_password.setBackground(new java.awt.Color(16, 72, 75));
         txt_password.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_password.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_password.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txt_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 210, -1));
 
-        txt_passwordConfirmacion.setBackground(new java.awt.Color(153, 153, 255));
+        txt_passwordConfirmacion.setBackground(new java.awt.Color(16, 72, 75));
         txt_passwordConfirmacion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_passwordConfirmacion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_passwordConfirmacion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txt_passwordConfirmacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 210, -1));
 
-        jButton_RestaurarPassword.setBackground(new java.awt.Color(153, 153, 255));
+        jButton_RestaurarPassword.setBackground(new java.awt.Color(10, 47, 63));
         jButton_RestaurarPassword.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton_RestaurarPassword.setForeground(java.awt.Color.white);
         jButton_RestaurarPassword.setText("Restaurar Password");

@@ -28,7 +28,7 @@ public class RegistrarClientes extends javax.swing.JFrame {
         IDuser = Interface.IDuser;
 
         setTitle("Agregar un nuevo cliente - Sesión de " + user);
-        setSize(600, 500);
+        setSize(600, 430);
         setResizable(false);
         setLocationRelativeTo(null);
         
@@ -80,7 +80,7 @@ public class RegistrarClientes extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
-        setMinimumSize(new java.awt.Dimension(600, 500));
+        setMinimumSize(new java.awt.Dimension(600, 430));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -123,7 +123,7 @@ public class RegistrarClientes extends javax.swing.JFrame {
         jLabel8.setText("Teléfono:");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
 
-        txt_nombre.setBackground(new java.awt.Color(153, 153, 255));
+        txt_nombre.setBackground(new java.awt.Color(16, 72, 75));
         txt_nombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_nombre.setForeground(java.awt.Color.white);
         txt_nombre.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -135,7 +135,7 @@ public class RegistrarClientes extends javax.swing.JFrame {
         });
         getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 225, -1));
 
-        txt_email.setBackground(new java.awt.Color(153, 153, 255));
+        txt_email.setBackground(new java.awt.Color(16, 72, 75));
         txt_email.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_email.setForeground(java.awt.Color.white);
         txt_email.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -147,7 +147,7 @@ public class RegistrarClientes extends javax.swing.JFrame {
         });
         getContentPane().add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 225, -1));
 
-        txt_apellidos.setBackground(new java.awt.Color(153, 153, 255));
+        txt_apellidos.setBackground(new java.awt.Color(16, 72, 75));
         txt_apellidos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_apellidos.setForeground(java.awt.Color.white);
         txt_apellidos.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -159,7 +159,7 @@ public class RegistrarClientes extends javax.swing.JFrame {
         });
         getContentPane().add(txt_apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 225, -1));
 
-        txt_username.setBackground(new java.awt.Color(153, 153, 255));
+        txt_username.setBackground(new java.awt.Color(16, 72, 75));
         txt_username.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_username.setForeground(java.awt.Color.white);
         txt_username.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -171,7 +171,7 @@ public class RegistrarClientes extends javax.swing.JFrame {
         });
         getContentPane().add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, 225, -1));
 
-        txt_telefono.setBackground(new java.awt.Color(153, 153, 255));
+        txt_telefono.setBackground(new java.awt.Color(16, 72, 75));
         txt_telefono.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_telefono.setForeground(java.awt.Color.white);
         txt_telefono.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -183,14 +183,16 @@ public class RegistrarClientes extends javax.swing.JFrame {
         });
         getContentPane().add(txt_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 225, -1));
 
-        txt_password.setBackground(new java.awt.Color(153, 153, 255));
+        txt_password.setBackground(new java.awt.Color(16, 72, 75));
         txt_password.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_password.setForeground(java.awt.Color.white);
         txt_password.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_password.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txt_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, 225, -1));
 
+        jButton_registrarClientes.setBackground(new java.awt.Color(10, 47, 63));
         jButton_registrarClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/addUser.png"))); // NOI18N
+        jButton_registrarClientes.setBorder(null);
         jButton_registrarClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_registrarClientesActionPerformed(evt);
@@ -201,7 +203,7 @@ public class RegistrarClientes extends javax.swing.JFrame {
         jLabel_footer.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
         getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 340, -1, -1));
-        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 500));
+        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 430));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

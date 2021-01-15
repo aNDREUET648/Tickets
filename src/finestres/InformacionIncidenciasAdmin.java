@@ -318,6 +318,7 @@ public class InformacionIncidenciasAdmin extends javax.swing.JFrame {
 
         cmb_asignar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmb_asignar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item1", "Item2" }));
+        cmb_asignar.setToolTipText("Asignar a un técnico o administrador (externo)");
         getContentPane().add(cmb_asignar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 90, 300, -1));
 
         cmb_prioridad.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -358,6 +359,7 @@ public class InformacionIncidenciasAdmin extends javax.swing.JFrame {
         jButton_Imprimir.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton_Imprimir.setForeground(java.awt.Color.white);
         jButton_Imprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/impresora.png"))); // NOI18N
+        jButton_Imprimir.setToolTipText("Impresión del registro del incidente (PDF)");
         jButton_Imprimir.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_Imprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -370,6 +372,7 @@ public class InformacionIncidenciasAdmin extends javax.swing.JFrame {
         jButton_Actualizar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton_Actualizar.setForeground(java.awt.Color.white);
         jButton_Actualizar.setText("Asignar y actualizar");
+        jButton_Actualizar.setToolTipText("Asignar Incidencia, establece prioridad, escala el nivel");
         jButton_Actualizar.setBorder(null);
         jButton_Actualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

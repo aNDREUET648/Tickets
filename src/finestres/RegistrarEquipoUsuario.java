@@ -46,7 +46,7 @@ public class RegistrarEquipoUsuario extends javax.swing.JFrame {
 
         // ahora si que puedo ponerlo porque ya tengo el valor de nombre_cliente
         setTitle("Añadir nuevo equipo para  " + nom_cliente);
-        setSize(630, 445);
+        setSize(630, 470);
         setResizable(false);  // no se modificar el tamaño del interfaz
         setLocationRelativeTo(null); // centrar la interfaz al ejecutar
 
@@ -61,7 +61,7 @@ public class RegistrarEquipoUsuario extends javax.swing.JFrame {
         this.repaint();
 
         txt_nombreCliente.setText(nom_cliente);
-        txt_nombreCliente.enable(false);
+        txt_nombreCliente.setEditable(false);
         txt_modelo.requestFocus();
         
     }  // fin del Constructor
@@ -104,6 +104,8 @@ public class RegistrarEquipoUsuario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
+        setMinimumSize(new java.awt.Dimension(630, 470));
+        setPreferredSize(new java.awt.Dimension(630, 470));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTextPane_observaciones.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -113,8 +115,8 @@ public class RegistrarEquipoUsuario extends javax.swing.JFrame {
 
         jLabel_Titulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel_Titulo.setForeground(java.awt.Color.white);
-        jLabel_Titulo.setText("Registro de equipo");
-        getContentPane().add(jLabel_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
+        jLabel_Titulo.setText("Registrar equipo de usuario");
+        getContentPane().add(jLabel_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, -1, -1));
 
         jLabel_Nombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel_Nombre.setForeground(java.awt.Color.white);
@@ -146,11 +148,10 @@ public class RegistrarEquipoUsuario extends javax.swing.JFrame {
         jLabel_Nombre5.setText("Observaciones:");
         getContentPane().add(jLabel_Nombre5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, -1, -1));
 
-        txt_nombreCliente.setEditable(false);
         txt_nombreCliente.setBackground(new java.awt.Color(16, 72, 75));
         txt_nombreCliente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_nombreCliente.setForeground(java.awt.Color.white);
-        txt_nombreCliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_nombreCliente.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_nombreCliente.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txt_nombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 210, -1));
 
@@ -191,7 +192,7 @@ public class RegistrarEquipoUsuario extends javax.swing.JFrame {
         jLabel_footer.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
         getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 390, -1, -1));
-        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 445));
+        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 470));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

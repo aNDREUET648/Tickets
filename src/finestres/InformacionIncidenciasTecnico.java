@@ -247,7 +247,6 @@ public class InformacionIncidenciasTecnico extends javax.swing.JFrame {
         txt_tipo.setForeground(java.awt.Color.white);
         txt_tipo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_tipo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txt_tipo.setEnabled(false);
         getContentPane().add(txt_tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 50, 100, 25));
 
         txt_idIncidente.setEditable(false);
@@ -256,7 +255,6 @@ public class InformacionIncidenciasTecnico extends javax.swing.JFrame {
         txt_idIncidente.setForeground(java.awt.Color.white);
         txt_idIncidente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_idIncidente.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txt_idIncidente.setEnabled(false);
         getContentPane().add(txt_idIncidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 50, 25));
 
         txt_nombre.setEditable(false);
@@ -265,7 +263,6 @@ public class InformacionIncidenciasTecnico extends javax.swing.JFrame {
         txt_nombre.setForeground(java.awt.Color.white);
         txt_nombre.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_nombre.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txt_nombre.setEnabled(false);
         getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 270, 25));
 
         txt_fechaincidente.setEditable(false);
@@ -274,7 +271,6 @@ public class InformacionIncidenciasTecnico extends javax.swing.JFrame {
         txt_fechaincidente.setForeground(java.awt.Color.white);
         txt_fechaincidente.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_fechaincidente.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txt_fechaincidente.setEnabled(false);
         getContentPane().add(txt_fechaincidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 60, 200, 25));
 
         txt_prioridad.setEditable(false);
@@ -283,7 +279,6 @@ public class InformacionIncidenciasTecnico extends javax.swing.JFrame {
         txt_prioridad.setForeground(java.awt.Color.white);
         txt_prioridad.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_prioridad.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txt_prioridad.setEnabled(false);
         getContentPane().add(txt_prioridad, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 100, 80, 25));
 
         txt_nivel.setEditable(false);
@@ -292,7 +287,6 @@ public class InformacionIncidenciasTecnico extends javax.swing.JFrame {
         txt_nivel.setForeground(java.awt.Color.white);
         txt_nivel.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_nivel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txt_nivel.setEnabled(false);
         getContentPane().add(txt_nivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 140, 80, 25));
 
         cmb_estado.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N

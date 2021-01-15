@@ -46,7 +46,7 @@ public class RegistrarEquipo extends javax.swing.JFrame {
 
         // ahora si que puedo ponerlo porque ya tengo el valor de nombre_cliente
         setTitle("Añadir nuevo equipo para  " + nom_cliente);
-        setSize(630, 445);
+        setSize(700, 470);
         setResizable(false);  // no se modificar el tamaño del interfaz
         setLocationRelativeTo(null); // centrar la interfaz al ejecutar
 
@@ -61,6 +61,8 @@ public class RegistrarEquipo extends javax.swing.JFrame {
         this.repaint();
 
         txt_nombreCliente.setText(nom_cliente);
+        txt_nombreCliente.setEditable(false);
+        txt_modelo.requestFocus();
 
     }  // fin del Constructor
 
@@ -110,8 +112,8 @@ public class RegistrarEquipo extends javax.swing.JFrame {
 
         jLabel_Titulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel_Titulo.setForeground(java.awt.Color.white);
-        jLabel_Titulo.setText("Registro de equipo");
-        getContentPane().add(jLabel_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, -1, -1));
+        jLabel_Titulo.setText("Registrar equipo de Cliente ");
+        getContentPane().add(jLabel_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, -1, -1));
 
         jLabel_Nombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel_Nombre.setForeground(java.awt.Color.white);
@@ -172,7 +174,7 @@ public class RegistrarEquipo extends javax.swing.JFrame {
         cmb_marcas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acer", "Apple", "Asus", "Brother", "Dell", "HP", "Lenovo", "MSI", "Samsung", "Toshiba", "Xerox" }));
         getContentPane().add(cmb_marcas, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
 
-        jButton_Registrar.setBackground(new java.awt.Color(16, 72, 75));
+        jButton_Registrar.setBackground(new java.awt.Color(10, 47, 63));
         jButton_Registrar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton_Registrar.setForeground(java.awt.Color.white);
         jButton_Registrar.setText("Registrar equipo");

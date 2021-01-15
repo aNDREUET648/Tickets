@@ -175,7 +175,7 @@ public class InformacionIncidenciasCliente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
-        setMinimumSize(new java.awt.Dimension(800, 650));
+        setMinimumSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel_Titulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -229,7 +229,6 @@ public class InformacionIncidenciasCliente extends javax.swing.JFrame {
         txt_tipo.setForeground(java.awt.Color.white);
         txt_tipo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_tipo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txt_tipo.setEnabled(false);
         getContentPane().add(txt_tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, 100, 25));
 
         txt_idIncidente.setEditable(false);
@@ -238,7 +237,6 @@ public class InformacionIncidenciasCliente extends javax.swing.JFrame {
         txt_idIncidente.setForeground(java.awt.Color.white);
         txt_idIncidente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_idIncidente.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txt_idIncidente.setEnabled(false);
         getContentPane().add(txt_idIncidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 50, 25));
 
         txt_nombre.setEditable(false);
@@ -247,7 +245,6 @@ public class InformacionIncidenciasCliente extends javax.swing.JFrame {
         txt_nombre.setForeground(java.awt.Color.white);
         txt_nombre.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_nombre.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txt_nombre.setEnabled(false);
         getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 270, 25));
 
         txt_fechaincidente.setEditable(false);
@@ -256,7 +253,6 @@ public class InformacionIncidenciasCliente extends javax.swing.JFrame {
         txt_fechaincidente.setForeground(java.awt.Color.white);
         txt_fechaincidente.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_fechaincidente.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txt_fechaincidente.setEnabled(false);
         getContentPane().add(txt_fechaincidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 60, 200, 25));
 
         txt_prioridad.setEditable(false);
@@ -265,7 +261,6 @@ public class InformacionIncidenciasCliente extends javax.swing.JFrame {
         txt_prioridad.setForeground(java.awt.Color.white);
         txt_prioridad.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_prioridad.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txt_prioridad.setEnabled(false);
         getContentPane().add(txt_prioridad, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 100, 80, 25));
 
         txt_nivel.setEditable(false);
@@ -274,7 +269,6 @@ public class InformacionIncidenciasCliente extends javax.swing.JFrame {
         txt_nivel.setForeground(java.awt.Color.white);
         txt_nivel.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_nivel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txt_nivel.setEnabled(false);
         getContentPane().add(txt_nivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 140, 80, 25));
 
         cmb_estado.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -300,8 +294,8 @@ public class InformacionIncidenciasCliente extends javax.swing.JFrame {
         });
         getContentPane().add(jButton_Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 450, 210, 35));
 
+        jTextPane_descripcion.setEditable(false);
         jTextPane_descripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextPane_descripcion.setEnabled(false);
         jScrollPane_descripcion.setViewportView(jTextPane_descripcion);
 
         getContentPane().add(jScrollPane_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 270, 70));

@@ -197,7 +197,7 @@ public class GestionarUsuarios extends javax.swing.JFrame {
         jButton_Imprimir.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton_Imprimir.setForeground(java.awt.Color.white);
         jButton_Imprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/impresora.png"))); // NOI18N
-        jButton_Imprimir.setToolTipText("Listado de Usuarios registrados (PDF)");
+        jButton_Imprimir.setToolTipText("Listado de usuarios registrados (PDF)");
         jButton_Imprimir.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_Imprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

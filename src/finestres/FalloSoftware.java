@@ -30,7 +30,7 @@ public class FalloSoftware extends javax.swing.JFrame {
         user = Interface.usuario;
         IDuser = Interface.IDuser;
 
-        setSize(750, 450);
+        setSize(750, 380);
         setResizable(false);
         setTitle("Rol: Cliente - Sesión de " + user);
         setLocationRelativeTo(null);
@@ -102,7 +102,6 @@ public class FalloSoftware extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
         setMinimumSize(new java.awt.Dimension(750, 400));
-        setPreferredSize(new java.awt.Dimension(750, 400));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel_Titulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -176,7 +175,7 @@ public class FalloSoftware extends javax.swing.JFrame {
         jLabel_footer.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
         getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 330, -1, -1));
-        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 400));
+        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 380));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

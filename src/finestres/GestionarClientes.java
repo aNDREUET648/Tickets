@@ -192,6 +192,7 @@ public class GestionarClientes extends javax.swing.JFrame {
         jButton_RegistrarClientes.setBackground(new java.awt.Color(10, 47, 63));
         jButton_RegistrarClientes.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton_RegistrarClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/addUser.png"))); // NOI18N
+        jButton_RegistrarClientes.setToolTipText("Agregar un nuevo cliente");
         jButton_RegistrarClientes.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_RegistrarClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,6 +205,7 @@ public class GestionarClientes extends javax.swing.JFrame {
         jButton_Mostrar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton_Mostrar.setForeground(java.awt.Color.white);
         jButton_Mostrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/buscar.png"))); // NOI18N
+        jButton_Mostrar.setToolTipText("Pulsa para filtrar");
         jButton_Mostrar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_Mostrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,6 +216,7 @@ public class GestionarClientes extends javax.swing.JFrame {
 
         cmb_estatus.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmb_estatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Activo", "Inactivo" }));
+        cmb_estatus.setToolTipText("Filtraje de los clientes para su visualización y exportación ");
         getContentPane().add(cmb_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 50, 130, 30));
 
         jLabel_footer.setForeground(new java.awt.Color(255, 255, 255));
@@ -224,6 +227,7 @@ public class GestionarClientes extends javax.swing.JFrame {
         jButton_Imprimir.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton_Imprimir.setForeground(java.awt.Color.white);
         jButton_Imprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/impresora.png"))); // NOI18N
+        jButton_Imprimir.setToolTipText("Listado de clientes registrados (PDF)");
         jButton_Imprimir.setBorder(null);
         jButton_Imprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

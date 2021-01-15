@@ -184,12 +184,14 @@ public class GestionarIncidenciasAdmin extends javax.swing.JFrame {
 
         cmb_estatus.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmb_estatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Inicio", "Asignado", "En Proceso", "Finalizado" }));
+        cmb_estatus.setToolTipText("Filtraje de los incidentes para su visualización y exportación ");
         getContentPane().add(cmb_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 50, 130, 30));
 
         jButton_Mostrar.setBackground(new java.awt.Color(10, 47, 63));
         jButton_Mostrar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton_Mostrar.setForeground(java.awt.Color.white);
         jButton_Mostrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/buscar.png"))); // NOI18N
+        jButton_Mostrar.setToolTipText("Pulsa para filtrar");
         jButton_Mostrar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_Mostrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,6 +204,7 @@ public class GestionarIncidenciasAdmin extends javax.swing.JFrame {
         jButton_Imprimir.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton_Imprimir.setForeground(java.awt.Color.white);
         jButton_Imprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/impresora.png"))); // NOI18N
+        jButton_Imprimir.setToolTipText("Listado de incidencias (PDF)");
         jButton_Imprimir.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_Imprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -379,7 +382,7 @@ public class GestionarIncidenciasAdmin extends javax.swing.JFrame {
 
                         tabla.addCell(Integer.toString(rs.getInt("idIncidente")));
                         tabla.addCell(rs.getString("nombre") + " " + rs.getString("apellidos"));
-                        tabla.addCell(rs.getTimestamp("fecha_crea").toString());
+                        tabla.addCell(rs.getTimestamp("fecha_intervencion").toString());
                         tabla.addCell(rs.getString("Tipo"));
                         tabla.addCell(rs.getString("INCID.descripcion"));
                         tabla.addCell(rs.getString("estado"));

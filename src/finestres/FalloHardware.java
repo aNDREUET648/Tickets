@@ -86,22 +86,21 @@ public class FalloHardware extends javax.swing.JFrame {
                 fila[2] = rs.getString("tipo");
                 fila[3] = rs.getString("marca");
                 fila[4] = rs.getString("modelo");
-                
-                switch (rs.getString("EQU.habilitado")){
+
+                switch (rs.getString("EQU.habilitado")) {
                     case "0":
-                      fila[5] = "Inactivo";
-                      break;
+                        fila[5] = "Inactivo";
+                        break;
                     case "1":
-                      fila[5] = "Activo";
-                      break;
+                        fila[5] = "Activo";
+                        break;
                     case "2":
-                      fila[5] = "Incidencia";
-                      break;
+                        fila[5] = "Incidencia";
+                        break;
                     default:  // a esta opción nunca tendría que llegar
-                      fila[5] = "XD";
-                      break;
+                        fila[5] = "XD";
+                        break;
                 }
-                
 
                 model.addRow(fila);
             }
@@ -280,160 +279,165 @@ public class FalloHardware extends javax.swing.JFrame {
         Timestamp fecha = new Timestamp(new java.util.Date().getTime());
         int incidencia_activa = 0; // no tengo incidencia abiert en el equipo
 
-        if (!nombre.equals("")) { // hay un usuario con equipo registrado, puedo crear la incidencia
+        if (IDequipo != 0) {
 
-            // veo a ver si el equipo que quiere abrir la incidencia ya tiene una incidencia abierta
-            try {
+            if (!nombre.equals("")) { // hay un usuario con equipo registrado, puedo crear la incidencia
 
-                Connection con = Conexion.conector();
-                String sql = "SELECT idEquipos, habilitado FROM equipos WHERE idEquipos = " + IDequipo;
-                PreparedStatement pst = con.prepareStatement(sql);
-                ResultSet rs = pst.executeQuery();
+                // veo a ver si el equipo que quiere abrir la incidencia ya tiene una incidencia abierta
+                try {
 
-                rs.next();
-                if ("2".equals(rs.getString("habilitado"))) {
-                    incidencia_activa = 1;
+                    Connection con = Conexion.conector();
+                    String sql = "SELECT idEquipos, habilitado FROM equipos WHERE idEquipos = " + IDequipo;
+                    PreparedStatement pst = con.prepareStatement(sql);
+                    ResultSet rs = pst.executeQuery();
+
+                    rs.next();
+                    if ("2".equals(rs.getString("habilitado"))) {
+                        incidencia_activa = 1;
+                    }
+
+                } catch (SQLException e) {
+                    System.err.println("Error al localizar equipo. Fallo Hardware " + e);
+                    JOptionPane.showMessageDialog(null, "Error al localizar equipo. Fallo Hardware, contacte con el Administrador");
                 }
+                if (incidencia_activa == 0) { // el equipo no tenía incidencia asignada, se puede crear
 
-            } catch (SQLException e) {
-                System.err.println("Error al localizar equipo. Fallo Hardware " + e);
-                JOptionPane.showMessageDialog(null, "Error al localizar equipo. Fallo Hardware, contacte con el Administrador");
-            }
-            if (incidencia_activa == 0) { // el equipo no tenía incidencia asignada, se puede crear
+                    descripcion = jTextPane_Descripcion.getText().trim();
+                    if (IDequipo != 0 && !descripcion.equals("")) {
 
-                descripcion = jTextPane_Descripcion.getText().trim();
-                if (!descripcion.equals("")) {
+                        descripcion = "IDEquipo: " + IDequipo + ". \n" + jTextPane_Descripcion.getText();
+                        jTextPane_Descripcion.setText(descripcion);
 
-                    descripcion = "IDEquipo: " + IDequipo + ". \n" + jTextPane_Descripcion.getText();
-                    jTextPane_Descripcion.setText(descripcion);
+                        // lo primero es actualizar el status del equipo (EQU.habilitado = 2)
+                        // "Equipo con incidencia abierta"
+                        try {
+                            // acceso a la base de datos para modificar la información
+                            Connection con = Conexion.conector();
+                            String sql = "UPDATE Equipos SET habilitado = 2 WHERE idEquipos = '" + IDequipo + "'";
+                            PreparedStatement pst = con.prepareStatement(sql);
+                            pst.executeUpdate();
 
-                    // lo primero es actualizar el status del equipo (EQU.habilitado = 2)
-                    // "Equipo con incidencia abierta"
-                    try {
-                        // acceso a la base de datos para modificar la información
-                        Connection con = Conexion.conector();
-                        String sql = "UPDATE Equipos SET habilitado = 2 WHERE idEquipos = '" + IDequipo + "'";
-                        PreparedStatement pst = con.prepareStatement(sql);
-                        pst.executeUpdate();
+                            con.close();
 
-                        con.close();
+                        } catch (SQLException e) {
+                            System.err.println("Error al actualizar datos del Equipo. FalloHardware " + e);
+                            JOptionPane.showMessageDialog(null, "Error al actualizar datos del Equipo. FalloHardware, contacte con el Administrador");
+                        }
 
-                    } catch (SQLException e) {
-                        System.err.println("Error al actualizar datos del Equipo. FalloHardware " + e);
-                        JOptionPane.showMessageDialog(null, "Error al actualizar datos del Equipo. FalloHardware, contacte con el Administrador");
+                        // creo un nuevo incidente Tabla Incidentes
+                        try {
+                            Connection con = Conexion.conector();
+                            String sql = "insert into Incidentes (fecha_crea, descripcion, Usuarios_idUsuario, tipos_idTipo) values (?,?,?,?)";
+                            PreparedStatement pst = con.prepareStatement(sql);
+
+                            pst.setTimestamp(1, fecha); // fecha creación incidente
+                            pst.setString(2, descripcion); // descripción del problema
+                            pst.setInt(3, IDuser); // usuario que crea el incidente
+                            pst.setInt(4, 1); // Incidente de tipo Fallo de Hardware
+
+                            pst.executeUpdate();
+                            con.close();
+                        } catch (SQLException e) {
+                            System.err.println("Error al crear incidente Hardware " + e);
+                            JOptionPane.showMessageDialog(null, "Error al crear incidente Hardware, contacte con el administrador");
+                        }
+
+                        // creo la intervención asociada a este incidente
+                        // como primera intervención es la de creación
+                        try {
+                            Connection con2 = Conexion.conector();
+                            String sql2 = "insert into Intervenciones (descripcion, fecha_intervencion, Usuarios_idUsuario, Incidentes_idIncidente) "
+                                    + "values (?,?,?,(select MAX(idIncidente) from Incidentes))";
+                            PreparedStatement pst2 = con2.prepareStatement(sql2);
+
+                            pst2.setString(1, "Inicio. Reporte Fallo de Hardware"); // descripción del problema
+                            pst2.setTimestamp(2, fecha); // fecha creación incidente
+                            // técnico al que se le asigna el incidente
+                            // en la creación del incidente al no determinarse el problema
+                            // el incidente se asigna al super usuario (idUsuario = 1)
+                            pst2.setInt(3, 1); // usuario que se asigna el incidente
+
+                            pst2.executeUpdate();
+                            con2.close();
+                        } catch (SQLException e) {
+                            System.err.println("Error al crear intervención Hardware " + e);
+                            JOptionPane.showMessageDialog(null, "Error al crear intervención Hardware, contacte con el administrador");
+                        }
+
+                        // inicialmente la intervención evoluciona al estado Inicio mientras 
+                        // no se asigne (por un administrador) a otro estado
+                        // por lo que aquí creo el primer estado del incidente
+                        try {
+                            Connection con3 = Conexion.conector();
+                            String sql3 = "insert into Estados (estado, descripcion, fecha_evolucion, Intervenciones_idIntervencion) "
+                                    + "values (?,?,?,(select MAX(idIntervencion) from Intervenciones))";
+                            PreparedStatement pst3 = con3.prepareStatement(sql3);
+
+                            pst3.setString(1, "Inicio"); // estado "Inicio" del Incidente
+                            pst3.setString(2, "Estado Inicial de la Incidencia de Fallo del Hardware"); // descripción del problema
+                            pst3.setTimestamp(3, fecha); // fecha evolución estado "Inici"
+
+                            pst3.executeUpdate();
+                            con3.close();
+                        } catch (SQLException e) {
+                            System.err.println("Error al crear estado Hardware " + e);
+                            JOptionPane.showMessageDialog(null, "Error al crear estado Hardware, contacte con el administrador");
+                        }
+
+                        // inicialmente la intervención se escala a un Nivel Básico 
+                        // por lo que aquí defino el primer nivel del incidente
+                        try {
+                            Connection con4 = Conexion.conector();
+                            String sql4 = "insert into Niveles (nivel, descripcion, fecha_escalada, Intervenciones_idIntervencion) "
+                                    + "values (?,?,?,(select MAX(idIntervencion) from Intervenciones))";
+                            PreparedStatement pst4 = con4.prepareStatement(sql4);
+
+                            pst4.setString(1, "Basico"); // nivel "Básico" del Incidente
+                            pst4.setString(2, "Nivel Básico de la Incidencia de Fallo del Hardware"); // descripción del problema
+                            pst4.setTimestamp(3, fecha); // fecha evolución estado "Inici"
+
+                            pst4.executeUpdate();
+                            con4.close();
+                        } catch (SQLException e) {
+                            System.err.println("Error al crear nivel Hardware " + e);
+                            JOptionPane.showMessageDialog(null, "Error al crear nivel Hardware, contacte con el administrador");
+                        }
+
+                        // por último tenemos las prioridades.
+                        // inicialmente la intervención se establece a una prioridad Baja
+                        // por lo que aquí defino la prioridad inicial del incidente
+                        try {
+                            Connection con5 = Conexion.conector();
+                            String sql5 = "insert into Prioridades (prioridad, descripcion, fecha_establece, Intervenciones_idIntervencion) "
+                                    + "values (?,?,?,(select MAX(idIntervencion) from Intervenciones))";
+                            PreparedStatement pst5 = con5.prepareStatement(sql5);
+
+                            pst5.setString(1, "Baja"); // Prioridad "Inicio" del Incidente
+                            pst5.setString(2, "Prioridad Baja de la Incidencia de Fallo del Hardware"); // descripción del problema
+                            pst5.setTimestamp(3, fecha); // fecha evolución estado "Inici"
+
+                            pst5.executeUpdate();
+                            con5.close();
+                        } catch (SQLException e) {
+                            System.err.println("Error al crear prioridad Hardware " + e);
+                            JOptionPane.showMessageDialog(null, "Error al crear prioridad Hardware, contacte con el administrador");
+                        }
+
+                        JOptionPane.showMessageDialog(null, "Incidencia creada correctamente");
+                        this.dispose(); // destruímos ventana
+                    } else {
+                        jTextPane_Descripcion.setBackground(Color.red);
+                        JOptionPane.showMessageDialog(null, "Debes describir el problema y/o seleccionar un equipo");
                     }
-
-                    // creo un nuevo incidente Tabla Incidentes
-                    try {
-                        Connection con = Conexion.conector();
-                        String sql = "insert into Incidentes (fecha_crea, descripcion, Usuarios_idUsuario, tipos_idTipo) values (?,?,?,?)";
-                        PreparedStatement pst = con.prepareStatement(sql);
-
-                        pst.setTimestamp(1, fecha); // fecha creación incidente
-                        pst.setString(2, descripcion); // descripción del problema
-                        pst.setInt(3, IDuser); // usuario que crea el incidente
-                        pst.setInt(4, 1); // Incidente de tipo Fallo de Hardware
-
-                        pst.executeUpdate();
-                        con.close();
-                    } catch (SQLException e) {
-                        System.err.println("Error al crear incidente Hardware " + e);
-                        JOptionPane.showMessageDialog(null, "Error al crear incidente Hardware, contacte con el administrador");
-                    }
-
-                    // creo la intervención asociada a este incidente
-                    // como primera intervención es la de creación
-                    try {
-                        Connection con2 = Conexion.conector();
-                        String sql2 = "insert into Intervenciones (descripcion, fecha_intervencion, Usuarios_idUsuario, Incidentes_idIncidente) "
-                                + "values (?,?,?,(select MAX(idIncidente) from Incidentes))";
-                        PreparedStatement pst2 = con2.prepareStatement(sql2);
-
-                        pst2.setString(1, "Inicio. Reporte Fallo de Hardware"); // descripción del problema
-                        pst2.setTimestamp(2, fecha); // fecha creación incidente
-                        // técnico al que se le asigna el incidente
-                        // en la creación del incidente al no determinarse el problema
-                        // el incidente se asigna al super usuario (idUsuario = 1)
-                        pst2.setInt(3, 1); // usuario que se asigna el incidente
-
-                        pst2.executeUpdate();
-                        con2.close();
-                    } catch (SQLException e) {
-                        System.err.println("Error al crear intervención Hardware " + e);
-                        JOptionPane.showMessageDialog(null, "Error al crear intervención Hardware, contacte con el administrador");
-                    }
-
-                    // inicialmente la intervención evoluciona al estado Inicio mientras 
-                    // no se asigne (por un administrador) a otro estado
-                    // por lo que aquí creo el primer estado del incidente
-                    try {
-                        Connection con3 = Conexion.conector();
-                        String sql3 = "insert into Estados (estado, descripcion, fecha_evolucion, Intervenciones_idIntervencion) "
-                                + "values (?,?,?,(select MAX(idIntervencion) from Intervenciones))";
-                        PreparedStatement pst3 = con3.prepareStatement(sql3);
-
-                        pst3.setString(1, "Inicio"); // estado "Inicio" del Incidente
-                        pst3.setString(2, "Estado Inicial de la Incidencia de Fallo del Hardware"); // descripción del problema
-                        pst3.setTimestamp(3, fecha); // fecha evolución estado "Inici"
-
-                        pst3.executeUpdate();
-                        con3.close();
-                    } catch (SQLException e) {
-                        System.err.println("Error al crear estado Hardware " + e);
-                        JOptionPane.showMessageDialog(null, "Error al crear estado Hardware, contacte con el administrador");
-                    }
-
-                    // inicialmente la intervención se escala a un Nivel Básico 
-                    // por lo que aquí defino el primer nivel del incidente
-                    try {
-                        Connection con4 = Conexion.conector();
-                        String sql4 = "insert into Niveles (nivel, descripcion, fecha_escalada, Intervenciones_idIntervencion) "
-                                + "values (?,?,?,(select MAX(idIntervencion) from Intervenciones))";
-                        PreparedStatement pst4 = con4.prepareStatement(sql4);
-
-                        pst4.setString(1, "Basico"); // nivel "Básico" del Incidente
-                        pst4.setString(2, "Nivel Básico de la Incidencia de Fallo del Hardware"); // descripción del problema
-                        pst4.setTimestamp(3, fecha); // fecha evolución estado "Inici"
-
-                        pst4.executeUpdate();
-                        con4.close();
-                    } catch (SQLException e) {
-                        System.err.println("Error al crear nivel Hardware " + e);
-                        JOptionPane.showMessageDialog(null, "Error al crear nivel Hardware, contacte con el administrador");
-                    }
-
-                    // por último tenemos las prioridades.
-                    // inicialmente la intervención se establece a una prioridad Baja
-                    // por lo que aquí defino la prioridad inicial del incidente
-                    try {
-                        Connection con5 = Conexion.conector();
-                        String sql5 = "insert into Prioridades (prioridad, descripcion, fecha_establece, Intervenciones_idIntervencion) "
-                                + "values (?,?,?,(select MAX(idIntervencion) from Intervenciones))";
-                        PreparedStatement pst5 = con5.prepareStatement(sql5);
-
-                        pst5.setString(1, "Baja"); // Prioridad "Inicio" del Incidente
-                        pst5.setString(2, "Prioridad Baja de la Incidencia de Fallo del Hardware"); // descripción del problema
-                        pst5.setTimestamp(3, fecha); // fecha evolución estado "Inici"
-
-                        pst5.executeUpdate();
-                        con5.close();
-                    } catch (SQLException e) {
-                        System.err.println("Error al crear prioridad Hardware " + e);
-                        JOptionPane.showMessageDialog(null, "Error al crear prioridad Hardware, contacte con el administrador");
-                    }
-
-                    JOptionPane.showMessageDialog(null, "Incidencia creada correctamente");
-                    this.dispose(); // destruímos ventana
                 } else {
-                    jTextPane_Descripcion.setBackground(Color.red);
-                    JOptionPane.showMessageDialog(null, "Debes describir el problema");
+                    JOptionPane.showMessageDialog(null, "Equipo con incidencia ya abierta");
+                    this.dispose(); // destruímos ventana
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "Equipo con incidencia ya abierta");
-                this.dispose(); // destruímos ventana
+            } else {  // no existe un usuario con equipo, por lo que cerramos esta ventana
+                this.dispose();
             }
-        } else {  // no existe un usuario con equipo, por lo que cerramos esta ventana
-            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar al menos un equipo");
         }
     }//GEN-LAST:event_jButton_CrearIncidenciaActionPerformed
 
