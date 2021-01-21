@@ -162,8 +162,9 @@ public class GestionarIncidenciasCliente extends javax.swing.JFrame {
         getContentPane().add(jLabel_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Estado:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 50, -1, 30));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 60, -1, 30));
 
         jTable_incidentes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -188,7 +189,7 @@ public class GestionarIncidenciasCliente extends javax.swing.JFrame {
                 cmb_estatusActionPerformed(evt);
             }
         });
-        getContentPane().add(cmb_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 50, 130, 30));
+        getContentPane().add(cmb_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 60, 130, 30));
 
         jButton_Mostrar.setBackground(new java.awt.Color(10, 47, 63));
         jButton_Mostrar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -200,7 +201,7 @@ public class GestionarIncidenciasCliente extends javax.swing.JFrame {
                 jButton_MostrarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 50, 30, 30));
+        getContentPane().add(jButton_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 60, 30, 30));
 
         jButton_Imprimir.setBackground(new java.awt.Color(10, 47, 63));
         jButton_Imprimir.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -213,7 +214,7 @@ public class GestionarIncidenciasCliente extends javax.swing.JFrame {
                 jButton_ImprimirActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 290, 80, 80));
+        getContentPane().add(jButton_Imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 290, 80, 80));
 
         jLabel_footer.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");

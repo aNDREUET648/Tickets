@@ -153,23 +153,23 @@ public class Administrador extends javax.swing.JFrame {
 
         jLabel2.setForeground(java.awt.Color.white);
         jLabel2.setText("Gestionar Usuarios");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, -1, -1));
 
         jLabel3.setForeground(java.awt.Color.white);
         jLabel3.setText("Gestionar Incidencias");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 170, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 180, -1, -1));
 
         jLabel4.setForeground(java.awt.Color.white);
         jLabel4.setText("Menú Rol Técnico");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 320, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, -1, -1));
 
         jLabel5.setForeground(java.awt.Color.white);
         jLabel5.setText("Menú Rol Cliente");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 320, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, -1, -1));
 
         jLabel6.setForeground(java.awt.Color.white);
         jLabel6.setText("Gestionar Equipos Usuarios");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, -1, -1));
 
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Andreu Garcia Coll - UIB 2020");

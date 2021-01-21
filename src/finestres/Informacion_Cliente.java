@@ -377,23 +377,23 @@ public class Informacion_Cliente extends javax.swing.JFrame {
         telefono = txt_telefono.getText().trim();
 
         if (nombre.equals("")) {
-            txt_nombre.setBackground(Color.RED);
+            txt_nombre.setBackground(new Color(255,180,40));
             validacion++;
         }
         if (apellidos.equals("")) {
-            txt_apellidos.setBackground(Color.RED);
+            txt_apellidos.setBackground(new Color(255,180,40));
             validacion++;
         }
         if (username.equals("")) {
-            txt_username.setBackground(Color.RED);
+            txt_username.setBackground(new Color(255,180,40));
             validacion++;
         }
         if (email.equals("")) {
-            txt_email.setBackground(Color.RED);
+            txt_email.setBackground(new Color(255,180,40));
             validacion++;
         }
         if (telefono.equals("")) {
-            txt_telefono.setBackground(Color.RED);
+            txt_telefono.setBackground(new Color(255,180,40));
             validacion++;
         }
 
@@ -413,11 +413,11 @@ public class Informacion_Cliente extends javax.swing.JFrame {
                 pst.executeUpdate();
                 con.close();
 
-                txt_nombre.setBackground(Color.green);
-                txt_apellidos.setBackground(Color.green);
-                txt_username.setBackground(Color.green);
-                txt_email.setBackground(Color.green);
-                txt_telefono.setBackground(Color.green);
+                txt_nombre.setBackground(new Color(40,190,255));
+                txt_apellidos.setBackground(new Color(40,190,255));
+                txt_username.setBackground(new Color(40,190,255));
+                txt_email.setBackground(new Color(40,190,255));
+                txt_telefono.setBackground(new Color(40,190,255));
                 txt_ultimaModificacion.setText(user);
                 JOptionPane.showMessageDialog(null, "Actualizado correctamente");
                 this.dispose(); // se cerrará la ventana y liberará recursos

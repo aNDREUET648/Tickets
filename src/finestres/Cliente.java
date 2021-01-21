@@ -121,23 +121,23 @@ public class Cliente extends javax.swing.JFrame {
 
         jLabel3.setForeground(java.awt.Color.white);
         jLabel3.setText("Histórico Incidentes");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 300, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 330, -1, -1));
 
         jLabel5.setForeground(java.awt.Color.white);
         jLabel5.setText("Mis equipos");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 300, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, -1, -1));
 
         jLabel6.setForeground(java.awt.Color.white);
         jLabel6.setText("Fallo Hardware");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, -1, -1));
 
         jLabel8.setForeground(java.awt.Color.white);
         jLabel8.setText("Fallo Software");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, -1, -1));
 
         jLabel9.setForeground(java.awt.Color.white);
         jLabel9.setText("Otros Fallos");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 180, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 190, -1, -1));
 
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Andreu Garcia Coll - UIB 2020");
@@ -152,7 +152,7 @@ public class Cliente extends javax.swing.JFrame {
                 jButton_FalloHardwareActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_FalloHardware, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 80, 80));
+        getContentPane().add(jButton_FalloHardware, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 80, 80));
 
         jButton_FalloSoftware.setBackground(new java.awt.Color(10, 47, 63));
         jButton_FalloSoftware.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/Problema-Software.PNG"))); // NOI18N
@@ -174,7 +174,7 @@ public class Cliente extends javax.swing.JFrame {
                 jButton_InformaProblemaActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_InformaProblema, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 100, 80, 80));
+        getContentPane().add(jButton_InformaProblema, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 80, 80));
 
         jButton_GestionarIncidenciasCliente.setBackground(new java.awt.Color(10, 47, 63));
         jButton_GestionarIncidenciasCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/Reportar-Incidencias.PNG"))); // NOI18N
@@ -185,7 +185,7 @@ public class Cliente extends javax.swing.JFrame {
                 jButton_GestionarIncidenciasClienteActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_GestionarIncidenciasCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, 80, 80));
+        getContentPane().add(jButton_GestionarIncidenciasCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, 80, 80));
 
         jButton_GestionarEquipos.setBackground(new java.awt.Color(10, 47, 63));
         jButton_GestionarEquipos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/equipos.png"))); // NOI18N
@@ -196,7 +196,7 @@ public class Cliente extends javax.swing.JFrame {
                 jButton_GestionarEquiposActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_GestionarEquipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 80, 80));
+        getContentPane().add(jButton_GestionarEquipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 80, 80));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 450));
 
         pack();

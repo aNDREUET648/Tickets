@@ -156,11 +156,11 @@ public class GestionarIncidenciasAdmin extends javax.swing.JFrame {
         jLabel_Titulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel_Titulo.setForeground(java.awt.Color.white);
         jLabel_Titulo.setText("Gestión de Incidentes");
-        getContentPane().add(jLabel_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, -1, -1));
+        getContentPane().add(jLabel_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 40, -1, -1));
 
         jLabel_footer.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
-        getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 460, -1, -1));
+        getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 480, -1, -1));
 
         jTable_incidentes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -175,17 +175,17 @@ public class GestionarIncidenciasAdmin extends javax.swing.JFrame {
         ));
         jScrollPane_incidentes.setViewportView(jTable_incidentes);
 
-        getContentPane().add(jScrollPane_incidentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 960, 210));
+        getContentPane().add(jScrollPane_incidentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 960, 280));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setForeground(java.awt.Color.white);
         jLabel1.setText("Estado:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 60, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 90, -1, -1));
 
         cmb_estatus.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmb_estatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Inicio", "Asignado", "En Proceso", "Finalizado" }));
         cmb_estatus.setToolTipText("Filtraje de los incidentes para su visualización y exportación ");
-        getContentPane().add(cmb_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 50, 130, 30));
+        getContentPane().add(cmb_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 80, 130, 30));
 
         jButton_Mostrar.setBackground(new java.awt.Color(10, 47, 63));
         jButton_Mostrar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -198,7 +198,7 @@ public class GestionarIncidenciasAdmin extends javax.swing.JFrame {
                 jButton_MostrarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 50, 30, 30));
+        getContentPane().add(jButton_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 80, 30, 30));
 
         jButton_Imprimir.setBackground(new java.awt.Color(10, 47, 63));
         jButton_Imprimir.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -211,7 +211,7 @@ public class GestionarIncidenciasAdmin extends javax.swing.JFrame {
                 jButton_ImprimirActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 340, 80, 80));
+        getContentPane().add(jButton_Imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 410, 80, 80));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 550));
 
         pack();

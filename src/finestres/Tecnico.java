@@ -118,23 +118,23 @@ public class Tecnico extends javax.swing.JFrame {
 
         jLabel4.setForeground(java.awt.Color.white);
         jLabel4.setText("Gestionar Clientes");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, -1, -1));
 
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Andreu Garcia Coll - UIB 2020");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 380, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 380, -1, -1));
 
         jLabel6.setForeground(java.awt.Color.white);
         jLabel6.setText("Menú Rol Cliente");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 310, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 320, -1, -1));
 
         jLabel11.setForeground(java.awt.Color.white);
         jLabel11.setText("Gestión Equipos Cliente");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, -1, -1));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, -1, -1));
 
         jLabel10.setForeground(java.awt.Color.white);
         jLabel10.setText("Gestionar Incidencias");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 160, -1, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, -1, -1));
 
         jButton_GestionarClientes.setBackground(new java.awt.Color(10, 47, 63));
         jButton_GestionarClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/informationuser.png"))); // NOI18N
@@ -145,7 +145,7 @@ public class Tecnico extends javax.swing.JFrame {
                 jButton_GestionarClientesActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_GestionarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 80, 80));
+        getContentPane().add(jButton_GestionarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 80, 80));
 
         jButton_GestionarIncidencias.setBackground(new java.awt.Color(10, 47, 63));
         jButton_GestionarIncidencias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/incidencias.png"))); // NOI18N
@@ -156,7 +156,7 @@ public class Tecnico extends javax.swing.JFrame {
                 jButton_GestionarIncidenciasActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_GestionarIncidencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, 80, 80));
+        getContentPane().add(jButton_GestionarIncidencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 80, 80));
 
         jButton_Cliente.setBackground(new java.awt.Color(10, 47, 63));
         jButton_Cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/menu_cliente.png"))); // NOI18N
@@ -167,7 +167,7 @@ public class Tecnico extends javax.swing.JFrame {
                 jButton_ClienteActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 230, 80, 80));
+        getContentPane().add(jButton_Cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 230, 80, 80));
 
         jButton_GestionarEquipos.setBackground(new java.awt.Color(10, 47, 63));
         jButton_GestionarEquipos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/equipos.png"))); // NOI18N
@@ -178,7 +178,7 @@ public class Tecnico extends javax.swing.JFrame {
                 jButton_GestionarEquiposActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_GestionarEquipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 80, 80));
+        getContentPane().add(jButton_GestionarEquipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 80, 80, 80));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 450));
 
         pack();

@@ -142,7 +142,7 @@ public class GestionarUsuarios extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(java.awt.Color.white);
         jLabel2.setText("Rol:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 40, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 30, -1, -1));
 
         jTable_usuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -157,7 +157,7 @@ public class GestionarUsuarios extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable_usuarios);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 960, 200));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 960, 280));
 
         cmb_estatus.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmb_estatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Administrador", "Tecnico", "Cliente" }));
@@ -167,7 +167,7 @@ public class GestionarUsuarios extends javax.swing.JFrame {
                 cmb_estatusActionPerformed(evt);
             }
         });
-        getContentPane().add(cmb_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 30, 130, 30));
+        getContentPane().add(cmb_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 20, 130, 30));
 
         jButton_Mostrar.setBackground(new java.awt.Color(10, 47, 63));
         jButton_Mostrar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -180,7 +180,7 @@ public class GestionarUsuarios extends javax.swing.JFrame {
                 jButton_MostrarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 30, 30, 30));
+        getContentPane().add(jButton_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 20, 30, 30));
 
         jButton_RegistrarUsuarios.setBackground(new java.awt.Color(10, 47, 63));
         jButton_RegistrarUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/addUser.png"))); // NOI18N
@@ -191,7 +191,7 @@ public class GestionarUsuarios extends javax.swing.JFrame {
                 jButton_RegistrarUsuariosActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_RegistrarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 300, 80, 80));
+        getContentPane().add(jButton_RegistrarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 360, 80, 80));
 
         jButton_Imprimir.setBackground(new java.awt.Color(10, 47, 63));
         jButton_Imprimir.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -204,11 +204,12 @@ public class GestionarUsuarios extends javax.swing.JFrame {
                 jButton_ImprimirActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 300, 80, 80));
+        getContentPane().add(jButton_Imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 360, 80, 80));
 
         jLabel_footer.setForeground(java.awt.Color.white);
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
-        getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 410, -1, -1));
+        jLabel_footer.setAlignmentY(0.0F);
+        getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 430, -1, -1));
 
         jLabel_Wallpaper.setToolTipText("");
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 500));

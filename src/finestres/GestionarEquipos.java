@@ -203,7 +203,6 @@ public class GestionarEquipos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
         setMinimumSize(new java.awt.Dimension(800, 450));
-        setPreferredSize(new java.awt.Dimension(800, 450));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -214,7 +213,7 @@ public class GestionarEquipos extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(java.awt.Color.white);
         jLabel2.setText("Estado:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 40, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 50, -1, -1));
 
         jTable_equipos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -229,15 +228,15 @@ public class GestionarEquipos extends javax.swing.JFrame {
         ));
         jScrollPane_equipos.setViewportView(jTable_equipos);
 
-        getContentPane().add(jScrollPane_equipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 760, 180));
+        getContentPane().add(jScrollPane_equipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 760, 230));
 
         jLabel_footer.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
-        getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 380, -1, -1));
+        getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 380, -1, -1));
 
         cmb_estatus.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmb_estatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Activo", "Inactivo", "Incidencia abierta" }));
-        getContentPane().add(cmb_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 30, 130, 30));
+        getContentPane().add(cmb_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 40, 130, 30));
 
         jButton_Mostrar.setBackground(new java.awt.Color(10, 47, 63));
         jButton_Mostrar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -250,7 +249,7 @@ public class GestionarEquipos extends javax.swing.JFrame {
                 jButton_MostrarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, 30, 30));
+        getContentPane().add(jButton_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 40, 30, 30));
 
         jButton_Imprimir.setBackground(new java.awt.Color(10, 47, 63));
         jButton_Imprimir.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -263,7 +262,7 @@ public class GestionarEquipos extends javax.swing.JFrame {
                 jButton_ImprimirActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 280, 80, 80));
+        getContentPane().add(jButton_Imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 320, 80, 80));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 450));
 
         pack();

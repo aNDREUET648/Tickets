@@ -172,7 +172,7 @@ public class GestionarClientes extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(java.awt.Color.white);
         jLabel2.setText("Estado:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 60, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 50, -1, -1));
 
         jTable_clientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -187,7 +187,7 @@ public class GestionarClientes extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable_clientes);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 940, 180));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 940, 230));
 
         jButton_RegistrarClientes.setBackground(new java.awt.Color(10, 47, 63));
         jButton_RegistrarClientes.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -199,7 +199,7 @@ public class GestionarClientes extends javax.swing.JFrame {
                 jButton_RegistrarClientesActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_RegistrarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 300, 80, 80));
+        getContentPane().add(jButton_RegistrarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 360, 80, 80));
 
         jButton_Mostrar.setBackground(new java.awt.Color(10, 47, 63));
         jButton_Mostrar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -212,16 +212,16 @@ public class GestionarClientes extends javax.swing.JFrame {
                 jButton_MostrarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 50, 30, 30));
+        getContentPane().add(jButton_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 40, 30, 30));
 
         cmb_estatus.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmb_estatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Activo", "Inactivo" }));
         cmb_estatus.setToolTipText("Filtraje de los clientes para su visualización y exportación ");
-        getContentPane().add(cmb_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 50, 130, 30));
+        getContentPane().add(cmb_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 40, 130, 30));
 
         jLabel_footer.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
-        getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 440, -1, -1));
+        getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 410, -1, -1));
 
         jButton_Imprimir.setBackground(new java.awt.Color(10, 47, 63));
         jButton_Imprimir.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -234,7 +234,7 @@ public class GestionarClientes extends javax.swing.JFrame {
                 jButton_ImprimirActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 300, 80, 80));
+        getContentPane().add(jButton_Imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 360, 80, 80));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 500));
 
         pack();

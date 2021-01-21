@@ -66,7 +66,6 @@ public class RestaurarPassword extends javax.swing.JFrame {
         txt_password = new javax.swing.JPasswordField();
         txt_passwordConfirmacion = new javax.swing.JPasswordField();
         jButton_RestaurarPassword = new javax.swing.JButton();
-        jLabel_footer = new javax.swing.JLabel();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -75,32 +74,32 @@ public class RestaurarPassword extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setForeground(java.awt.Color.white);
         jLabel1.setText("Cambio de password");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setForeground(java.awt.Color.white);
         jLabel7.setText("Nuevo Password:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setForeground(java.awt.Color.white);
         jLabel8.setText("Confirmar Password:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, -1, -1));
 
-        txt_password.setBackground(new java.awt.Color(16, 72, 75));
+        txt_password.setBackground(new java.awt.Color(141, 159, 166));
         txt_password.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_password.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txt_password.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 210, -1));
+        txt_password.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        getContentPane().add(txt_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 210, -1));
 
-        txt_passwordConfirmacion.setBackground(new java.awt.Color(16, 72, 75));
+        txt_passwordConfirmacion.setBackground(new java.awt.Color(141, 159, 166));
         txt_passwordConfirmacion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_passwordConfirmacion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txt_passwordConfirmacion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_passwordConfirmacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 210, -1));
+        txt_passwordConfirmacion.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        getContentPane().add(txt_passwordConfirmacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 210, -1));
 
-        jButton_RestaurarPassword.setBackground(new java.awt.Color(10, 47, 63));
-        jButton_RestaurarPassword.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jButton_RestaurarPassword.setBackground(new java.awt.Color(16, 72, 75));
+        jButton_RestaurarPassword.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton_RestaurarPassword.setForeground(java.awt.Color.white);
         jButton_RestaurarPassword.setText("Restaurar Password");
         jButton_RestaurarPassword.setBorder(null);
@@ -109,11 +108,7 @@ public class RestaurarPassword extends javax.swing.JFrame {
                 jButton_RestaurarPasswordActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_RestaurarPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 210, 35));
-
-        jLabel_footer.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
-        getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, -1, -1));
+        getContentPane().add(jButton_RestaurarPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 140, 35));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
 
         pack();
@@ -142,8 +137,8 @@ public class RestaurarPassword extends javax.swing.JFrame {
                     pst.executeUpdate();
                     con.close();
 
-                    txt_password.setBackground(Color.green);
-                    txt_passwordConfirmacion.setBackground(Color.green);
+                    txt_password.setBackground(new Color(40,190,255));
+                    txt_passwordConfirmacion.setBackground(new Color(40,190,255));
                     JOptionPane.showMessageDialog(null, "Contraseña cambiada");
                     this.dispose();
 
@@ -154,15 +149,15 @@ public class RestaurarPassword extends javax.swing.JFrame {
                 //
                 // los campos de password no coinciden
                 //
-                txt_passwordConfirmacion.setBackground(Color.red);
+                txt_passwordConfirmacion.setBackground(new Color(255,180,40));
                 JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
             }
         } else {
             //
             // algún campo está vacío
             //
-            txt_password.setBackground(Color.red);
-            txt_passwordConfirmacion.setBackground(Color.red);
+            txt_password.setBackground(new Color(255,180,40));
+            txt_passwordConfirmacion.setBackground(new Color(255,180,40));
             JOptionPane.showMessageDialog(null, "No puede haber campos vacíos");
         }
     }//GEN-LAST:event_jButton_RestaurarPasswordActionPerformed
@@ -208,7 +203,6 @@ public class RestaurarPassword extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel_Wallpaper;
-    private javax.swing.JLabel jLabel_footer;
     private javax.swing.JPasswordField txt_password;
     private javax.swing.JPasswordField txt_passwordConfirmacion;
     // End of variables declaration//GEN-END:variables

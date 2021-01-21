@@ -145,25 +145,25 @@ public class RegistrarEquipo extends javax.swing.JFrame {
         jLabel_Nombre5.setText("Observaciones:");
         getContentPane().add(jLabel_Nombre5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, -1, -1));
 
-        txt_nombreCliente.setBackground(new java.awt.Color(16, 72, 75));
+        txt_nombreCliente.setBackground(new java.awt.Color(141, 159, 166));
         txt_nombreCliente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_nombreCliente.setForeground(java.awt.Color.white);
         txt_nombreCliente.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txt_nombreCliente.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txt_nombreCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txt_nombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 210, -1));
 
-        txt_modelo.setBackground(new java.awt.Color(16, 72, 75));
+        txt_modelo.setBackground(new java.awt.Color(141, 159, 166));
         txt_modelo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_modelo.setForeground(java.awt.Color.white);
         txt_modelo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txt_modelo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txt_modelo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txt_modelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 210, -1));
 
-        txt_num_serie.setBackground(new java.awt.Color(16, 72, 75));
+        txt_num_serie.setBackground(new java.awt.Color(141, 159, 166));
         txt_num_serie.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_num_serie.setForeground(java.awt.Color.white);
         txt_num_serie.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txt_num_serie.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txt_num_serie.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txt_num_serie, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 210, -1));
 
         cmb_tipoequipo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -174,8 +174,8 @@ public class RegistrarEquipo extends javax.swing.JFrame {
         cmb_marcas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acer", "Apple", "Asus", "Brother", "Dell", "HP", "Lenovo", "MSI", "Samsung", "Toshiba", "Xerox" }));
         getContentPane().add(cmb_marcas, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
 
-        jButton_Registrar.setBackground(new java.awt.Color(10, 47, 63));
-        jButton_Registrar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jButton_Registrar.setBackground(new java.awt.Color(16, 72, 75));
+        jButton_Registrar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton_Registrar.setForeground(java.awt.Color.white);
         jButton_Registrar.setText("Registrar equipo");
         jButton_Registrar.setBorder(null);
@@ -184,7 +184,7 @@ public class RegistrarEquipo extends javax.swing.JFrame {
                 jButton_RegistrarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 310, 210, 35));
+        getContentPane().add(jButton_Registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 310, 140, 35));
 
         jLabel_footer.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
@@ -214,11 +214,11 @@ public class RegistrarEquipo extends javax.swing.JFrame {
         //fecha_ingreso = Integer.toString(calendar.get(Calendar.DATE));
 
         if (modelo.equals("")) {
-            txt_modelo.setBackground(Color.red);
+            txt_modelo.setBackground(new Color(255,180,40));
             validacion++;
         }
         if (num_serie.equals("")) {
-            txt_num_serie.setBackground(Color.red);
+            txt_num_serie.setBackground(new Color(255,180,40));
             validacion++;
         }
         if (observaciones.equals("")) {
@@ -248,9 +248,9 @@ public class RegistrarEquipo extends javax.swing.JFrame {
                 pst.executeUpdate();
                 con.close();
                 
-                txt_nombreCliente.setBackground(Color.GREEN);
-                txt_modelo.setBackground(Color.GREEN);
-                txt_num_serie.setBackground(Color.GREEN);
+                txt_nombreCliente.setBackground(new Color(40,190,255));
+                txt_modelo.setBackground(new Color(40,190,255));
+                txt_num_serie.setBackground(new Color(40,190,255));
                 
                 JOptionPane.showMessageDialog(null, "Nuevo equipo registrado");
                 this.dispose();

@@ -169,7 +169,7 @@ public class GestionarEquiposClientes extends javax.swing.JFrame {
         ));
         jScrollPane_equipos.setViewportView(jTable_equipos);
 
-        getContentPane().add(jScrollPane_equipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 760, 180));
+        getContentPane().add(jScrollPane_equipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 760, 180));
 
         jLabel_footer.setForeground(java.awt.Color.white);
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
@@ -177,7 +177,7 @@ public class GestionarEquiposClientes extends javax.swing.JFrame {
 
         cmb_estatus.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmb_estatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Activo", "Inactivo", "Incidencia abierta" }));
-        getContentPane().add(cmb_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 30, 130, 30));
+        getContentPane().add(cmb_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 60, 130, 30));
 
         jButton_Mostrar.setBackground(new java.awt.Color(10, 47, 63));
         jButton_Mostrar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -189,7 +189,7 @@ public class GestionarEquiposClientes extends javax.swing.JFrame {
                 jButton_MostrarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, 30, 30));
+        getContentPane().add(jButton_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 60, 30, 30));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 400));
 
         pack();

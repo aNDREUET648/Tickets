@@ -100,48 +100,47 @@ public class FalloOtro extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
         setMinimumSize(new java.awt.Dimension(750, 400));
-        setPreferredSize(new java.awt.Dimension(750, 400));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel_Titulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel_Titulo.setForeground(java.awt.Color.white);
         jLabel_Titulo.setText("Reportar otro tipo de problema");
-        getContentPane().add(jLabel_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, -1));
+        getContentPane().add(jLabel_Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
 
         jLabel_Nombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel_Nombre.setForeground(java.awt.Color.white);
         jLabel_Nombre.setText("Nombre:");
-        getContentPane().add(jLabel_Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, -1, -1));
+        getContentPane().add(jLabel_Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, -1, -1));
 
         jLabel_Nombre8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel_Nombre8.setForeground(java.awt.Color.white);
         jLabel_Nombre8.setText("Descripción problema:");
-        getContentPane().add(jLabel_Nombre8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+        getContentPane().add(jLabel_Nombre8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
 
         jLabel_Nombre9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel_Nombre9.setForeground(java.awt.Color.white);
         jLabel_Nombre9.setText("Prioridad:");
-        getContentPane().add(jLabel_Nombre9, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 90, -1, -1));
+        getContentPane().add(jLabel_Nombre9, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 120, -1, -1));
 
         jLabel_Nombre10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel_Nombre10.setForeground(java.awt.Color.white);
         jLabel_Nombre10.setText("Estado:");
-        getContentPane().add(jLabel_Nombre10, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 60, -1, -1));
+        getContentPane().add(jLabel_Nombre10, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 90, -1, -1));
 
-        txt_nombre.setBackground(new java.awt.Color(16, 72, 75));
+        txt_nombre.setEditable(false);
+        txt_nombre.setBackground(new java.awt.Color(141, 159, 166));
         txt_nombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_nombre.setForeground(java.awt.Color.white);
         txt_nombre.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txt_nombre.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txt_nombre.setEnabled(false);
-        getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 250, -1));
+        txt_nombre.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 250, -1));
 
         jScrollPane1.setViewportView(jTextPane_Descripcion);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 500, 80));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 500, 80));
 
         jButton_CrearIncidencia.setBackground(new java.awt.Color(16, 72, 75));
-        jButton_CrearIncidencia.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jButton_CrearIncidencia.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton_CrearIncidencia.setForeground(java.awt.Color.white);
         jButton_CrearIncidencia.setText("Crear Incidencia");
         jButton_CrearIncidencia.setBorder(null);
@@ -150,21 +149,21 @@ public class FalloOtro extends javax.swing.JFrame {
                 jButton_CrearIncidenciaActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_CrearIncidencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 240, 210, 35));
+        getContentPane().add(jButton_CrearIncidencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 270, 130, 35));
 
         cmb_prioridad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmb_prioridad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Baja", "Media", "Alta", "Grave", "Critica" }));
         cmb_prioridad.setEnabled(false);
-        getContentPane().add(cmb_prioridad, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 90, 80, -1));
+        getContentPane().add(cmb_prioridad, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 120, 80, -1));
 
         cmb_estado.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmb_estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Inicio", "Asignado", "En proceso", "Finalizado" }));
         cmb_estado.setEnabled(false);
-        getContentPane().add(cmb_estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 60, 100, -1));
+        getContentPane().add(cmb_estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 90, 100, -1));
 
         jLabel_footer.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
-        getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, -1, -1));
+        getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, -1, -1));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 400));
 
         pack();
@@ -283,8 +282,8 @@ public class FalloOtro extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Incidencia creada correctamente");
             this.dispose(); // destruímos ventana
         } else {
-            jScrollPane1.setBackground(Color.red);
-            //jTextPane_Descripcion.setBackground(Color.red);
+            jScrollPane1.setBackground(new Color(255,180,40));
+            //jTextPane_Descripcion.setBackground(new Color(255,180,40));
             JOptionPane.showMessageDialog(null, "Debes describir el problema");
         }
 

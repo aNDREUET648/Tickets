@@ -200,32 +200,32 @@ public class InformacionUsuario extends javax.swing.JFrame {
         jLabel_Nombre6.setText("Registrado por:");
         getContentPane().add(jLabel_Nombre6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
 
-        txt_nombre.setBackground(new java.awt.Color(16, 72, 75));
+        txt_nombre.setBackground(new java.awt.Color(141, 159, 166));
         txt_nombre.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txt_nombre.setForeground(java.awt.Color.white);
         txt_nombre.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txt_nombre.setBorder(null);
+        txt_nombre.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 210, 25));
 
-        txt_email.setBackground(new java.awt.Color(16, 72, 75));
+        txt_email.setBackground(new java.awt.Color(141, 159, 166));
         txt_email.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txt_email.setForeground(java.awt.Color.white);
         txt_email.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txt_email.setBorder(null);
+        txt_email.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         getContentPane().add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 210, 25));
 
-        txt_apellidos.setBackground(new java.awt.Color(16, 72, 75));
+        txt_apellidos.setBackground(new java.awt.Color(141, 159, 166));
         txt_apellidos.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txt_apellidos.setForeground(java.awt.Color.white);
         txt_apellidos.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txt_apellidos.setBorder(null);
+        txt_apellidos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         getContentPane().add(txt_apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 210, 25));
 
-        txt_username.setBackground(new java.awt.Color(16, 72, 75));
+        txt_username.setBackground(new java.awt.Color(141, 159, 166));
         txt_username.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txt_username.setForeground(java.awt.Color.white);
         txt_username.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txt_username.setBorder(null);
+        txt_username.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         txt_username.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         getContentPane().add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 210, 25));
 
@@ -245,8 +245,8 @@ public class InformacionUsuario extends javax.swing.JFrame {
         cmb_rol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Tecnico", "Cliente" }));
         getContentPane().add(cmb_rol, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, -1, -1));
 
-        jButton_Actualizar.setBackground(new java.awt.Color(10, 47, 63));
-        jButton_Actualizar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton_Actualizar.setBackground(new java.awt.Color(16, 72, 75));
+        jButton_Actualizar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton_Actualizar.setForeground(java.awt.Color.white);
         jButton_Actualizar.setText("Actualizar Usuario");
         jButton_Actualizar.setToolTipText("Actualizar datos del usuario");
@@ -256,10 +256,10 @@ public class InformacionUsuario extends javax.swing.JFrame {
                 jButton_ActualizarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 320, 210, 35));
+        getContentPane().add(jButton_Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 320, 140, 35));
 
-        jButton_RestaurarPassword.setBackground(new java.awt.Color(10, 47, 63));
-        jButton_RestaurarPassword.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton_RestaurarPassword.setBackground(new java.awt.Color(16, 72, 75));
+        jButton_RestaurarPassword.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton_RestaurarPassword.setForeground(java.awt.Color.white);
         jButton_RestaurarPassword.setText("Restaurar Password");
         jButton_RestaurarPassword.setToolTipText("Cambiar Password del usuario");
@@ -269,10 +269,10 @@ public class InformacionUsuario extends javax.swing.JFrame {
                 jButton_RestaurarPasswordActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_RestaurarPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 320, 210, 35));
+        getContentPane().add(jButton_RestaurarPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 320, 140, 35));
 
-        jButton_RegistrarEquipo.setBackground(new java.awt.Color(10, 47, 63));
-        jButton_RegistrarEquipo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jButton_RegistrarEquipo.setBackground(new java.awt.Color(16, 72, 75));
+        jButton_RegistrarEquipo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton_RegistrarEquipo.setForeground(java.awt.Color.white);
         jButton_RegistrarEquipo.setText("Registrar equipo");
         jButton_RegistrarEquipo.setToolTipText("Agregar un nuevo equipo para este usuario");
@@ -282,7 +282,7 @@ public class InformacionUsuario extends javax.swing.JFrame {
                 jButton_RegistrarEquipoActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_RegistrarEquipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 320, 210, 35));
+        getContentPane().add(jButton_RegistrarEquipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 320, 140, 35));
 
         jTable_equipos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -297,7 +297,7 @@ public class InformacionUsuario extends javax.swing.JFrame {
         ));
         jScrollPane_equipos.setViewportView(jTable_equipos);
 
-        getContentPane().add(jScrollPane_equipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 680, 180));
+        getContentPane().add(jScrollPane_equipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 680, 200));
 
         jLabel_footer.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_footer.setText("Andreu Garcia Coll - UIB 2020");
@@ -319,19 +319,19 @@ public class InformacionUsuario extends javax.swing.JFrame {
         habilitado_cmb = cmb_habilitado.getSelectedIndex() + 1;
 
         if (email.equals("")) {
-            txt_email.setBackground(Color.RED);
+            txt_email.setBackground(new Color(255,180,40));
             validacion++;
         }
         if (username.equals("")) {
-            txt_username.setBackground(Color.RED);
+            txt_username.setBackground(new Color(255,180,40));
             validacion++;
         }
         if (nombre.equals("")) {
-            txt_nombre.setBackground(Color.RED);
+            txt_nombre.setBackground(new Color(255,180,40));
             validacion++;
         }
         if (apellidos.equals("")) {
-            txt_apellidos.setBackground(Color.RED);
+            txt_apellidos.setBackground(new Color(255,180,40));
             validacion++;
         }
 
@@ -355,7 +355,7 @@ public class InformacionUsuario extends javax.swing.JFrame {
                 ResultSet rs = pst.executeQuery();
 
                 if (rs.next()) {
-                    txt_username.setBackground(Color.RED);
+                    txt_username.setBackground(new Color(255,180,40));
                     JOptionPane.showMessageDialog(null, "Nombre de usuario no disponible");
                     con.close(); // cerramos la conexión
                 } else {
@@ -406,10 +406,10 @@ public class InformacionUsuario extends javax.swing.JFrame {
                         // marcamos en verde todos los campos insertados
                         // indicando que todo hay ido perfecto
                         //
-                        txt_nombre.setBackground(Color.GREEN);
-                        txt_apellidos.setBackground(Color.GREEN);
-                        txt_email.setBackground(Color.GREEN);
-                        txt_username.setBackground(Color.GREEN);
+                        txt_nombre.setBackground(new Color(40,190,255));
+                        txt_apellidos.setBackground(new Color(40,190,255));
+                        txt_email.setBackground(new Color(40,190,255));
+                        txt_username.setBackground(new Color(40,190,255));
                         // JOptionPane.showMessageDialog(null, "Modificado el rol");
                         JOptionPane.showMessageDialog(null, "Usuario modificado correctamente");
                     } else {

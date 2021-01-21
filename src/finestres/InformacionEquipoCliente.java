@@ -202,41 +202,41 @@ public class InformacionEquipoCliente extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 130, 360, 130));
 
         txt_NombreCliente.setEditable(false);
-        txt_NombreCliente.setBackground(new java.awt.Color(16, 72, 75));
+        txt_NombreCliente.setBackground(new java.awt.Color(141, 159, 166));
         txt_NombreCliente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_NombreCliente.setForeground(java.awt.Color.white);
         txt_NombreCliente.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txt_NombreCliente.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txt_NombreCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         getContentPane().add(txt_NombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 220, -1));
 
-        txt_modelo.setBackground(new java.awt.Color(16, 72, 75));
+        txt_modelo.setBackground(new java.awt.Color(141, 159, 166));
         txt_modelo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_modelo.setForeground(java.awt.Color.white);
         txt_modelo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txt_modelo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txt_modelo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         getContentPane().add(txt_modelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 220, -1));
 
-        txt_num_serie.setBackground(new java.awt.Color(16, 72, 75));
+        txt_num_serie.setBackground(new java.awt.Color(141, 159, 166));
         txt_num_serie.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_num_serie.setForeground(java.awt.Color.white);
         txt_num_serie.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txt_num_serie.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txt_num_serie.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         getContentPane().add(txt_num_serie, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 220, -1));
 
-        txt_ultima_Modificacion.setBackground(new java.awt.Color(16, 72, 75));
+        txt_ultima_Modificacion.setBackground(new java.awt.Color(141, 159, 166));
         txt_ultima_Modificacion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_ultima_Modificacion.setForeground(java.awt.Color.white);
         txt_ultima_Modificacion.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txt_ultima_Modificacion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txt_ultima_Modificacion.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         txt_ultima_Modificacion.setEnabled(false);
         getContentPane().add(txt_ultima_Modificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 150, -1));
 
         txt_fecha.setEditable(false);
-        txt_fecha.setBackground(new java.awt.Color(16, 72, 75));
+        txt_fecha.setBackground(new java.awt.Color(141, 159, 166));
         txt_fecha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_fecha.setForeground(java.awt.Color.white);
         txt_fecha.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txt_fecha.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txt_fecha.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         getContentPane().add(txt_fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 80, 180, -1));
 
         cmb_tipoequipo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N

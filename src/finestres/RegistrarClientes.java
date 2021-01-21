@@ -241,27 +241,27 @@ public class RegistrarClientes extends javax.swing.JFrame {
 
         // compruebo que no haya campos vacíos
         if (nombre.equals("")) {
-            txt_nombre.setBackground(Color.RED);
+            txt_nombre.setBackground(new Color(255,180,40));
             validacion++;
         }
         if (apellidos.equals("")) {
-            txt_apellidos.setBackground(Color.RED);
+            txt_apellidos.setBackground(new Color(255,180,40));
             validacion++;
         }
         if (email.equals("")) {
-            txt_email.setBackground(Color.RED);
+            txt_email.setBackground(new Color(255,180,40));
             validacion++;
         }
         if (telefono.equals("")) {
-            txt_telefono.setBackground(Color.RED);
+            txt_telefono.setBackground(new Color(255,180,40));
             validacion++;
         }
         if (username.equals("")) {
-            txt_username.setBackground(Color.RED);
+            txt_username.setBackground(new Color(255,180,40));
             validacion++;
         }
         if (password.equals("")) {
-            txt_password.setBackground(Color.RED);
+            txt_password.setBackground(new Color(255,180,40));
             validacion++;
         }
         // compruebo que no hay otro cliente con el mismo username
@@ -273,7 +273,7 @@ public class RegistrarClientes extends javax.swing.JFrame {
 
             if (rs.next()) {
                 // lo encuentra, por tanto existe
-                txt_username.setBackground(Color.red);
+                txt_username.setBackground(new Color(255,180,40));
                 JOptionPane.showMessageDialog(null, "Este username"
                         + "ya está en uso");
                 con.close(); // cerramos la conexión
@@ -329,12 +329,12 @@ public class RegistrarClientes extends javax.swing.JFrame {
                         if (resultado > 0) {
                             
                             //  marcamos en verde todos los campos insertados
-                            txt_nombre.setBackground(Color.GREEN);
-                            txt_apellidos.setBackground(Color.GREEN);
-                            txt_email.setBackground(Color.GREEN);
-                            txt_telefono.setBackground(Color.GREEN);
-                            txt_username.setBackground(Color.GREEN);
-                            txt_password.setBackground(Color.GREEN);
+                            txt_nombre.setBackground(new Color(40,190,255));
+                            txt_apellidos.setBackground(new Color(40,190,255));
+                            txt_email.setBackground(new Color(40,190,255));
+                            txt_telefono.setBackground(new Color(40,190,255));
+                            txt_username.setBackground(new Color(40,190,255));
+                            txt_password.setBackground(new Color(40,190,255));
                             JOptionPane.showMessageDialog(null, "Cliente creado correctamente");
                             
                         } else {
