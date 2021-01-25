@@ -176,6 +176,7 @@ public class Administrador extends javax.swing.JFrame {
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 380, -1, -1));
 
         jLabel_Wallpaper.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
+        jLabel_Wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/wallpaperPrincipal.jpg"))); // NOI18N
         jLabel_Wallpaper.setToolTipText("");
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 450));
 
